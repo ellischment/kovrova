@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Окно освободилось — Ирина Коврова</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Освободилось окно, которое вы ждали. Оно держится за вами некоторое время.">
+<meta name="theme-color" content="#3D4E21">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../booking.css">
+<!-- /z/offer/<token>. Без давления: просто время, до которого держится окно, без обратного отсчёта секунд. -->
+</head>
+<body>
+<div class="proto-note" role="note"><b>Демо предложения из листа ожидания.</b> Проверить состояния: ?state=taken</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs><symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol></defs>
+</svg>
+<div class="page" id="page">
+  <header class="bk-head">
+    <span class="icon-btn" aria-hidden="true"></span>
+    <h1>Ваше окно</h1>
+    <a class="icon-btn" href="../index.html" aria-label="Закрыть"><svg width="22" height="22"><use href="#i-close"></use></svg></a>
+  </header>
+  <main class="bk-body" id="body" aria-live="polite" tabindex="-1"></main>
+  <div class="bk-foot" id="foot"></div>
+</div>
+<script src="../../booking-data.js"></script>
+<script>
+(function () {
+  'use strict';
+  var K = window.KVR;
+  var body = K.$('#body'), foot = K.$('#foot');
+  var state = new URLSearchParams(location.search).get('state') || 'active'; // active | taken | claimed
+  var offer = { name: 'Анна', date: 'сб, 4 октября', time: '11:00', svc: 'Массаж 90 минут', loc: 'Пригород Лесное', holdUntil: '12:10' };
+
+  function render() {
+    if (state === 'taken') {
+      body.innerHTML = '<div class="banner"><strong>Это окно уже забрали</strong>Вы остаётесь в листе ожидания — я напишу, как только появится следующее подходящее время.</div>' +
+        '<p class="small muted">Спасибо за терпение. Раз в месяц буду спрашивать, ждёте ли вы ещё.</p>';
+      foot.innerHTML = '<a class="btn btn-secondary btn-block" href="index.html">Открыть запись заново</a>';
+      return;
+    }
+    if (state === 'claimed') {
+      body.innerHTML = '<div class="success"><div class="ok-circle"><svg width="30" height="30"><use href="#i-check"></use></svg></div>' +
+        '<h2>Окно за вами</h2><p>' + offer.date + ', ' + offer.time + '<br>' + offer.svc + ' · ' + offer.loc + '</p>' +
+        '<p class="small muted">Подтверждение и напоминания придут в выбранный канал.</p></div>';
+      foot.innerHTML = '<a class="btn btn-secondary btn-block" href="../index.html">На главную</a>';
+      return;
+    }
+    body.innerHTML = '<p>' + offer.name + ', освободилось окно, которое вы ждали:</p>' +
+      '<div class="summary"><dl><dt>Когда</dt><dd>' + offer.date + ', ' + offer.time + '</dd><dt>Что</dt><dd>' + offer.svc + '</dd><dt>Где</dt><dd>' + offer.loc + '</dd></dl></div>' +
+      '<p class="small muted">Оно держится за вами до <b>' + offer.holdUntil + '</b>. Не успеете — ничего страшного, я предложу следующей гостье, а вы останетесь в листе ожидания.</p>';
+    foot.innerHTML = '<button class="btn btn-primary btn-block" data-claim="1">Забрать окно</button>' +
+      '<button class="link-btn" style="display:block;margin:10px auto 0" data-skip="1">Мне уже не актуально — уйти из листа</button>';
+  }
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-claim]')) { K.track('waitlist_offer_accepted', offer); location.href = 'index.html?loc=lesnoe&svc=massage&fam=massage90&date=2026-10-04&time=11:00&step=contacts'; }
+    if (e.target.closest('[data-skip]')) { K.track('waitlist_offer_declined', offer); location.href = '../index.html'; }
+  });
+  K.track('waitlist_offer_shown', { state: state });
+  render();
+})();
+</script>
+</body>
+</html>

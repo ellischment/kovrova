@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Услуги и цены — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<div class="phone">
+  <header class="a-head"><div><div class="t">Услуги и цены</div><div class="s">Одна матрица: семейство × место</div></div></header>
+  <main>
+    <p class="small muted" style="margin-top:0">Правка прямо в ячейке, автосохранение. Изменения видны на сайте примерно через минуту. Старые записи сохраняют старую цену.</p>
+    <div class="card" style="margin-bottom:14px">
+      <b style="font-size:14px">Массовое изменение цен</b>
+      <div class="field" style="margin-top:8px"><label for="bulkLoc">Локация</label><select id="bulkLoc"><option value="lesnoe">Лесное</option><option value="moskva">Москва</option><option value="online">Онлайн</option></select></div>
+      <div class="row" style="gap:8px;align-items:flex-end">
+        <div class="field" style="flex:1;margin-bottom:0"><label for="bulkPct">Изменить на, %</label><input id="bulkPct" type="number" inputmode="numeric" placeholder="напр. 10 или -5"></div>
+        <button class="btn sm" id="bulkApply">Применить</button>
+      </div>
+      <p class="note" id="bulkNote">Затронет только заполненные цены выбранной локации.</p>
+    </div>
+    <div style="overflow-x:auto"><table id="matrix">
+      <thead><tr><th>Услуга</th><th>Лесное</th><th>Москва</th><th>Онлайн</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <button class="btn sec block" style="margin-top:14px" data-toast="Открывается предпросмотр страницы «Услуги и цены», как её видит гость">Показать, как видит гость</button>
+  </main>
+  <div id="tabs-root"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>
+(function () {
+  var K = KVR;
+  var ROWS = []; // {dirTitle, famId, famTitle, dur, prices:{lesnoe,moskva,online}, techs}
+  K.DIRECTIONS.forEach(function (d) { d.families.forEach(function (f) { ROWS.push({ dir: d.title, id: f.id, title: f.title, dur: f.durKnown === false ? '[?]' : f.dur + ' мин', prices: { lesnoe: f.prices.lesnoe, moskva: f.prices.moskva, online: f.prices.online } }); }); });
+  var LOCS = ['lesnoe', 'moskva', 'online'];
+
+  function cell(row, loc) {
+    var has = Object.prototype.hasOwnProperty.call(row.prices, loc);
+    if (!has) return '<td class="off" style="opacity:.3">—</td>';
+    var v = row.prices[loc];
+    var off = v === undefined;
+    return '<td class="' + (off ? 'off' : '') + '"><input inputmode="numeric" data-row="' + row.id + '" data-loc="' + loc + '" value="' + (v == null ? '' : v) + '" placeholder="[?]" aria-label="' + row.title + ', ' + loc + '">' +
+      '<button class="sw" data-toggle="' + row.id + '" data-loc="' + loc + '">' + (off ? 'выкл' : 'вкл') + '</button></td>';
+  }
+  function render() {
+    document.querySelector('#matrix tbody').innerHTML = ROWS.map(function (r) {
+      return '<tr><td><b>' + r.title + '</b><div class="small muted">' + r.dir + ' · ' + r.dur + '</div></td>' + LOCS.map(function (l) { return cell(r, l); }).join('') + '</tr>';
+    }).join('');
+  }
+  document.addEventListener('change', function (e) {
+    if (e.target.matches('input[data-row]')) { KVR.toast('Сохранено · на сайте примерно через минуту'); }
+  });
+  document.addEventListener('click', function (e) {
+    var sw = e.target.closest('[data-toggle]');
+    if (sw) { var td = sw.closest('td'); td.classList.toggle('off'); sw.textContent = td.classList.contains('off') ? 'выкл' : 'вкл'; KVR.toast(td.classList.contains('off') ? 'Услуга скрыта в этой локации' : 'Услуга снова доступна'); return; }
+    var t = e.target.closest('[data-toast]'); if (t) { KVR.toast(t.dataset.toast); return; }
+  });
+  document.getElementById('bulkApply').addEventListener('click', function () {
+    var loc = document.getElementById('bulkLoc').value, pct = parseFloat(document.getElementById('bulkPct').value);
+    if (!pct) { KVR.toast('Укажите процент изменения'); return; }
+    var count = 0;
+    document.querySelectorAll('input[data-loc="' + loc + '"]').forEach(function (inp) {
+      if (inp.value) { inp.value = Math.round(parseFloat(inp.value) * (1 + pct / 100)); count++; }
+    });
+    KVR.toast(count ? 'Изменено цен: ' + count + ' · сохранено' : 'В этой локации нет заполненных цен');
+  });
+  KVRA.mountNav('ceny');
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Записи — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<div class="phone">
+  <header class="a-head"><div><div class="t">Записи</div><div class="s">Фильтры, перенос, отмена, ручная запись</div></div></header>
+  <main>
+    <div class="chips" role="group" aria-label="Фильтр по статусу" style="margin-bottom:12px">
+      <button class="chip" aria-pressed="true" data-f="all">Все</button>
+      <button class="chip" aria-pressed="false" data-f="today">Сегодня</button>
+      <button class="chip" aria-pressed="false" data-f="new">Новенькие</button>
+      <button class="chip" aria-pressed="false" data-f="cancelled">Отменённые</button>
+    </div>
+    <button class="btn block" style="margin-bottom:14px" data-toast="В продукте: пошаговая форма — гость, услуга, место, дата и время, предоплата (для записи по телефону/личке)">+ Записать вручную</button>
+    <div id="list"></div>
+  </main>
+  <div id="tabs-root"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>
+(function () {
+  var ROWS = [
+    { name: 'Анна', tag: 'reg', status: 'Подтверждена', when: 'сб, 4 окт · 11:00', svc: 'Массаж 90 · лимфодренажный', loc: 'Лесное' },
+    { name: 'Мария', tag: 'new', status: 'Подтверждена', when: 'сб, 4 окт · 13:30', svc: 'Первичный приём', loc: 'Лесное' },
+    { name: 'Ольга', tag: 'reg', status: 'Ожидает оплаты', when: 'вс, 5 окт · 16:00', svc: 'Остеопрактика', loc: 'Лесное' },
+    { name: 'Ксения', tag: '', status: 'Отменена гостьей', when: 'вт, 30 сент · 15:00', svc: 'Остеопрактика', loc: 'Москва' },
+  ];
+  function render() {
+    document.getElementById('list').innerHTML = ROWS.map(function (r) {
+      return '<div class="card row"><div style="flex:1"><b>' + r.name + '</b>' + (r.tag ? '<span class="tag ' + r.tag + '">' + (r.tag === 'reg' ? 'постоянная' : 'новенькая') + '</span>' : '') +
+        '<div class="small muted">' + r.when + ' · ' + r.svc + ' · ' + r.loc + '</div>' +
+        '<div class="small" style="font-weight:600;margin-top:2px">' + r.status + '</div>' +
+        '<div class="actions"><button class="btn sec sm" data-toast="В продукте: перенос — выбор нового времени, гостье уходит уведомление">Перенести</button><button class="btn sec sm" data-toast="В продукте: отмена с расчётом возврата по правилам">Отменить</button></div>' +
+        '</div></div>';
+    }).join('');
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-toast]'); if (t) { KVR.toast(t.dataset.toast); return; }
+    var f = e.target.closest('[data-f]'); if (f) { document.querySelectorAll('[data-f]').forEach(function (b) { b.setAttribute('aria-pressed', b === f); }); }
+  });
+  KVRA.mountNav('zapisi');
+  render();
+})();
+</script>
+</body>
+</html>

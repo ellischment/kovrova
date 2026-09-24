@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Управление записью — Ирина Коврова</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Перенос, отмена, смена техники и повторная запись по ссылке /z/<token>.">
+<meta name="theme-color" content="#3D4E21">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../booking.css">
+</head>
+<body>
+<div class="proto-note" role="note"><b>Демо /z/&lt;token&gt;.</b> Ничего никуда не отправляется.</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs><symbol id="i-close" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol></defs>
+</svg>
+<div class="page" id="page">
+  <header class="bk-head">
+    <span class="icon-btn" aria-hidden="true"></span>
+    <h1>Ваша запись</h1>
+    <a class="icon-btn" href="../index.html" aria-label="Закрыть"><svg width="22" height="22"><use href="#i-close"></use></svg></a>
+  </header>
+  <main class="bk-body" id="body" aria-live="polite" tabindex="-1"></main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script>
+(function () {
+  'use strict';
+  var K = window.KVR;
+  var body = K.$('#body');
+  var token = new URLSearchParams(location.search).get('token') || K.shortCode('demo');
+  var now = new Date();
+  var booking = {
+    guestName: 'Анна', date: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 5, 11, 0), // демо: через 5 дней
+    dirId: 'massage', famId: 'massage90', tech: 'Лимфодренажный', loc: 'lesnoe', prepay: K.PREPAY, status: 'CONFIRMED',
+  };
+  var view = 'summary';
+
+  function famObj() { return K.findFamily(booking.dirId, booking.famId); }
+  function locObj() { return K.LOCS.filter(function (l) { return l.id === booking.loc; })[0]; }
+  function hoursLeft() { return Math.round((booking.date - now) / 36e5); }
+  function techDeadlinePassed() {
+    var d = new Date(booking.date); d.setDate(d.getDate() - 1); d.setHours(18, 0, 0, 0);
+    return now > d;
+  }
+  function refundText() {
+    var h = hoursLeft();
+    if (h >= 48) return 'До визита ' + h + ' ч (больше 48) — при отмене или переносе предоплата вернётся полностью или останется депозитом, как вам удобнее.';
+    return 'До визита осталось ' + h + ' ч (меньше 48) — предоплата удерживается. Но если это время заберут из листа ожидания, вернём её полностью.';
+  }
+
+  function render() {
+    if (view === 'summary') return renderSummary();
+    if (view === 'reschedule') return renderReschedule();
+    if (view === 'cancel') return renderCancel();
+    if (view === 'tech') return renderTech();
+    if (view === 'again') return renderAgain();
+  }
+
+  function renderSummary() {
+    var f = famObj(), l = locObj();
+    body.innerHTML = '<div class="summary"><dl>' +
+      '<dt>Гостья</dt><dd>' + booking.guestName + '</dd>' +
+      '<dt>Когда</dt><dd>' + K.fmtDay.format(booking.date) + ', ' + booking.date.toTimeString().slice(0, 5) + '</dd>' +
+      '<dt>Что</dt><dd>' + K.esc(f.title) + (booking.tech ? ' · ' + K.esc(booking.tech) : '') + '</dd>' +
+      '<dt>Где</dt><dd>' + K.esc(l.name) + '</dd>' +
+      '<dt>Статус</dt><dd>Подтверждена</dd></dl></div>' +
+      '<p class="hint">' + refundText() + '</p>' +
+      '<div class="list-actions" style="margin-top:18px">' +
+      '<button class="btn btn-primary btn-block" data-v="reschedule">Перенести</button>' +
+      (f.techs ? '<button class="btn btn-secondary btn-block" data-v="tech" ' + (techDeadlinePassed() ? 'disabled' : '') + '>Сменить технику' + (techDeadlinePassed() ? ' — время вышло' : '') + '</button>' : '') +
+      '<button class="btn btn-secondary btn-block" data-v="cancel">Отменить</button>' +
+      '<a class="btn btn-secondary btn-block" href="index.html">Записаться снова</a>' +
+      '<button class="btn btn-ghost btn-block" data-toast="В продукте: откроется Telegram-бот по одноразовой ссылке ?start=' + token + '">Подключить Telegram</button>' +
+      '<button class="btn btn-ghost btn-block" data-toast="В продукте: откроется MAX-бот по одноразовой ссылке">Подключить MAX</button>' +
+      '</div>' +
+      '<p class="rule">Код записи: ' + token + '</p>';
+  }
+
+  function renderReschedule() {
+    var opts = [];
+    var d = new Date(now); d.setDate(d.getDate() + 1);
+    for (var i = 0; i < 14 && opts.length < 6; i++) {
+      K.slotsFor(booking.loc, d, now).forEach(function (x) { if (x.free && opts.length < 6) opts.push({ date: new Date(d), time: x.time }); });
+      d.setDate(d.getDate() + 1);
+    }
+    body.innerHTML = '<button class="link-btn" data-v="summary" style="margin-bottom:12px">← Назад к записи</button>' +
+      '<p class="small muted">' + (hoursLeft() < 48 ? 'До визита меньше 48 часов: перенос возможен один раз, если есть окно в ближайшие 14 дней.' : 'Выберите новое время — цена и предоплата не изменятся.') + '</p>' +
+      '<div class="chips" style="flex-direction:column;align-items:stretch;gap:8px">' + opts.map(function (o) {
+        return '<button class="chip" style="justify-content:space-between;display:flex" data-pick="' + K.iso(o.date) + '|' + o.time + '">' + K.fmtDay.format(o.date) + ' · ' + o.time + '</button>';
+      }).join('') + '</div>';
+  }
+
+  function renderCancel() {
+    body.innerHTML = '<button class="link-btn" data-v="summary" style="margin-bottom:12px">← Назад к записи</button>' +
+      '<div class="banner"><strong>Отмена записи</strong>' + refundText() + '</div>' +
+      '<p class="small muted">Если передумаете — можно записаться снова в любой момент.</p>' +
+      '<button class="btn btn-primary btn-block" data-confirm-cancel="1">Подтвердить отмену</button>';
+  }
+
+  function renderTech() {
+    var f = famObj();
+    body.innerHTML = '<button class="link-btn" data-v="summary" style="margin-bottom:12px">← Назад к записи</button>' +
+      '<p class="small muted">Можно поменять до 18:00 накануне визита, цена не меняется.</p>' +
+      '<div class="chips chips-scroll">' + f.techs.map(function (t) {
+        return '<button class="chip" data-set-tech="' + K.esc(t) + '" aria-pressed="' + (booking.tech === t) + '">' + K.esc(t) + '</button>';
+      }).join('') + '</div>';
+  }
+
+  function renderAgain() {}
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('button,[data-toast]'); if (!t) return; var ds = t.dataset;
+    if (ds.v) { view = ds.v; render(); body.focus({ preventScroll: true }); return; }
+    if (ds.pick) { var pair = ds.pick.split('|'); var d = new Date(pair[0] + 'T' + pair[1]); booking.date = d; K.track('booking_rescheduled', { date: pair[0], time: pair[1] }); view = 'summary'; render(); K.toast('Перенесено на ' + K.fmtDay.format(d) + ', ' + pair[1]); return; }
+    if (ds.setTech !== undefined) { booking.tech = ds.setTech; K.track('booking_tech_changed', { tech: booking.tech }); view = 'summary'; render(); K.toast('Техника изменена: ' + booking.tech); return; }
+    if (ds.confirmCancel !== undefined) { K.track('booking_cancelled', { hoursLeft: hoursLeft() }); body.innerHTML = '<div class="success">' +
+      '<div class="ok-circle"><svg width="30" height="30"><use href="#i-check"></use></svg></div><h2>Запись отменена</h2>' +
+      '<p class="small muted">' + refundText() + '</p>' +
+      '<a class="btn btn-secondary btn-block" style="margin-top:16px" href="index.html">Записаться снова</a></div>'; return; }
+    if (t.dataset.toast) { K.toast(t.dataset.toast); return; }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

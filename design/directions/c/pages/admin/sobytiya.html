@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>События — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<div class="phone">
+  <header class="a-head"><div><div class="t">События и курсы</div><div class="s">Мастер-классы, вместимость, лист ожидания</div></div></header>
+  <main>
+    <button class="btn block" style="margin-bottom:14px" data-toast="В продукте: название, даты, локация или онлайн, цена, предоплата, вместимость">+ Новое событие</button>
+    <div class="card">
+      <b>Самомассаж лица: бережные техники</b>
+      <div class="small muted">сб, 18 октября · 12:00–14:00 · Лесное</div>
+      <div class="small" style="margin-top:4px">Занято 4 из 6 мест · в листе ожидания 1</div>
+      <div class="actions"><button class="btn sec sm" data-toast="Открыт список участников и лист ожидания на событие">Список участников</button><button class="btn sec sm" data-toast="Событие снято с публикации">Снять с сайта</button></div>
+    </div>
+    <div class="card">
+      <b>Курс «Бережные техники» (архив)</b>
+      <div class="small muted">завершён 2 сентября · Лесное</div>
+      <div class="small" style="margin-top:4px">Прошло 8 человек</div>
+    </div>
+    <p class="note">Регистрация на событие работает как обычная бронь (тип EVENT), лист ожидания — по тем же правилам, что и обычная запись.</p>
+  </main>
+  <div id="tabs-root"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>
+document.addEventListener('click', function (e) { var t = e.target.closest('[data-toast]'); if (t) KVR.toast(t.dataset.toast); });
+KVRA.mountNav('sobytiya');
+</script>
+</body>
+</html>

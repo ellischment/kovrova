@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Гости — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<div class="phone">
+  <header class="a-head"><div><div class="t">Гости</div><div class="s">Контакты, визиты, согласия</div></div></header>
+  <main>
+    <div class="field"><label for="search" class="sr-only">Поиск гостя</label><input id="search" placeholder="Найти по имени или телефону"></div>
+    <div id="list"></div>
+  </main>
+  <div id="tabs-root"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>
+(function () {
+  function card(g, i) {
+    var c = g.consent;
+    return '<div class="card">' +
+      '<div class="row" style="justify-content:space-between"><b>' + g.name + '</b>' + (g.regular ? '<span class="tag reg">постоянная</span>' : '') + '</div>' +
+      '<div class="small muted">' + g.phone + ' · ' + g.visits + ' визит(ов) · последний: ' + g.lastVisit + '</div>' +
+      '<div class="small" style="margin-top:6px"><b>Согласия:</b> ПДн ' + (c.pdn ? '✓' : '—') + ' · Реклама ' + (c.marketing ? '✓' : '—') + ' · Распространение отзыва ' + (c.rasprostranenie ? '✓' : '—') + '</div>' +
+      '<p class="small muted" style="margin:6px 0 0">Заметка: <span style="font-style:italic">без сведений о здоровье — используйте только организационные пометки</span></p>' +
+      '<div class="actions">' +
+      '<button class="btn sec sm" data-t="Открыта карточка · экспорт данных гостя (JSON) — 152-ФЗ, право на доступ">Экспорт данных</button>' +
+      '<button class="btn sec sm" data-t="Гость обезличен: имя и телефон заменены, история визитов сохранена">Обезличить</button>' +
+      '</div></div>';
+  }
+  function render(filter) {
+    var q = (filter || '').toLowerCase();
+    var items = KVRA.GUESTS.filter(function (g) { return !q || g.name.toLowerCase().indexOf(q) > -1 || g.phone.indexOf(q) > -1; });
+    document.getElementById('list').innerHTML = items.map(card).join('') || '<p class="note">Никого не нашлось.</p>';
+  }
+  document.getElementById('search').addEventListener('input', function (e) { render(e.target.value); });
+  document.addEventListener('click', function (e) { var t = e.target.closest('[data-t]'); if (t) KVR.toast(t.dataset.t); });
+  KVRA.mountNav('gosti');
+  render('');
+})();
+</script>
+</body>
+</html>

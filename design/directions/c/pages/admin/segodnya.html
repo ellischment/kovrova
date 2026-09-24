@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сегодня — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<div class="phone">
+  <header class="a-head"><div><div class="t">Сегодня</div><div class="s" id="dateSub">ср, 30 сентября · Лесное</div></div></header>
+  <main>
+    <div class="actions" style="margin-top:0">
+      <button class="btn sec sm" data-toast="В продукте: выбрать интервал → если есть гости, им уйдут 3 варианта переноса">Закрыть время</button>
+      <button class="btn sec sm" data-toast="В продукте: /отпуск 10.11 15.11 — слоты скрыты, гостям уйдут варианты переноса и возврат">Отпуск</button>
+      <a class="btn sec sm" href="mesyac.html">Открыть месяц</a>
+    </div>
+    <div class="card row"><span class="time">09:00</span><div><b>Анна</b><span class="tag reg">5-й визит</span><div class="small muted">Массаж 90 · лимфодренажный</div></div></div>
+    <div class="card row"><span class="time">11:00</span><div><b>Мария</b><span class="tag new">новенькая</span><div class="small muted">Первичный приём · предоплата ✓</div></div></div>
+    <div class="card free">
+      <div class="row"><span class="time">13:30</span><div><b>Свободно</b><div class="small muted">В листе ожидания подходят 3 гостьи. Предложение уже отправлено первой, держится до 12:10.</div></div></div>
+      <div class="actions">
+        <button class="btn sm" data-toast="Отправлено следующей гостье из листа ожидания (каскад, 30 мин)">Предложить листу ожидания</button>
+        <button class="btn sec sm" data-toast="Слот закрыт, лист ожидания не беспокоим">Закрыть окно</button>
+      </div>
+    </div>
+    <div class="card row"><span class="time">16:00</span><div><b>Ольга</b><span class="tag reg">2-й визит</span><div class="small muted">Остеопрактика · поменяла технику вчера в 17:12</div></div></div>
+    <p class="note">Отметки «пришла / не пришла» — свайпом по карточке (в продукте). После сеанса гостье само уйдёт тёплое «спасибо».</p>
+  </main>
+  <div id="tabs-root"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>
+KVRA.mountNav('segodnya');
+document.addEventListener('click', function (e) { var t = e.target.closest('[data-toast]'); if (t) KVR.toast(t.dataset.toast); });
+</script>
+</body>
+</html>

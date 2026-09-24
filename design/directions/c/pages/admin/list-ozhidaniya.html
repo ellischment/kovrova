@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Лист ожидания — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<div class="phone">
+  <header class="a-head"><div><div class="t">Лист ожидания</div><div class="s">Кто и чего ждёт</div></div></header>
+  <main id="list"></main>
+  <div id="tabs-root"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>
+(function () {
+  var list = document.getElementById('list');
+  list.innerHTML = KVRA.WAITLIST.map(function (w) {
+    return '<div class="card"><b>' + w.name + '</b>' + (w.tag ? '<span class="tag ' + w.tag + '">' + (w.tag === 'reg' ? 'постоянная' : 'новенькая') + '</span>' : '') +
+      '<div class="small muted">' + (w.loc === 'moskva' ? 'Москва' : 'Лесное') + ' · ' + w.svc + ' · ' + w.windows + ' · до ' + w.horizon + '</div>' +
+      '<div class="small">' + w.position + '-я в очереди на «' + w.windows + '»</div>' +
+      '<div class="actions"><button class="btn sm" data-t="Выберите свободное окно — ' + w.name + ' уйдёт предложение с кнопкой «Забрать», держится 30 минут">Предложить окно</button>' +
+      '<button class="btn sec sm" data-t="' + w.name + ' удалена из листа ожидания">Убрать из листа</button></div></div>';
+  }).join('') + '<p class="note">Правила: окно на завтра и ближе предлагается всем сразу, дальше — по очереди с удержанием 30 минут. Тихие часы 22:00–08:00. Всё настраивается в «Настройках».</p>';
+  document.addEventListener('click', function (e) { var t = e.target.closest('[data-t]'); if (t) KVR.toast(t.dataset.t); });
+  KVRA.mountNav('list-ozhidaniya');
+})();
+</script>
+</body>
+</html>

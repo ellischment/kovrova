@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Месяц — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-l" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-r" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
+</defs></svg>
+<div class="phone">
+  <header class="a-head"><div><div class="t">Месяц</div><div class="s">Раскраска по месту приёма</div></div></header>
+  <main>
+    <div class="cal-head">
+      <button class="btn sec sm" id="prev" aria-label="Предыдущий месяц"><svg width="16" height="16"><use href="#i-l"></use></svg></button>
+      <span class="m" id="mLabel"></span>
+      <button class="btn sec sm" id="next" aria-label="Следующий месяц"><svg width="16" height="16"><use href="#i-r"></use></svg></button>
+    </div>
+    <div class="cal-wd" id="wd"></div>
+    <div class="cal-grid" id="grid"></div>
+    <div class="cal-legend"><span><i></i> Лесное / онлайн</span><span><i class="moskva"></i> Москва</span><span><i style="background:transparent;opacity:.5"></i> Закрыто</span></div>
+
+    <h2>Открыть запись</h2>
+    <div class="card">
+      <p class="small muted" style="margin-top:0">Когда открывается запись на следующий месяц. Постоянным гостям — доступ на 24 ч раньше.</p>
+      <div class="field"><label for="odate">Дата</label><input id="odate" type="date"></div>
+      <div class="field"><label for="otime">Время</label><input id="otime" type="time" value="11:00"></div>
+      <button class="btn block" id="openRelease">Открыть запись</button>
+    </div>
+    <p class="note" id="selNote"></p>
+  </main>
+  <div id="tabs-root"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>
+(function () {
+  var K = KVR, now = new Date();
+  var m = new Date(now.getFullYear(), now.getMonth(), 1);
+  var WD = ['пн','вт','ср','чт','пт','сб','вс'];
+  document.getElementById('wd').innerHTML = WD.map(function (w) { return '<span>' + w + '</span>'; }).join('');
+  var selected = null;
+
+  function render() {
+    document.getElementById('mLabel').textContent = K.MONTHS_NOM[m.getMonth()] + ' ' + m.getFullYear();
+    var first = new Date(m.getFullYear(), m.getMonth(), 1);
+    var offset = (first.getDay() + 6) % 7;
+    var days = KVRA.monthSchedule(m.getFullYear(), m.getMonth());
+    var cells = [];
+    for (var i = 0; i < offset; i++) cells.push('<span class="cal-day empty"></span>');
+    days.forEach(function (d) {
+      var cls = ['cal-day']; if (d.loc) cls.push(d.loc); else cls.push('closed');
+      cells.push('<button class="' + cls.join(' ') + '" data-date="' + d.iso + '" aria-pressed="' + (selected === d.iso) + '" aria-label="' + d.day + ' ' + K.MONTHS_GEN[m.getMonth()] + (d.loc ? ', ' + (d.loc === 'moskva' ? 'Москва' : 'Лесное и онлайн') : ', закрыто') + '">' + d.day + '</button>');
+    });
+    document.getElementById('grid').innerHTML = cells.join('');
+    document.getElementById('selNote').textContent = '';
+  }
+  document.getElementById('prev').onclick = function () { m = new Date(m.getFullYear(), m.getMonth() - 1, 1); render(); };
+  document.getElementById('next').onclick = function () { m = new Date(m.getFullYear(), m.getMonth() + 1, 1); render(); };
+  document.getElementById('grid').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-date]'); if (!b) return;
+    selected = b.dataset.date; render();
+    document.getElementById('selNote').textContent = 'Выбрано: ' + selected + ' — в продукте здесь открывается редактор дня (закрыть, изменить локацию, задать якорные времена).';
+  });
+  document.getElementById('openRelease').addEventListener('click', function () {
+    var d = document.getElementById('odate').value, t = document.getElementById('otime').value;
+    if (!d) { K.toast('Укажите дату открытия'); return; }
+    K.track('admin_release_opened', { date: d, time: t });
+    K.toast('Запись откроется ' + d + ' в ' + t + '. Подписчикам «Напомнить» уйдёт сообщение автоматически.');
+  });
+  KVRA.mountNav('mesyac');
+  render();
+})();
+</script>
+</body>
+</html>

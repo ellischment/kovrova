@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Настройки — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<div class="phone">
+  <header class="a-head"><div><div class="t">Настройки</div><div class="s">Правила, окно записи, каналы</div></div></header>
+  <main>
+    <h2 style="margin-top:0">Отмена и перенос</h2>
+    <div class="card">
+      <div class="field"><label for="cancelH">Бесплатная отмена, часов до визита</label><input id="cancelH" type="number" value="48"></div>
+      <label class="row" style="gap:10px;align-items:center;cursor:pointer"><input type="checkbox" checked style="width:20px;height:20px"> Возвращать предоплату, если окно выкупили из листа ожидания</label>
+    </div>
+    <h2>Окно записи</h2>
+    <div class="card">
+      <div class="chips" style="margin-bottom:10px"><button class="chip" aria-pressed="true">Открытие месяца</button><button class="chip" aria-pressed="false">Скользящее окно</button></div>
+      <div class="field"><label for="relDay">День открытия</label><input id="relDay" type="number" value="21"></div>
+      <div class="field"><label for="relTime">Время открытия</label><input id="relTime" type="time" value="11:00"></div>
+      <div class="field"><label for="regVisits">Постоянная гостья: визитов за 6 мес.</label><input id="regVisits" type="number" value="3"></div>
+      <div class="field" style="margin-bottom:0"><label for="regHours">Ранний доступ, часов</label><input id="regHours" type="number" value="24"></div>
+    </div>
+    <h2>Лист ожидания</h2>
+    <div class="card">
+      <div class="field"><label for="holdMin">Удержание окна, мин</label><input id="holdMin" type="number" value="30"></div>
+      <div class="field"><label for="broadcastH">Порог рассылки всем сразу, часов</label><input id="broadcastH" type="number" value="24"></div>
+      <div class="field" style="margin-bottom:0"><label for="priority">Приоритет</label><select id="priority"><option>Постоянные гости первыми</option><option>Очередь (FIFO)</option><option>Вручную</option></select></div>
+    </div>
+    <h2>Тихие часы</h2>
+    <div class="card row" style="gap:10px;align-items:center">
+      <input type="time" value="22:00"><span>—</span><input type="time" value="08:00">
+    </div>
+    <h2>Каналы уведомлений</h2>
+    <div class="card"><div class="chips"><button class="chip" aria-pressed="true">Telegram</button><button class="chip" aria-pressed="true">MAX</button><button class="chip" aria-pressed="true">SMS</button><button class="chip" aria-pressed="false">Email</button></div></div>
+    <h2>Реквизиты и юр-документы</h2>
+    <div class="card">
+      <p class="small muted" style="margin-top:0">Статус: ИП / НПД <span class="q">[?]</span> · ИНН <span class="q">[?]</span></p>
+      <button class="btn sec block" data-toast="Открыт редактор версий: политика, согласие на ПДн, согласие на рекламу, правила записи">Юридические документы (версии)</button>
+    </div>
+    <button class="btn block" style="margin-top:6px" id="save">Сохранить настройки</button>
+  </main>
+  <div id="tabs-root"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>
+document.addEventListener('click', function (e) { var t = e.target.closest('[data-toast]'); if (t) KVR.toast(t.dataset.toast); var c = e.target.closest('.chip'); if (c) c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') !== 'true'); });
+document.getElementById('save').addEventListener('click', function () { KVR.toast('Настройки сохранены'); });
+KVRA.mountNav('nastrojki');
+</script>
+</body>
+</html>

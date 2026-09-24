@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сообщения — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<div class="phone">
+  <header class="a-head"><div><div class="t">Сообщения</div><div class="s">Шаблоны и журнал отправок</div></div></header>
+  <main>
+    <div class="chips" style="margin-bottom:12px">
+      <button class="chip" aria-pressed="true" data-tab="templates">Шаблоны</button>
+      <button class="chip" aria-pressed="false" data-tab="log">Журнал отправок</button>
+    </div>
+    <div id="templates"></div>
+    <div id="log" hidden></div>
+  </main>
+  <div id="tabs-root"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>
+(function () {
+  var TPL = [
+    { id: 'confirm', title: 'Подтверждение записи', text: '{имя}, вы записаны 🍀\n{дата}, {время} · {услуга} · {локация}\nВид массажа можно поменять до {дедлайн_техники}.\nВсё, что нужно (перенести, отменить, поменять), по ссылке: {ссылка}\nИрина' },
+    { id: 'r48', title: 'Напоминание за 48 ч', text: '{имя}, добрый день. Напоминаю: жду вас {дата} в {время}, {локация}.\nЕсли планы изменились, перенести или отменить можно здесь: {ссылка}.\n[Всё в силе] [Перенести] [Сменить технику] [Отменить]' },
+    { id: 'r3', title: 'Напоминание за 3 ч', text: '{имя}, до встречи в {время}.\nАдрес: {адрес}. {как_пройти}\nКарта: {ссылка_карта}' },
+    { id: 'offer', title: 'Предложение из листа ожидания', text: '{имя}, освободилось окно, которое вы ждали:\n{дата}, {время} · {услуга} · {локация}\nОно держится за вами {удержание} мин. [Забрать окно]' },
+    { id: 'release', title: 'Открытие записи', text: '{имя}, открываю запись на {месяц}. Выбирайте удобное время: {ссылка}\n(Постоянным гостям: доступ открыт на сутки раньше.)' },
+  ];
+  document.getElementById('templates').innerHTML = TPL.map(function (t) {
+    return '<div class="card"><b>' + t.title + '</b>' +
+      '<div class="field" style="margin-top:8px"><textarea rows="5" data-id="' + t.id + '">' + t.text + '</textarea></div>' +
+      '<p class="small muted" style="margin-bottom:8px">Подстановки подсвечены фигурными скобками — система заполнит их сама.</p>' +
+      '<div class="actions"><button class="btn sm" data-save="' + t.id + '">Сохранить</button><button class="btn sec sm" data-preview="' + t.id + '">Предпросмотр</button></div></div>';
+  }).join('');
+  document.getElementById('log').innerHTML = ['сегодня 09:03 · Подтверждение → Анна · Telegram · доставлено', 'сегодня 08:41 · Напоминание 48ч → Ольга · SMS (фолбэк) · доставлено', 'вчера 20:00 · Сводка → Ирина · Telegram · доставлено']
+    .map(function (l) { return '<div class="card small">' + l + '</div>'; }).join('');
+
+  document.addEventListener('click', function (e) {
+    var tab = e.target.closest('[data-tab]');
+    if (tab) { document.querySelectorAll('[data-tab]').forEach(function (b) { b.setAttribute('aria-pressed', b === tab); }); document.getElementById('templates').hidden = tab.dataset.tab !== 'templates'; document.getElementById('log').hidden = tab.dataset.tab !== 'log'; return; }
+    var s = e.target.closest('[data-save]'); if (s) { KVR.toast('Шаблон сохранён. Ирина утверждает текст перед использованием.'); return; }
+    var p = e.target.closest('[data-preview]'); if (p) { KVR.toast('Открыт предпросмотр, как увидит гость (см. booking/messages.html)'); return; }
+  });
+  KVRA.mountNav('soobshcheniya');
+})();
+</script>
+</body>
+</html>

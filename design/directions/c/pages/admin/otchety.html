@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Отчёты — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<div class="phone">
+  <header class="a-head"><div><div class="t">Отчёты</div><div class="s">Загрузка, отмены, выручка, источники</div></div></header>
+  <main>
+    <div class="chips" style="margin-bottom:12px"><button class="chip" aria-pressed="true">Месяц</button><button class="chip" aria-pressed="false">Квартал</button><button class="chip" aria-pressed="false">Год</button></div>
+    <div class="card"><b>Загрузка</b><div class="small muted">28 визитов из 40 возможных слотов · 70%</div></div>
+    <div class="card"><b>Отмены и неявки</b><div class="small muted">3 отмены (2 — с возвратом), 1 неявка</div></div>
+    <div class="card"><b>Выкупы из листа ожидания</b><div class="small muted">4 окна закрыты через лист ожидания вместо простоя</div></div>
+    <div class="card"><b>Выручка по категориям</b><div class="small muted">Массаж тела 62% · Остеопрактика 21% · Лицо 9% · Психосоматика 8%</div></div>
+    <div class="card"><b>Источники (UTM)</b><div class="small muted">Telegram-канал 54% · Яндекс Карты 22% · прямые заходы 24%</div></div>
+    <div class="card"><b>Воронка виджета записи</b><div class="small muted">Открыли запись 100 → выбрали время 61 → указали контакты 44 → оплатили 37</div></div>
+    <button class="btn sec block" style="margin-top:6px" data-toast="Экспорт таблицы в CSV начат">Выгрузить в CSV</button>
+  </main>
+  <div id="tabs-root"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>
+document.addEventListener('click', function (e) { var t = e.target.closest('[data-toast]'); if (t) KVR.toast(t.dataset.toast); var c = e.target.closest('.chip'); if (c) { document.querySelectorAll('.chip').forEach(function(b){b.setAttribute('aria-pressed', b===c);}); } });
+KVRA.mountNav('otchety');
+</script>
+</body>
+</html>

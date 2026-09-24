@@ -1,0 +1,87 @@
+/* Направление C · Календарь — кабинет Ирины (мобайл), pages/admin/*.html */
+
+@font-face{font-family:"Geologica";font-style:normal;font-display:swap;font-weight:100 900;
+  src:url(fonts/geologica-cyrillic-wght-normal.woff2) format("woff2-variations"),url(fonts/geologica-cyrillic-wght-normal.woff2) format("woff2");
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Geologica";font-style:normal;font-display:swap;font-weight:100 900;
+  src:url(fonts/geologica-latin-wght-normal.woff2) format("woff2-variations"),url(fonts/geologica-latin-wght-normal.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:"Marck Script";font-style:normal;font-display:swap;font-weight:400;
+  src:url(fonts/marck-script-cyrillic-400-normal.woff2) format("woff2");
+  unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Marck Script";font-style:normal;font-display:swap;font-weight:400;
+  src:url(fonts/marck-script-latin-400-normal.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+2000-206F}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg-alt);color:var(--text);font:400 15px/1.5 var(--font-sans);min-height:100dvh}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+.q{font-size:11px;font-weight:700;color:var(--bordo-500,#7E1F2A);background:var(--sand-200);border-radius:6px;padding:1px 6px;vertical-align:1px}
+h2{font:600 18px/1.3 var(--font-sans);margin:18px 0 10px}
+.phone{max-width:430px;min-height:100dvh;margin:0 auto;background:var(--bg);display:flex;flex-direction:column}
+header.a-head{padding:12px 16px 10px;border-bottom:2px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px}
+header.a-head .t{font:600 19px/1.2 var(--font-sans)}
+header.a-head .s{font-size:12px;color:var(--text-muted)}
+main{flex:1;padding:14px 16px 96px}
+.card{background:var(--sheet-bg);color:var(--sheet-text);border:var(--frame) solid var(--sheet-line);border-radius:var(--radius-frame);padding:14px;margin-bottom:10px}
+/* весь контент кабинета лежит на кремовых карточках — сильнее правила base.css "body .muted" */
+.card .muted,.card.muted,.card .small.muted{color:var(--sheet-muted)}
+.row{display:flex;gap:12px;align-items:flex-start}
+.time{font-weight:700;min-width:52px}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:2px 7px;margin-left:4px;vertical-align:1px}
+.tag.new{background:var(--loc-moskva-fill);color:var(--loc-moskva-text)}
+.tag.reg{border:1.5px solid var(--loc-lesnoe);color:var(--sheet-text)}
+.muted{color:var(--sheet-muted)}
+.small{font-size:13px}
+.free{border-style:dashed}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:var(--tap);padding:0 16px;border-radius:var(--radius-btn);border:2px solid var(--btn-bg);background:var(--btn-bg);color:var(--btn-text);font:600 14px/1 var(--font-sans);cursor:pointer}
+.btn.sec{background:transparent;color:var(--text);border-color:var(--line)}
+.card .btn.sec{color:var(--sheet-text);border-color:var(--sheet-line)}
+.card .btn.sec[disabled]{color:var(--sheet-muted)}
+.btn.sm{min-height:38px;padding:0 12px;font-size:13px}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+table{width:100%;min-width:330px;border-collapse:collapse;font-size:13px;background:var(--sheet-bg);color:var(--sheet-text);border:var(--frame) solid var(--sheet-line);border-radius:var(--radius-frame);overflow:hidden}
+th,td{padding:9px 6px;border-bottom:1px solid var(--sheet-line);text-align:left;vertical-align:middle;color:var(--sheet-text)}
+td .muted,td .small.muted{color:var(--sheet-muted)}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--sheet-muted);font-weight:700;background:var(--bg-alt)}
+td input{width:64px;min-height:38px;border:2px solid var(--sheet-line);border-radius:8px;padding:4px 6px;font:600 14px var(--font-sans);color:var(--sheet-text);background:#fff}
+td input:focus{outline:none;border-color:var(--accent-field)}
+td.off input{opacity:.35}
+.sw{display:block;font-size:11px;color:var(--sheet-muted);margin-top:4px;cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
+.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;display:grid;grid-template-columns:repeat(5,1fr);background:var(--bg);border-top:2px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:6;overflow-x:auto}
+.tabs a,.tabs button{border:0;background:none;padding:9px 2px 10px;font:600 11px var(--font-sans);color:var(--text-muted);cursor:pointer;min-height:52px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:2px}
+.tabs a[aria-current=page],.tabs button[aria-selected=true]{color:var(--text);box-shadow:inset 0 3px 0 var(--sand-200)}
+.more-menu{position:fixed;left:8px;right:8px;bottom:64px;max-width:414px;margin:0 auto;background:var(--sheet-bg);color:var(--sheet-text);border-radius:var(--radius-frame);border:var(--frame) solid var(--sheet-line);padding:8px;z-index:7;display:grid;gap:4px}
+.more-menu a{display:block;padding:12px 10px;border-radius:8px;color:inherit;text-decoration:none;font-weight:600;font-size:14px}
+.more-menu a:hover{background:var(--bg-alt)}
+.toast{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);background:var(--ink-900);color:#fff;border-radius:12px;padding:10px 14px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9;max-width:90vw;text-align:center}
+.toast.show{opacity:1}
+.note{font-size:12px;color:var(--text-muted);margin-top:8px}
+[hidden]{display:none!important}
+
+/* календарь месяца в кабинете */
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin:4px 0 10px}
+.cal-head .m{font-family:var(--font-hand);font-size:26px}
+.cal-wd{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-size:10px;color:var(--text-muted);text-align:center;margin-bottom:4px;text-transform:uppercase}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-day{position:relative;aspect-ratio:1/1;border-radius:8px;border:2px solid var(--line);background:var(--sheet-bg);color:var(--sheet-text);font:600 13px/1 var(--font-sans);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.cal-day.empty{visibility:hidden}
+.cal-day.lesnoe{border-color:var(--loc-lesnoe)}
+.cal-day.moskva{background:var(--loc-moskva-fill);color:var(--loc-moskva-text);border-color:var(--loc-moskva-fill)}
+.cal-day.closed{opacity:.4}
+.cal-day[aria-pressed=true]{outline:3px solid var(--focus);outline-offset:1px}
+.cal-legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--text-muted);margin:8px 0}
+.cal-legend span{display:inline-flex;align-items:center;gap:6px}
+.cal-legend i{width:12px;height:12px;border-radius:4px;border:2px solid var(--loc-lesnoe);display:inline-block;background:var(--sheet-bg)}
+.cal-legend i.moskva{background:var(--loc-moskva-fill);border-color:var(--loc-moskva-fill)}
+
+.field{margin-bottom:12px}
+.field label{display:block;font-weight:600;font-size:13px;margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;min-height:44px;border:2px solid var(--line);border-radius:10px;background:var(--sheet-bg);color:var(--sheet-text);padding:10px 12px;font:400 15px/1.4 var(--font-sans)}
+.chip{display:inline-flex;min-height:38px;align-items:center;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:transparent;font:600 13px var(--font-sans);color:var(--text);cursor:pointer;margin:2px}
+.chip[aria-pressed=true]{background:var(--sand-200);border-color:var(--sand-200);color:var(--ink-900)}
+.card .chip{color:var(--sheet-text);border-color:var(--sheet-line)}
+.card .chip[aria-pressed=true]{color:var(--ink-900);border-color:var(--sand-200)}

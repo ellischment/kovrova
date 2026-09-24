@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сертификаты — кабинет Ирины</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../admin.css">
+</head>
+<body>
+<div class="phone">
+  <header class="a-head"><div><div class="t">Сертификаты</div><div class="s">Номиналы, оформленные и доставленные</div></div></header>
+  <main>
+    <h2 style="margin-top:0">Номиналы</h2>
+    <div class="chips" style="margin-bottom:14px">
+      <span class="chip" aria-pressed="true">3 000 ₽</span><span class="chip" aria-pressed="true">5 500 ₽</span><span class="chip" aria-pressed="true">10 000 ₽</span><span class="chip" aria-pressed="false">Свой номинал</span>
+    </div>
+    <p class="small muted">Срок действия — 12 мес. <span class="q">[?]</span>. Изменить номиналы можно здесь (в продукте).</p>
+    <h2>Заказы</h2>
+    <div class="card"><b>LS-CERT-7Q2</b><div class="small muted">5 500 ₽ · для Веры от Анны · доставка сегодня, email</div><div class="small">Статус: доставлен</div></div>
+    <div class="card"><b>LS-CERT-3F1</b><div class="small muted">3 000 ₽ · для Игоря от Ольги · доставка 8 марта, Telegram</div><div class="small">Статус: запланирован</div></div>
+    <p class="note">Оплата → PDF с кодом и QR, страница получателя с кнопкой «Записаться по сертификату».</p>
+  </main>
+  <div id="tabs-root"></div>
+</div>
+<script src="../../booking-data.js"></script>
+<script src="../../admin-data.js"></script>
+<script>KVRA.mountNav('sertifikaty');</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Лист ожидания — Ирина Коврова</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Встаньте в лист ожидания: как только освободится подходящее окно, придёт сообщение.">
+<meta name="theme-color" content="#3D4E21">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../booking.css">
+</head>
+<body>
+<div class="proto-note" role="note"><b>Демо листа ожидания.</b> Ничего никуда не отправляется. <span class="q">[?]</span> — уточняется у Ирины.</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+  </defs>
+</svg>
+<div class="page" id="page">
+  <header class="bk-head">
+    <a class="icon-btn" href="index.html" aria-label="Назад к записи"><svg width="22" height="22"><use href="#i-back"></use></svg></a>
+    <h1 id="pageTitle">Лист ожидания</h1>
+    <a class="icon-btn" href="../index.html" aria-label="Закрыть"><svg width="22" height="22"><use href="#i-close"></use></svg></a>
+  </header>
+  <main class="bk-body" id="body" aria-live="polite" tabindex="-1"></main>
+  <div class="bk-foot" id="foot"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="../../booking-data.js"></script>
+<script>
+(function () {
+  'use strict';
+  var K = window.KVR;
+  var body = K.$('#body'), foot = K.$('#foot');
+  var p = new URLSearchParams(location.search);
+  var S = {
+    loc: p.get('loc') || 'lesnoe', dirId: p.get('svc') || 'massage', famId: p.get('fam') || null,
+    windows: new Set(), horizon: 'month', name: '', phone: '', channel: 'telegram', consent: false, marketing: false, done: false,
+  };
+  if (!S.famId) { var d0 = K.findDirection(S.dirId); S.famId = d0 ? d0.families.filter(function (f) { return K.familyAvailableIn(f, S.loc); })[0].id : null; }
+
+  function locObj() { return K.LOCS.filter(function (l) { return l.id === S.loc; })[0]; }
+  function famObj() { return K.findFamily(S.dirId, S.famId); }
+
+  var WINDOWS = [['wd-m', 'Будни утром'], ['wd-d', 'Будни днём'], ['wd-e', 'Будни вечером'], ['we-m', 'Выходные утром'], ['we-d', 'Выходные днём'], ['we-e', 'Выходные вечером']];
+  var HORIZONS = [['2w', '2 недели'], ['month', 'месяц'], ['2m', '2 месяца']];
+
+  function render() {
+    if (S.done) return renderDone();
+    var f = famObj();
+    body.innerHTML =
+      '<p class="small muted">Отметьте, когда вам удобно. Как только освободится подходящее окно, я пришлю сообщение. На ответ будет 30 минут, потом предложу следующей гостье.</p>' +
+      '<div class="summary"><dl><dt>Где</dt><dd>' + K.esc(locObj().name) + '</dd><dt>Что</dt><dd>' + (f ? K.esc(f.title) : 'Любая длительность от 60 мин') + '</dd></dl></div>' +
+      '<p class="small" style="font-weight:600;margin-bottom:8px">Удобное время</p>' +
+      '<div class="chips" style="margin-bottom:16px">' + WINDOWS.map(function (kv) { return '<button class="chip" data-w="' + kv[0] + '" aria-pressed="' + S.windows.has(kv[0]) + '">' + kv[1] + '</button>'; }).join('') + '</div>' +
+      '<p class="small" style="font-weight:600;margin-bottom:8px">Жду не дольше</p>' +
+      '<div class="chips" style="margin-bottom:18px">' + HORIZONS.map(function (kv) { return '<button class="chip" data-h="' + kv[0] + '" aria-pressed="' + (S.horizon === kv[0]) + '">' + kv[1] + '</button>'; }).join('') + '</div>' +
+      contactFields();
+    foot.innerHTML = '<button class="btn btn-primary btn-block" data-submit="1" ' + (S.windows.size ? '' : 'disabled') + '>Встать в лист ожидания</button>';
+  }
+  function contactFields() {
+    var e = S._errs || {};
+    return '<div class="field' + (e.name ? ' has-error' : '') + '"><label for="f-name">Как к вам обращаться</label><input id="f-name" autocomplete="name" value="' + K.esc(S.name) + '" data-bind="name">' + (e.name ? '<p class="err">Напишите, пожалуйста, имя</p>' : '') + '</div>' +
+      '<div class="field' + (e.phone ? ' has-error' : '') + '"><label for="f-phone">Телефон</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" value="' + K.esc(S.phone) + '" data-bind="phone">' + (e.phone ? '<p class="err">Проверьте номер</p>' : '') + '</div>' +
+      '<div class="field"><span style="display:block;font-weight:600;font-size:15px;margin-bottom:6px">Куда написать</span><div class="chips">' + [['telegram', 'Telegram'], ['max', 'MAX'], ['sms', 'SMS']].map(function (kv) { return '<button class="chip" data-channel="' + kv[0] + '" aria-pressed="' + (S.channel === kv[0]) + '">' + kv[1] + '</button>'; }).join('') + '</div></div>' +
+      '<label class="check"><input type="checkbox" data-bind="consent" ' + (S.consent ? 'checked' : '') + '><span>Соглашаюсь на <a href="#legal" data-legal="soglasie">обработку персональных данных</a></span></label>' +
+      (e.consent ? '<p class="err">Без согласия не сможем добавить вас в лист — это требование 152-ФЗ</p>' : '') +
+      '<label class="check"><input type="checkbox" data-bind="marketing" ' + (S.marketing ? 'checked' : '') + '><span class="muted">Хочу получать новости и приглашения (необязательно)</span></label>';
+  }
+  function renderDone() {
+    body.innerHTML = '<div class="success"><svg width="150" height="70" viewBox="0 0 150 70" aria-hidden="true"><ellipse cx="38" cy="46" rx="30" ry="18" fill="var(--bg-alt)"/><ellipse cx="86" cy="50" rx="24" ry="14" fill="var(--sand-200)"/></svg>' +
+      '<h2>Вы в листе ожидания</h2>' +
+      '<p>' + K.esc(locObj().name) + ' · ' + (famObj() ? K.esc(famObj().title) : '') + '<br><span class="muted small">Перед вами 2 человека (демо) — прозрачно и честно</span></p>' +
+      '<p class="small muted">Если окно освободится меньше чем за сутки, пришлю его всем сразу: возьмёт та, кто успеет. Раз в месяц спрошу, ждёте ли вы ещё окно.</p>' +
+      '<div class="list-actions"><a class="btn btn-secondary btn-block" href="index.html">Вернуться к записи</a><a class="btn btn-ghost btn-block" href="../index.html">На главную</a></div></div>';
+    foot.innerHTML = '';
+    document.getElementById('pageTitle').textContent = 'Вы в листе ожидания';
+  }
+  function phoneDigits() { return S.phone.replace(/\D/g, ''); }
+
+  document.addEventListener('click', function (e) {
+    var legal = e.target.closest('[data-legal]');
+    if (legal) { e.preventDefault(); K.toast('В продукте: отдельный документ /legal/soglasie (152-ФЗ)'); return; }
+    var t = e.target.closest('button'); if (!t) return; var ds = t.dataset;
+    if (ds.w) { S.windows.has(ds.w) ? S.windows.delete(ds.w) : S.windows.add(ds.w); render(); return; }
+    if (ds.h) { S.horizon = ds.h; render(); return; }
+    if (ds.channel) { S.channel = ds.channel; render(); return; }
+    if (ds.submit) {
+      var errs = {};
+      if (!S.name || S.name.trim().length < 2) errs.name = 1;
+      if (phoneDigits().length !== 11) errs.phone = 1;
+      if (!S.consent) errs.consent = 1;
+      S._errs = errs;
+      if (Object.keys(errs).length) { render(); var f = document.querySelector('.has-error input'); if (f) f.focus(); return; }
+      K.track('waitlist_joined', { loc: S.loc, svc: S.dirId, windows: Array.from(S.windows), horizon: S.horizon });
+      S.done = true; render(); body.focus({ preventScroll: true });
+      return;
+    }
+  });
+  document.addEventListener('input', function (e) {
+    var k = e.target.dataset.bind; if (!k) return;
+    if (k === 'phone') { var pos = e.target.value.length; e.target.value = K.formatPhone(e.target.value); S.phone = e.target.value; if (pos) e.target.setSelectionRange(e.target.value.length, e.target.value.length); }
+    else S[k] = e.target.value;
+  });
+  document.addEventListener('change', function (e) { if (e.target.type === 'checkbox' && e.target.dataset.bind) S[e.target.dataset.bind] = e.target.checked; });
+
+  K.track('booking_started', { entry: 'waitlist', loc: S.loc, svc: S.dirId });
+  render();
+})();
+</script>
+</body>
+</html>

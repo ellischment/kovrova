@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Запись — Ирина Коврова</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Запись на массаж, остеопрактику и психосоматику: Пригород Лесное, Москва и онлайн. Без звонков.">
+<meta name="theme-color" content="#3D4E21">
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../../base.css">
+<link rel="stylesheet" href="../../booking.css">
+<!--
+  Направление C · Календарь. Демо-данные, ничего не отправляется на сервер.
+  URL-состояние: ?loc=&svc=&fam=&date=&time=&step= . [?] = факт нужно подтвердить у Ирины.
+  Демо-режимы для проверки состояний: ?demo=no-slots | race | pay-error | early-access
+-->
+</head>
+<body>
+<div class="proto-note" role="note"><b>Демо листа записи.</b> Ничего никуда не отправляется. <span class="q">[?]</span> — факт уточняется у Ирины.</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-chevron-l" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-chevron-r" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
+  </defs>
+</svg>
+
+<div class="page" id="page">
+  <header class="bk-head">
+    <button class="icon-btn" id="btnBack" aria-label="Назад"><svg width="22" height="22"><use href="#i-back"></use></svg></button>
+    <h1 id="stepTitle">Запись</h1>
+    <a class="icon-btn" id="btnClose" href="../index.html" aria-label="Закрыть запись"><svg width="22" height="22"><use href="#i-close"></use></svg></a>
+  </header>
+  <div class="progress" aria-hidden="true"><i id="progressBar" style="width:14%"></i></div>
+  <main class="bk-body" id="body" aria-live="polite" tabindex="-1"></main>
+  <div class="bk-foot" id="foot"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../../booking-data.js"></script>
+<script>
+(function () {
+  'use strict';
+  var K = window.KVR;
+  var body = K.$('#body'), foot = K.$('#foot'), titleEl = K.$('#stepTitle'), backBtn = K.$('#btnBack'), progressBar = K.$('#progressBar');
+  var now = new Date();
+
+  var S = { step: 'loc', loc: null, dirId: null, famId: null, tech: null, date: null, time: null, filter: 'all',
+    name: '', phone: '', channel: 'telegram', comment: '', consent: false, marketing: false,
+    calMonth: new Date(now.getFullYear(), now.getMonth(), 1), started: Date.now(), payFailed: false, quizAnswers: [] };
+
+  var STEP_ORDER = ['loc', 'direction', 'family', 'when', 'contacts', 'pay', 'done'];
+  var BACK = { direction: 'loc', family: 'direction', when: null /* computed */, contacts: 'when', pay: 'contacts', quiz: 'direction', race: 'when', payerror: 'pay' };
+
+  function dirObj() { return K.findDirection(S.dirId); }
+  function famObj() { return K.findFamily(S.dirId, S.famId); }
+  function price() { var f = famObj(); return f ? f.prices[S.loc] : null; }
+  function locObj() { return K.LOCS.filter(function (l) { return l.id === S.loc; })[0]; }
+
+  function backTargetFor(step) {
+    if (step === 'when') { var d = dirObj(); return (d && d.families.length > 1) ? 'family' : 'direction'; }
+    return BACK[step] || null;
+  }
+
+  function urlFor(step) {
+    var p = new URLSearchParams();
+    if (S.loc) p.set('loc', S.loc);
+    if (S.dirId) p.set('svc', S.dirId);
+    if (S.famId) p.set('fam', S.famId);
+    if (S.date) p.set('date', S.date);
+    if (S.time) p.set('time', S.time);
+    if (step && step !== 'loc') p.set('step', step);
+    if (K.DEMO !== 'default') p.set('demo', K.DEMO);
+    var qstr = p.toString();
+    return location.pathname + (qstr ? '?' + qstr : '');
+  }
+
+  function goStep(step, opts) {
+    S.step = step;
+    var url = urlFor(step);
+    if (opts && opts.replace) history.replaceState({ S: snap() }, '', url);
+    else history.pushState({ S: snap() }, '', url);
+    render();
+  }
+  function snap() { return JSON.parse(JSON.stringify(S)); }
+
+  /* при входе в шаг «Когда» подбираем ближайшую свободную дату сами —
+     иначе пустой календарь до первого тапа выглядел бы как «нет окон» */
+  function goWhen() {
+    if (!S.date) {
+      var nf = nearestFreeDay(S.loc);
+      if (nf) { S.date = K.iso(nf.date); S.calMonth = new Date(nf.date.getFullYear(), nf.date.getMonth(), 1); }
+    }
+    goStep('when');
+  }
+
+  window.addEventListener('popstate', function (e) {
+    if (e.state && e.state.S) { Object.assign(S, e.state.S); render(); }
+    else { S.step = 'loc'; render(); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      var b = backTargetFor(S.step);
+      if (b) { goStep(b); } else { window.location.href = '../index.html'; }
+    }
+  });
+
+  backBtn.addEventListener('click', function () {
+    var b = backTargetFor(S.step);
+    if (b) goStep(b); else history.back();
+  });
+
+  /* ---------- начальное состояние из URL (deep-link) ---------- */
+  (function initFromUrl() {
+    var p = new URLSearchParams(location.search);
+    if (p.get('loc')) S.loc = p.get('loc');
+    if (p.get('svc')) S.dirId = p.get('svc');
+    if (p.get('fam')) S.famId = p.get('fam');
+    if (p.get('date')) S.date = p.get('date');
+    if (p.get('time')) S.time = p.get('time');
+    if (S.dirId && !S.famId) {
+      var d0 = K.findDirection(S.dirId);
+      var loc0 = S.loc || (d0 && d0.families.filter(function (f) { return Object.keys(f.prices)[0]; })[0]);
+      var fams0 = d0 ? d0.families.filter(function (f) { return !S.loc || K.familyAvailableIn(f, S.loc); }) : [];
+      if (fams0.length) S.famId = fams0[0].id;
+    }
+    var step = p.get('step');
+    if (step) S.step = step;
+    else if (S.loc && S.dirId && S.date && S.time) S.step = 'contacts';
+    else if (S.loc && S.dirId) S.step = 'when';
+    else if (S.loc) S.step = 'direction';
+    if (S.step === 'when' && !S.date) {
+      var nf0 = nearestFreeDay(S.loc);
+      if (nf0) { S.date = K.iso(nf0.date); S.calMonth = new Date(nf0.date.getFullYear(), nf0.date.getMonth(), 1); }
+    }
+    K.track('booking_started', { loc: S.loc, svc: S.dirId, entry: 'deep-link' });
+    history.replaceState({ S: snap() }, '', urlFor(S.step));
+  })();
+  if (!new URLSearchParams(location.search).get('loc')) K.track('booking_started', { entry: 'direct' });
+
+  /* ================= рендер шагов ================= */
+  var TITLES = { loc: 'Где вам удобнее?', direction: 'Что записываем?', family: 'Что записываем?', quiz: 'Подберём вместе',
+    when: 'Когда?', contacts: 'Контакты', pay: 'Предоплата', race: 'Это время только что заняли', payerror: 'Оплата не прошла', done: 'Готово' };
+  var STEP_NUM = { loc: 1, direction: 2, family: 2, when: 3, contacts: 4 };
+
+  function kicker(step) { var n = STEP_NUM[step]; return n ? '<p class="step-kicker">Шаг ' + n + ' из 4</p>' : ''; }
+
+  function render() {
+    titleEl.textContent = TITLES[S.step] || 'Запись';
+    document.title = (TITLES[S.step] || 'Запись') + ' — Ирина Коврова';
+    var b = backTargetFor(S.step);
+    backBtn.hidden = !b;
+    var idx = STEP_ORDER.indexOf(S.step === 'family' ? 'direction' : (S.step === 'quiz' ? 'direction' : (S.step === 'race' ? 'when' : (S.step === 'payerror' ? 'pay' : S.step))));
+    progressBar.style.width = idx >= 0 ? Math.round(((idx + 1) / 5) * 100) + '%' : '100%';
+    body.innerHTML = VIEWS[S.step] ? VIEWS[S.step]() : '';
+    foot.innerHTML = FOOTS[S.step] ? FOOTS[S.step]() : '';
+    body.scrollTop = 0;
+    body.focus({ preventScroll: true });
+  }
+
+  function locOption(l) {
+    var n = K.slotsFor(l.id, nearestUpcomingDay(l.id), now);
+    return '<button class="opt ' + l.cls + '" data-set-loc="' + l.id + '" aria-pressed="' + (S.loc === l.id) + '">' +
+      '<span><span class="t">' + l.name + '</span><span class="s">' + K.esc(l.sub) + (l.unknownAddress ? ' <span class="q">[?]</span>' : '') + '</span>' +
+      '<span class="badge ' + l.badge + '">' + (l.id === 'moskva' ? 'Бордовый день' : 'Оливковый день') + '</span></span></button>';
+  }
+  function nearestUpcomingDay(locId) {
+    var d = new Date(now); for (var i = 0; i < 60; i++) { if (K.worksOn(locId, d)) return new Date(d); d.setDate(d.getDate() + 1); } return new Date(now);
+  }
+
+  var VIEWS = {
+    loc: function () {
+      return kicker('loc') + K.LOCS.map(locOption).join('') +
+        '<p class="hint">Мы запомним ваш выбор — в следующий раз предложим его первым.</p>';
+    },
+    direction: function () {
+      var last = K.loadLastBooking();
+      var top = '';
+      if (last && S.loc && K.findFamily(last.dirId, last.famId) && K.familyAvailableIn(K.findFamily(last.dirId, last.famId), S.loc)) {
+        var d0 = K.findDirection(last.dirId), f0 = K.findFamily(last.dirId, last.famId);
+        top += '<button class="opt" data-set-repeat="1" aria-pressed="false"><span><span class="t">Как в прошлый раз</span>' +
+          '<span class="s">' + K.esc(f0.title) + (last.tech ? ' · ' + K.esc(last.tech) : '') + '</span></span><span class="pr">' + K.rub(f0.prices[S.loc]) + '</span></button>';
+      }
+      top += '<button class="opt" data-go-quiz="1" aria-pressed="false"><span><span class="t">Не знаю, что выбрать</span><span class="s">Отвечу на 3 вопроса и подберу вариант</span></span></button>';
+      var dirs = K.DIRECTIONS.filter(function (d) { return d.families.some(function (f) { return K.familyAvailableIn(f, S.loc); }); });
+      var list = dirs.map(function (d) {
+        var fams = d.families.filter(function (f) { return K.familyAvailableIn(f, S.loc); });
+        var priceHint = fams.length === 1 ? K.rub(fams[0].prices[S.loc]) : '';
+        return '<button class="opt" data-set-dir="' + d.id + '" aria-pressed="' + (S.dirId === d.id) + '">' +
+          '<span><span class="t">' + K.esc(d.title) + '</span><span class="s">' + K.esc(d.hint) + '</span></span>' +
+          (priceHint ? '<span class="pr">' + priceHint + '</span>' : '') + '</button>';
+      }).join('');
+      return kicker('direction') + top + list;
+    },
+    quiz: function () {
+      var Q = [
+        { q: 'С чем вам сейчас важнее поработать?', opts: [['tension', 'Напряжение, тяжесть в теле'], ['face', 'Лицо и шея'], ['emotion', 'Эмоции и состояние'], ['first', 'Пока не знаю, хочу познакомиться']] },
+      ];
+      return '<p class="small" style="margin-bottom:14px">' + K.esc(Q[0].q) + '</p>' +
+        Q[0].opts.map(function (o) { return '<button class="opt" data-quiz="' + o[0] + '"><span class="t">' + K.esc(o[1]) + '</span></button>'; }).join('') +
+        '<p class="hint">Три вопроса — и я подскажу, с чего начать. Решение всегда за вами.</p>';
+    },
+    family: function () {
+      var d = dirObj();
+      var fams = d.families.filter(function (f) { return K.familyAvailableIn(f, S.loc); });
+      return kicker('family') + fams.map(function (f) {
+        return '<button class="opt" data-set-fam="' + f.id + '" aria-pressed="' + (S.famId === f.id) + '">' +
+          '<span><span class="t">' + K.esc(f.title) + '</span><span class="s">' + (f.durKnown === false ? 'Длительность [?]' : f.dur + ' мин') +
+          (f.note ? ' · ' + K.esc(f.note) : '') + '</span></span><span class="pr">' + K.rub(f.prices[S.loc]) + '</span></button>';
+      }).join('') + '<p class="small muted" style="text-align:center;margin-top:10px">Не знаете, что выбрать? <button class="link-btn" data-set-repeat-first="1">Начните с первичного приёма</button></p>';
+    },
+    when: function () {
+      var f = famObj();
+      var html = kicker('when');
+      if (K.IS_REGULAR) html += '<div class="banner"><strong>Ранний доступ</strong>Вы постоянная гостья — вам открыт следующий месяц на ' + K.REGULAR_EARLY_H + ' часа раньше остальных.</div>';
+      html += renderCalendar();
+      html += '<div class="cal-legend"><span><i></i> Лесное / онлайн</span><span><i class="moskva"></i> Москва</span></div>';
+      html += '<div class="chips chips-scroll" style="margin:12px 0 14px">' + [['all', 'Любое'], ['morning', 'Утро'], ['day', 'День'], ['evening', 'Вечер']].map(function (kv) {
+        return '<button class="chip" data-filter="' + kv[0] + '" aria-pressed="' + (S.filter === kv[0]) + '">' + kv[1] + '</button>';
+      }).join('') + '</div>';
+      if (f && f.techs) {
+        html += '<p class="small" style="font-weight:600;margin:6px 0 8px">Техника <span class="muted" style="font-weight:400">— можно выбрать позже, до ' + K.TECH_DEADLINE + '</span></p>' +
+          '<div class="chips chips-scroll" style="margin-bottom:16px">' + f.techs.map(function (t) {
+            return '<button class="chip" data-set-tech="' + K.esc(t) + '" aria-pressed="' + (S.tech === t) + '">' + K.esc(t) + '</button>';
+          }).join('') + '<button class="chip" data-set-tech="" aria-pressed="' + (!S.tech) + '">Выберу позже</button></div>';
+      }
+      if (!S.date) { html += emptyState(); return html; }
+      var dObj = new Date(S.date + 'T00:00');
+      var all = K.slotsFor(S.loc, dObj, now).filter(function (x) { return S.filter === 'all' || K.partOf(x.time) === S.filter; });
+      var free = all.filter(function (x) { return x.free; });
+      html += '<p class="small" style="font-weight:600;margin-bottom:8px">' + K.fmtDay.format(dObj) + (f ? ' · ' + (f.durKnown === false ? 'длительность [?]' : f.dur + ' мин') : '') + '</p>';
+      if (!all.length || !free.length) { K.track('booking_no_slots', { loc: S.loc, date: S.date }); html += emptyState(); return html; }
+      html += '<div class="chips">' + all.map(function (x) {
+        return '<button class="chip" ' + (x.free ? '' : 'disabled') + ' data-set-time="' + x.time + '" aria-pressed="' + (S.time === x.time) + '" aria-label="' + x.time + (x.free ? '' : ', занято') + '">' + x.time + '</button>';
+      }).join('') + '</div>' +
+        '<p class="small muted" style="margin-top:14px">Нет подходящего времени? <button class="link-btn" data-go-wl="1">Встать в лист ожидания</button></p>';
+      return html;
+    },
+    contacts: function () {
+      var f = famObj(), d = new Date(S.date + 'T00:00');
+      return kicker('contacts') + summaryBlock(d, f) + contactFields(true);
+    },
+    race: function () {
+      var alts = raceAlternatives();
+      return '<div class="banner err"><strong>Это время только что заняли</strong>Ничего страшного — деньги не списаны, вот ближайшие варианты. Ваши данные сохранены.</div>' +
+        '<div class="chips">' + alts.map(function (a) {
+          return '<button class="chip" data-pick-alt="' + a.date + '|' + a.time + '">' + K.fmtShort.format(new Date(a.date + 'T00:00')) + ', ' + a.time + '</button>';
+        }).join('') + '</div>';
+    },
+    pay: function () {
+      var f = famObj();
+      return '<div class="success"><p class="muted small">Демо оплаты через СБП. В продукте здесь откроется страница банка.</p>' +
+        K.qrSvg(S.date + S.time) +
+        '<p><b>' + K.PREPAY.toLocaleString('ru-RU') + ' ₽</b> · предоплата за ' + K.esc((f.title || '').toLowerCase()) + '</p>' +
+        '<p class="small muted">Окно держится за вами ' + K.HOLD_MIN + ' минут, пока идёт оплата.</p></div>';
+    },
+    payerror: function () {
+      return '<div class="banner err"><strong>Оплата не прошла</strong>Деньги не списаны. Слот пока держится за вами, попробуйте ещё раз или выберите другой способ.</div>' +
+        '<div class="success">' + K.qrSvg('err' + S.date + S.time) + '</div>';
+    },
+    done: function () {
+      var f = famObj(), d = new Date(S.date + 'T00:00'), l = locObj();
+      var token = K.shortCode(S.date + S.time + S.phone);
+      K.saveLastBooking({ loc: S.loc, dirId: S.dirId, famId: S.famId, tech: S.tech });
+      return '<div class="success"><div class="ok-circle"><svg width="30" height="30"><use href="#i-check"></use></svg></div>' +
+        '<h2>Вы записаны</h2>' +
+        '<p>' + (S.name ? K.esc(S.name) + ', я' : 'Я') + ' жду вас <b>' + K.fmtDay.format(d) + ' в ' + S.time + '</b><br>' + K.esc(l.name) + ' · ' + K.esc(f.title) + (S.tech ? ' · ' + K.esc(S.tech) : '') + '</p>' +
+        '<p class="small muted">' + (f.techs ? 'Вид массажа можно поменять до ' + K.TECH_DEADLINE + '. ' : '') +
+        (S.channel === 'sms' ? 'Подтверждение и напоминания придут по SMS.' : 'Подключите ' + (S.channel === 'max' ? 'MAX' : 'Telegram') + ' кнопкой ниже — пока не подключили, пришлём SMS.') + '</p>' +
+        '<div class="list-actions">' +
+        '<button class="btn btn-secondary btn-block" data-ics="1">Добавить в календарь</button>' +
+        (S.channel !== 'sms' ? '<button class="btn btn-secondary btn-block" data-toast="В продукте: откроется ' + (S.channel === 'max' ? 'MAX' : 'Telegram') + '-бот по одноразовой ссылке">Подключить напоминания в ' + (S.channel === 'max' ? 'MAX' : 'Telegram') + '</button>' : '') +
+        (S.loc !== 'online' ? '<a class="btn btn-ghost btn-block" href="https://yandex.ru/maps/?text=' + encodeURIComponent(l.sub) + '" target="_blank" rel="noopener">Как добраться</a>' : '') +
+        '<a class="btn btn-ghost btn-block" href="manage.html?token=' + token + '">Управлять записью</a>' +
+        '</div></div>';
+    },
+  };
+
+  function summaryBlock(d, f) {
+    return '<div class="summary"><dl><dt>Когда</dt><dd>' + K.fmtDay.format(d) + ', ' + S.time + '</dd>' +
+      '<dt>Что</dt><dd>' + K.esc(f.title) + (S.tech ? ' · ' + K.esc(S.tech) : '') + '</dd>' +
+      '<dt>Где</dt><dd>' + K.esc(locObj().name) + '</dd>' +
+      '<dt>Цена</dt><dd>' + K.rub(price()) + '</dd>' +
+      '<dt>Предоплата</dt><dd>' + K.PREPAY.toLocaleString('ru-RU') + ' ₽ <span class="q">[?]</span></dd></dl></div>';
+  }
+
+  function raceAlternatives() {
+    var out = []; var d = new Date(S.date + 'T00:00');
+    for (var i = 0; i < 14 && out.length < 3; i++) {
+      var slots = K.slotsFor(S.loc, d, now).filter(function (x) { return x.free && !(K.iso(d) === S.date && x.time === S.time); });
+      slots.forEach(function (x) { if (out.length < 3) out.push({ date: K.iso(d), time: x.time }); });
+      d.setDate(d.getDate() + 1);
+    }
+    return out;
+  }
+
+  function emptyState() {
+    var alt = K.LOCS.filter(function (l) { return l.id !== S.loc && K.familyAvailableIn(famObj(), l.id); })
+      .map(function (l) { var nd = nearestFreeDay(l.id); return { l: l, nd: nd }; }).filter(function (x) { return x.nd; })[0];
+    return '<div class="empty">' + stonesSvg() + '<p><b>Свободных окон не нашлось</b></p>' +
+      '<p class="small muted">Оставьте пожелания — я напишу, как только освободится подходящее время.</p>' +
+      '<button class="btn btn-primary btn-block" data-go-wl="1">Встать в лист ожидания</button>' +
+      (alt ? '<p class="small" style="margin-top:12px">Или ближайшее окно: <button class="link-btn" data-alt-loc="' + alt.l.id + '" data-alt-date="' + K.iso(alt.nd.date) + '" data-alt-time="' + alt.nd.time + '">' + K.esc(alt.l.name) + ', ' + K.fmtDay.format(alt.nd.date) + ', ' + alt.nd.time + '</button></p>' : '') +
+      '</div>';
+  }
+  function nearestFreeDay(locId) {
+    var d = new Date(now);
+    for (var i = 0; i < 60; i++) { var s = K.slotsFor(locId, d, now).find(function (x) { return x.free; }); if (s) return { date: new Date(d), time: s.time }; d.setDate(d.getDate() + 1); }
+    return null;
+  }
+  function stonesSvg() { return '<svg width="150" height="70" viewBox="0 0 150 70" aria-hidden="true"><ellipse cx="38" cy="46" rx="30" ry="18" fill="var(--bg-alt)"/><ellipse cx="86" cy="50" rx="24" ry="14" fill="var(--sand-200)"/><ellipse cx="116" cy="44" rx="18" ry="12" fill="var(--bg-alt)"/></svg>'; }
+
+  /* ---------- календарь месяца ---------- */
+  function renderCalendar() {
+    var m = S.calMonth, year = m.getFullYear(), month = m.getMonth();
+    var first = new Date(year, month, 1);
+    var startOffset = (first.getDay() + 6) % 7; // пн=0
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+    var rel = K.releaseInfo(now);
+    var cells = [];
+    for (var i = 0; i < startOffset; i++) cells.push('<span class="cal-day empty" aria-hidden="true"></span>');
+    for (var day = 1; day <= daysInMonth; day++) {
+      var d = new Date(year, month, day);
+      var dIso = K.iso(d);
+      var past = d < new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      var beyondOpen = d > rel.openUntil;
+      var earlyVisible = beyondOpen && K.IS_REGULAR && d <= new Date(rel.openUntil.getFullYear(), rel.openUntil.getMonth() + 1, rel.openUntil.getDate());
+      var works = K.worksOn(S.loc, d) && !past && (!beyondOpen || earlyVisible);
+      var free = works && K.slotsFor(S.loc, d, now).some(function (x) { return x.free; });
+      var cls = ['cal-day'];
+      if (past || (beyondOpen && !earlyVisible)) cls.push('closed');
+      else if (!works) cls.push('closed');
+      else if (!free) cls.push('full');
+      else { cls.push('free'); cls.push(S.loc === 'moskva' ? 'loc-moskva' : 'loc-lesnoe'); }
+      if (earlyVisible && free) cls.push('early');
+      var pressed = S.date === dIso;
+      cells.push('<button class="' + cls.join(' ') + '" ' + (works && free ? '' : 'disabled') + ' data-set-date="' + dIso + '" aria-pressed="' + pressed + '" aria-label="' + K.fmtDay.format(d) + (works ? (free ? ', есть окна' : ', всё занято') : ', нет приёма') + '"><span class="dnum">' + day + '</span></button>');
+    }
+    var monthLabel = '<span class="m">' + K.MONTHS_NOM[month] + '</span> <span class="small muted">' + year + '</span>';
+    return '<div class="cal-head">' +
+      '<button class="icon-btn" data-cal-prev="1" aria-label="Предыдущий месяц"><svg width="20" height="20"><use href="#i-chevron-l"></use></svg></button>' +
+      monthLabel +
+      '<button class="icon-btn" data-cal-next="1" aria-label="Следующий месяц"><svg width="20" height="20"><use href="#i-chevron-r"></use></svg></button></div>' +
+      '<div class="cal-wd">' + K.WD_SHORT.slice(1).concat(K.WD_SHORT[0]).map(function (w) { return '<span>' + w + '</span>'; }).join('') + '</div>' +
+      '<div class="cal-grid">' + cells.join('') + '</div>' +
+      (rel.opened ? '' : '<p class="hint">Запись на ' + K.MONTHS_GEN[rel.nextMonth.getMonth()] + ' откроется ' + rel.nextReleaseDate.getDate() + ' ' + K.MONTHS_GEN[rel.nextReleaseDate.getMonth()] + ' в ' + K.RELEASE_HOUR + ':00' + (K.IS_REGULAR ? ' — вам уже открыто.' : '. Постоянным гостям — на ' + K.REGULAR_EARLY_H + ' ч раньше.') + '</p>');
+  }
+
+  function contactFields(withComment) {
+    var errs = S._errs || {};
+    return '<div class="field' + (errs.name ? ' has-error' : '') + '"><label for="f-name">Как к вам обращаться</label>' +
+      '<input id="f-name" name="name" autocomplete="name" value="' + K.esc(S.name) + '" data-bind="name" aria-describedby="e-name">' +
+      (errs.name ? '<p class="err" id="e-name">Напишите, пожалуйста, ваше имя</p>' : '') + '</div>' +
+      '<div class="field' + (errs.phone ? ' has-error' : '') + '"><label for="f-phone">Телефон</label>' +
+      '<input id="f-phone" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" value="' + K.esc(S.phone) + '" data-bind="phone" aria-describedby="e-phone">' +
+      (errs.phone ? '<p class="err" id="e-phone">Проверьте номер — не хватает цифр</p>' : '') + '</div>' +
+      '<div class="field"><span style="display:block;font-weight:600;font-size:15px;margin-bottom:6px">Куда прислать подтверждение и напоминания</span>' +
+      '<div class="chips">' + [['telegram', 'Telegram'], ['max', 'MAX'], ['sms', 'SMS']].map(function (kv) {
+        return '<button class="chip" data-channel="' + kv[0] + '" aria-pressed="' + (S.channel === kv[0]) + '">' + kv[1] + '</button>';
+      }).join('') + '</div><p class="hint">Если мессенджер не ответит, продублируем по SMS.</p></div>' +
+      (withComment ? '<div class="field"><label for="f-comment">Пожелания к сеансу <span class="muted" style="font-weight:400">(необязательно)</span></label>' +
+        '<textarea id="f-comment" data-bind="comment" placeholder="Например: люблю, когда посильнее">' + K.esc(S.comment) + '</textarea>' +
+        '<p class="hint">Пожалуйста, не пишите здесь о здоровье — обсудим лично, при встрече.</p><div id="medWarn"></div></div>' : '') +
+      '<label class="check"><input type="checkbox" data-bind="consent" ' + (S.consent ? 'checked' : '') + '><span>Соглашаюсь на <a href="#legal" data-legal="soglasie">обработку персональных данных</a></span></label>' +
+      (errs.consent ? '<p class="err">Без согласия не сможем оформить запись — это требование 152-ФЗ</p>' : '') +
+      '<label class="check"><input type="checkbox" data-bind="marketing" ' + (S.marketing ? 'checked' : '') + '><span class="muted">Хочу получать новости и приглашения на события (необязательно)</span></label>';
+  }
+
+  var FOOTS = {
+    when: function () { return '<button class="btn btn-primary btn-block" data-next="1" ' + (S.time ? '' : 'disabled') + '>' + (S.time ? 'Дальше · ' + S.time : 'Выберите время') + '</button>'; },
+    contacts: function () { return '<button class="btn btn-primary btn-block" data-submit="1">Перейти к оплате · ' + K.PREPAY.toLocaleString('ru-RU') + ' ₽</button>' +
+      '<p class="rule">Бесплатная отмена не позднее чем за 48 ч <span class="q">[?]</span>. <a href="#legal" data-legal="pravila">Правила записи</a></p>'; },
+    race: function () { return '<p class="rule">Выберите время из списка выше — форму заполнять заново не придётся.</p>'; },
+    pay: function () { return '<button class="btn btn-primary btn-block" data-paid="1">Оплатить (демо)</button><button class="btn btn-secondary btn-block" style="margin-top:8px" data-force-error="1">Демо: смоделировать ошибку оплаты</button>'; },
+    payerror: function () { return '<button class="btn btn-primary btn-block" data-retry-pay="1">Попробовать снова</button><a class="btn btn-secondary btn-block" style="margin-top:8px" href="mailto:hello@kovrova.ru?subject=Не%20получилось%20оплатить">Написать Ирине</a>'; },
+    done: function () { return '<a class="btn btn-secondary btn-block" href="../index.html">Закрыть</a>'; },
+  };
+
+  /* ================= обработчики ================= */
+  function setDirection(dirId, opts) {
+    S.dirId = dirId; S.famId = null; S.tech = null; S.date = null; S.time = null;
+    var d = dirObj();
+    var fams = d.families.filter(function (f) { return K.familyAvailableIn(f, S.loc); });
+    K.track('booking_step_service', { svc: dirId });
+    if (fams.length === 1) { S.famId = fams[0].id; goWhen(); }
+    else goStep('family');
+  }
+
+  document.addEventListener('click', function (e) {
+    var legal = e.target.closest('[data-legal]');
+    if (legal) { e.preventDefault(); K.toast('В продукте: отдельный документ /legal/' + (legal.dataset.legal === 'soglasie' ? 'soglasie' : 'pravila-zapisi') + ' (152-ФЗ)'); return; }
+    var t = e.target.closest('button,a[data-toast]'); if (!t) return;
+    var ds = t.dataset;
+    if (ds.setLoc) { S.loc = ds.setLoc; K.track('booking_step_location', { loc: S.loc }); goStep('direction'); return; }
+    if (ds.goQuiz) { goStep('quiz'); return; }
+    if (ds.quiz) {
+      var map = { tension: 'massage', face: 'face', emotion: 'psy', first: 'first' };
+      setDirection(map[ds.quiz] || 'first');
+      return;
+    }
+    if (ds.setRepeat) {
+      var last = K.loadLastBooking();
+      S.dirId = last.dirId; S.famId = last.famId; S.tech = last.tech || null; S.date = null; S.time = null;
+      K.track('booking_step_service', { svc: S.dirId, repeat: true });
+      goWhen(); return;
+    }
+    if (ds.setRepeatFirst) { setDirection('first'); return; }
+    if (ds.setDir) { setDirection(ds.setDir); return; }
+    if (ds.setFam) { S.famId = ds.setFam; K.track('booking_step_service', { svc: S.dirId, fam: S.famId }); goWhen(); return; }
+    if (ds.setTech !== undefined) { S.tech = ds.setTech || null; render(); return; }
+    if (ds.calPrev) { S.calMonth = new Date(S.calMonth.getFullYear(), S.calMonth.getMonth() - 1, 1); render(); return; }
+    if (ds.calNext) { S.calMonth = new Date(S.calMonth.getFullYear(), S.calMonth.getMonth() + 1, 1); render(); return; }
+    if (ds.setDate) { S.date = ds.setDate; S.time = null; render(); return; }
+    if (ds.filter) { S.filter = ds.filter; render(); return; }
+    if (ds.setTime) { S.time = ds.setTime; K.track('booking_step_time', { date: S.date, time: S.time }); render(); return; }
+    if (ds.altLoc) { S.loc = ds.altLoc; S.date = ds.altDate; S.time = ds.altTime; render(); return; }
+    if (ds.goWl) {
+      var f = famObj();
+      var params = new URLSearchParams({ loc: S.loc || '', svc: S.dirId || '', fam: S.famId || '' });
+      window.location.href = 'waitlist.html?' + params.toString();
+      return;
+    }
+    if (ds.next) { goStep('contacts'); return; }
+    if (ds.channel) { S.channel = ds.channel; render(); return; }
+    if (ds.submit) {
+      var d = new Date(S.date + 'T00:00');
+      var errs = {};
+      if (!S.name || S.name.trim().length < 2) errs.name = 1;
+      if (phoneDigits().length !== 11) errs.phone = 1;
+      if (!S.consent) errs.consent = 1;
+      S._errs = errs;
+      if (Object.keys(errs).length) { render(); var first = document.querySelector('.has-error input'); if (first) first.focus(); return; }
+      K.track('booking_contacts_submitted', { channel: S.channel, marketing: S.marketing });
+      if (K.DEMO === 'race' && !S._raceHandled) { S._raceHandled = true; goStep('race'); return; }
+      K.track('payment_started', { amount: K.PREPAY, method: 'sbp' });
+      goStep('pay');
+      return;
+    }
+    if (ds.pickAlt) {
+      var pair = ds.pickAlt.split('|'); S.date = pair[0]; S.time = pair[1];
+      K.track('payment_started', { amount: K.PREPAY, method: 'sbp' });
+      goStep('pay'); return;
+    }
+    if (ds.forceError !== undefined || (ds.paid !== undefined && K.DEMO === 'pay-error' && !S._payErrorShown)) {
+      if (ds.forceError !== undefined) { S._payErrorShown = true; goStep('payerror'); return; }
+    }
+    if (ds.paid !== undefined) {
+      if (K.DEMO === 'pay-error' && !S._payErrorShown) { S._payErrorShown = true; goStep('payerror'); return; }
+      goStep('done');
+      K.track('booking_completed', { loc: S.loc, svc: S.dirId, seconds: Math.round((Date.now() - S.started) / 1000) });
+      return;
+    }
+    if (ds.retryPay !== undefined) { goStep('pay'); return; }
+    if (ds.ics !== undefined) { var f2 = famObj(); K.downloadIcs({ date: S.date, time: S.time, dur: f2.dur, title: f2.title, location: S.loc === 'online' ? 'Онлайн' : locObj().sub }); return; }
+    if (t.dataset.toast) { K.toast(t.dataset.toast); return; }
+  });
+
+  document.addEventListener('input', function (e) {
+    var k = e.target.dataset.bind; if (!k) return;
+    if (k === 'phone') { var pos = e.target.value.length; e.target.value = K.formatPhone(e.target.value); S.phone = e.target.value; if (pos) e.target.setSelectionRange(e.target.value.length, e.target.value.length); }
+    else S[k] = e.target.value;
+    if (k === 'comment') { var w = K.$('#medWarn'); if (w) w.innerHTML = K.MED_RE.test(S.comment) ? '<p class="warn">Похоже, здесь сведения о здоровье. Пожалуйста, обсудим это при встрече — на сайте такие данные не нужны.</p>' : ''; }
+  });
+  document.addEventListener('change', function (e) { if (e.target.type === 'checkbox' && e.target.dataset.bind) S[e.target.dataset.bind] = e.target.checked; });
+
+  function phoneDigits() { return S.phone.replace(/\D/g, ''); }
+
+  window.addEventListener('beforeunload', function () { if (S.step !== 'done') K.track('booking_abandoned', { step: S.step }); });
+
+  render();
+})();
+</script>
+</body>
+</html>
