@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Страница события</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a class="on" href="c-sobytiya.dc.html">События</a><a href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+  <nav class="crumbs w" aria-label="Путь" style="padding-top:8px"><a href="c-sobytiya.dc.html">События</a><span aria-hidden="true">/</span><span>Мастер-класс</span></nav>
+
+  <div class="w vgrid" style="padding-top:8px">
+    <div class="va-head st g16">
+      <p class="lbl">Мастер-класс · Лесное</p>
+      <h1 class="h1s">Самомассаж лица [?]</h1>
+      <p class="lead">[Описание от Ирины: чему научимся, что возьмём домой.] Небольшая группа, у каждой будет время на вопросы.</p>
+    </div>
+    <aside class="va-aside band st g12" style="padding:18px 16px;border-radius:4px">
+      <div class="row" style="flex-wrap:nowrap;gap:14px;align-items:stretch">
+        <div class="st" style="width:90px;flex-shrink:0;align-items:center;justify-content:center;border:3px solid var(--les);border-radius:4px;padding:8px 0"><span class="xs" style="color:var(--ink)">сб</span><b style="font-weight:800;font-size:40px;line-height:1">[?]</b><span class="hand" style="font-size:24px">ноября</span></div>
+        <div class="st g4" style="justify-content:center"><b class="h4">[11:00 ?], 2 часа [?]</b><span class="small">Пригород Лесное, ул. Героя России Филиппова, 8</span></div>
+      </div>
+      <div class="kv"><span>Цена</span><b class="b">[?] ₽, оплата сразу</b></div>
+      <sc-if value="{{free}}" hint-placeholder-val="{{ true }}">
+        <div class="kv"><span>Мест</span><b class="b">осталось [3 из 8 ?]</b></div>
+        <a class="btn" href="c-zapis.dc.html">Записаться на мастер-класс</a>
+        <p class="xs">Если не сможете прийти, место можно передать подруге или вернуть оплату по <a class="link" href="c-legal.dc.html" style="min-height:0">правилам</a>.</p>
+      </sc-if>
+      <sc-if value="{{full}}" hint-placeholder-val="{{ false }}">
+        <div class="kv"><span>Мест</span><b class="b">все заняты</b></div>
+        <div class="alert"><b style="font-weight:800;font-size:18px">Мест больше нет</b><span style="font-size:15px;line-height:1.45">Встаньте в лист ожидания: если кто-то откажется, я напишу вам первой из списка. Место держу 30 минут.</span></div>
+        <a class="btn" href="c-list.dc.html">Встать в лист ожидания</a>
+        <a class="link" href="c-raspisanie.dc.html">Сообщить о следующем мастер-классе</a>
+      </sc-if>
+    </aside>
+    <div class="va-rest st g16">
+      <div class="ph" style="height:220px"><b>Нужно фото</b>руки у лица, свет из окна, без лица гостьи</div>
+      <h2 class="h3">Программа</h2>
+      <ol class="st g8" style="list-style:none">
+        <li class="frame row" style="padding:12px 14px;flex-wrap:nowrap;gap:14px"><b style="font-weight:800;font-size:22px">1</b><span class="p">[Пункт программы ?]</span></li>
+        <li class="frame row" style="padding:12px 14px;flex-wrap:nowrap;gap:14px"><b style="font-weight:800;font-size:22px">2</b><span class="p">[Пункт программы ?]</span></li>
+        <li class="frame row" style="padding:12px 14px;flex-wrap:nowrap;gap:14px"><b style="font-weight:800;font-size:22px">3</b><span class="p">[Пункт программы ?]</span></li>
+      </ol>
+      <h2 class="h3">Что взять</h2>
+      <p class="p">[?] Ирина уточнит.</p>
+      <p class="small" style="padding-top:12px;border-top:2px solid var(--ink)">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p>
+    </div>
+  </div>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-legal.dc.html">Правила записи</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1800,"section":"Размер"},"state":{"editor":"enum","options":["free","full"],"default":"free","section":"Состояние"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const full = (this.props.state ?? 'free') === 'full';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1800, cls: t === 'moss' ? '' : t, full, free: !full };
+  }
+}
+</script>
+</body>
+</html>

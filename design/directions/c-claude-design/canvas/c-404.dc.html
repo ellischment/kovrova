@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Страница не найдена и технические статусы</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <a class="btn btn-s" href="c-kontakty.dc.html">Написать</a>
+  </header>
+  <div class="w d-center st g16" style="padding-top:40px;padding-bottom:48px">
+    <sc-if value="{{is404}}" hint-placeholder-val="{{ true }}">
+      <div class="st g16">
+        <div class="row" style="gap:8px" aria-hidden="true"><span class="day" style="width:76px;height:76px;font-size:36px;font-weight:800;color:var(--ink);border:2px dashed var(--ink2)">4</span><span class="day" style="width:76px;height:76px;font-size:36px;font-weight:800;background:var(--msk);border-color:var(--msk);color:var(--msk-ink)">0</span><span class="day" style="width:76px;height:76px;font-size:36px;font-weight:800;color:var(--ink);border:2px solid var(--les)">4</span></div>
+        <h1 class="h2">Такой страницы нет</h1>
+        <p class="p">Возможно, ссылка устарела. Найдите нужное или вернитесь на главную.</p>
+        <div class="srch"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path></svg><label for="nf" class="vh">Найти на сайте</label><input id="nf" type="search" placeholder="Найти: цены, первичный приём"></div>
+        <a class="btn" href="c-zapis.dc.html">Записаться</a>
+        <div class="row" style="gap:0 18px"><a class="link" href="c-home.dc.html">Главная</a><a class="link" href="c-prices.dc.html">Цены</a><a class="link" href="c-raspisanie.dc.html">Расписание</a></div>
+      </div>
+    </sc-if>
+    <sc-if value="{{isTech}}" hint-placeholder-val="{{ false }}">
+      <div class="st g16">
+        <span class="hand" style="font-size:48px">минутку</span>
+        <h1 class="h2">Обновляю запись</h1>
+        <p class="p">Сейчас идут технические работы, до [12:30 ?]. Записи, которые уже есть, в порядке: напоминания придут как обычно.</p>
+        <div class="note"><b class="b">Нужно срочно?</b><p class="small" style="color:var(--ink)">Напишите в Telegram, я отвечу между сеансами.</p></div>
+        <a class="btn" href="c-kontakty.dc.html">Написать в Telegram</a>
+        <a class="link" href="c-raspisanie.dc.html">Напомнить, когда запись заработает</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{isSoon}}" hint-placeholder-val="{{ false }}">
+      <div class="st g16">
+        <span class="hand" style="font-size:52px">ноябрь</span>
+        <h1 class="h2">Запись откроется [16 октября ?] в [22:00 ?]</h1>
+        <p class="p">Дни приёма уже видны в расписании. Постоянные гостьи получат доступ на сутки раньше.</p>
+        <a class="btn" href="c-raspisanie.dc.html">Напомнить об открытии</a>
+        <a class="link" href="c-list.dc.html">Встать в лист ожидания на октябрь</a>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":844,"section":"Размер"},"kind":{"editor":"enum","options":["404","tech","soon"],"default":"404","section":"Состояние"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const k = this.props.kind ?? '404';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 844, cls: t === 'moss' ? '' : t, is404: k === '404', isTech: k === 'tech', isSoon: k === 'soon' };
+  }
+}
+</script>
+</body>
+</html>

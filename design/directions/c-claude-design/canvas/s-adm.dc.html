@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Кабинет: месяц, записи, лист, цены</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root" style="width:2190px;height:1040px;background:var(--desk);padding:40px;display:flex;gap:40px;align-items:flex-start">
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">Месяц: раскраска дней и открытие записи</p><dc-import name="c-adm" screen="mesyac" w="390" h="900" hint-size="390px,900px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">Записи</p><dc-import name="c-adm" screen="zapisi" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">Лист ожидания</p><dc-import name="c-adm" screen="list" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">Цены: матрица вид × место</p><dc-import name="c-adm" screen="ceny" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">+300 ₽ всем 90-минутным в Москве</p><dc-import name="c-adm" screen="massovo" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2190,"height":1040}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

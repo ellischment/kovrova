@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Слова гостей</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+
+  <section class="w st g16 d-read" style="padding-top:28px">
+    <h1 class="h1s">Слова гостей</h1>
+    <p class="lead">Здесь нет кейсов «до и после». Я публикую только слова гостей и только с их письменного согласия. Ваши успехи принадлежат вам.</p>
+    <div class="row" style="gap:10px"><span class="tag">5,0 по 35 оценкам</span><span class="tag">18 отзывов в DIKIDI</span><a class="link" href="c-otzyvy.dc.html">Открыть в DIKIDI</a></div>
+  </section>
+
+  <sc-if value="{{empty}}" hint-placeholder-val="{{ true }}">
+    <section class="w sec">
+      <div class="frame st g12 d-read" style="padding:22px 18px;border-style:dashed">
+        <span class="hand" style="font-size:40px">скоро</span>
+        <p class="h3">Слова гостей появятся здесь, когда авторы разрешат их опубликовать</p>
+        <p class="small">Пока можно прочитать оценки в DIKIDI. Если вы бывали у меня и хотите поделиться, напишите, и я пришлю форму согласия.</p>
+        <a class="btn2" href="c-kontakty.dc.html" style="align-self:flex-start">Поделиться словами</a>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{filled}}" hint-placeholder-val="{{ false }}">
+    <section class="w sec st g12 d-3">
+      <figure class="sheet st g12" style="padding:18px"><blockquote class="p">[Цитата гостьи, дословно, после согласия на распространение]</blockquote><figcaption class="row xs" style="gap:8px"><span class="sw les"></span>[Имя], Лесное · [месяц, год]</figcaption></figure>
+      <figure class="sheet st g12" style="padding:18px"><blockquote class="p">[Цитата гостьи]</blockquote><figcaption class="row xs" style="gap:8px"><span class="sw msk"></span>[Имя], Москва</figcaption></figure>
+      <figure class="sheet st g12" style="padding:18px"><blockquote class="p">[Цитата гостьи]</blockquote><figcaption class="row xs" style="gap:8px"><span class="sw les"></span>[Имя], онлайн</figcaption></figure>
+    </section>
+  </sc-if>
+
+  <section class="w sec d-2">
+    <div class="st g10"><h2 class="h2">Как попадают сюда</h2><p class="p">Отзыв в DIKIDI или в канале не публикуется автоматически. Сначала автор подписывает согласие на распространение, где видно имя и текст целиком.</p></div>
+    <div class="note" style="margin-top:16px"><b class="b">Можно без фамилии</b><p class="small" style="color:var(--ink)">Подпись: только имя и место. Удалить слова можно в любой момент, одним сообщением.</p></div>
+  </section>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-legal.dc.html">Согласие на распространение</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1500,"section":"Размер"},"state":{"editor":"enum","options":["empty","filled"],"default":"empty","section":"Состояние"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const s = this.props.state ?? 'empty';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1500, cls: t === 'moss' ? '' : t, empty: s === 'empty', filled: s === 'filled' };
+  }
+}
+</script>
+</body>
+</html>

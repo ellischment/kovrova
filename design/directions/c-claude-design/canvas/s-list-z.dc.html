@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Лист ожидания и управление записью</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root" style="width:2620px;height:980px;background:var(--desk);padding:40px;display:flex;gap:40px;align-items:flex-start">
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">19 · Вы в листе ожидания</p><dc-import name="c-list" state="podtv" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">19 · Окно освободилось: забрать</p><dc-import name="c-list" state="predl" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">19 · Окно уже забрали</p><dc-import name="c-list" state="ushlo" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">20 · Перенос</p><dc-import name="c-z" state="perenos" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">20 · Отмена с расчётом возврата</p><dc-import name="c-z" state="otmena" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">20 · Отменено</p><dc-import name="c-z" state="otmeneno" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2620,"height":980}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

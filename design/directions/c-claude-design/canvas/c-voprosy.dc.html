@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Вопросы и ответы</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+
+  <div class="w d-48" style="padding-top:28px">
+    <section class="st g12">
+      <h1 class="h1s">Вопросы</h1>
+      <p class="small">Не нашли ответ? Напишите в Telegram, отвечаю между сеансами.</p>
+      <a class="btn2 d-only" href="c-kontakty.dc.html">Написать</a>
+    </section>
+    <section class="st g24" style="padding-top:24px">
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+        <div class="st g8">
+          <h2 class="lbl" style="color:var(--ink)">{{g.t}}</h2>
+          <sc-for list="{{g.q}}" as="q" hint-placeholder-count="3">
+            <details class="acc" open="{{q.open}}"><summary>{{q.q}}</summary><div><p class="p">{{q.a}}</p></div></details>
+          </sc-for>
+        </div>
+      </sc-for>
+    </section>
+  </div>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-legal.dc.html">Правила записи</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1420,"section":"Размер"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1420}}'>
+const G = [
+  { t: 'Запись', q: [
+    { q: 'Когда открывается запись на следующий месяц?', a: 'Дату и время я объявляю заранее, обычно в середине месяца. Можно подписаться на напоминание: придёт одно сообщение в день открытия.', open: true },
+    { q: 'Нужно ли звонить?', a: 'Нет. Запись онлайн, подтверждение и чек приходят сразу в мессенджер. Во время сеансов я не беру трубку, быстрее написать.' },
+    { q: 'Что, если окон нет?', a: 'Встаньте в лист ожидания. Когда окно освободится, я напишу вам первой из списка и подержу его 30 минут.' },
+    { q: 'Можно поменять вид массажа?', a: 'Да, до 18:00 накануне, по ссылке из напоминания. Цена при той же длительности не меняется.' }
+  ] },
+  { t: 'Оплата и отмена', q: [
+    { q: 'Сколько предоплата?', a: '[?] Размер предоплаты уточняется. Оплата через СБП или картой, чек приходит сразу.' },
+    { q: 'Как отменить или перенести?', a: 'По ссылке из подтверждения. Там сразу видно, что будет с предоплатой. Бесплатная отмена: за [48 ч ?] до визита.' }
+  ] },
+  { t: 'Сеанс', q: [
+    { q: 'Будет больно?', a: 'Нет. Силу воздействия вы регулируете сами, в любой момент можно попросить мягче.' },
+    { q: 'Это лечение?', a: 'Нет. Услуги не являются медицинскими. При заболеваниях и противопоказаниях сначала проконсультируйтесь с врачом.' },
+    { q: 'Как проходит онлайн?', a: 'По видеосвязи. До первой встречи договоримся о платформе и, если нужно, проверим связь.' }
+  ] }
+];
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1420, cls: t === 'moss' ? '' : t, groups: G.map(g => ({ t: g.t, q: g.q.map(q => Object.assign({ open: false }, q)) })) };
+  }
+}
+</script>
+</body>
+</html>

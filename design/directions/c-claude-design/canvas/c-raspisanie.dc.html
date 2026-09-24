@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Расписание и открытие записи</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a href="c-prices.dc.html">Цены</a><a class="on" href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+
+  <div class="w d-2" style="padding-top:28px">
+    <section class="st g16">
+      <h1 class="h1s">Расписание</h1>
+      <sc-if value="{{soon}}" hint-placeholder-val="{{ false }}">
+        <div class="field st g10" style="padding:18px 16px">
+          <span class="lbl" style="color:var(--field-ink)">Запись на ноябрь</span>
+          <p style="font-weight:800;font-size:26px;line-height:1.1;letter-spacing:-.02em">Откроется [16 октября ?] в [22:00 ?]</p>
+          <p style="font-size:15px;line-height:1.5">Постоянные гостьи получат доступ на сутки раньше. Напомню в мессенджер, когда откроется.</p>
+          <a class="btn" href="#napomnit">Напомнить об открытии</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{open}}" hint-placeholder-val="{{ true }}">
+        <div class="note"><b class="b">Запись на октябрь открыта</b><span class="small" style="color:var(--ink)">Ближайшее окно: сб, 3 окт., 11:00, Лесное</span></div>
+      </sc-if>
+      <p class="p">Дни приёма меняются от месяца к месяцу. Рамкой отмечены дни в Пригороде Лесное и онлайн, заливкой бордо дни в Москве.</p>
+      <div class="legend">
+        <span><span class="sw les"></span>Пригород Лесное и онлайн</span>
+        <span><span class="sw msk"></span>Москва, м. Таганская</span>
+        <span class="muted"><span class="sw full"></span>всё занято: можно в лист ожидания</span>
+      </div>
+    </section>
+
+    <section class="band st g12" style="padding:22px 18px;border-radius:4px;margin-top:24px" data-x="cal">
+      <div class="between"><span class="hand" style="font-size:54px">{{month}}</span><span class="lbl" style="color:var(--ink)">{{monthState}}</span></div>
+      <div class="cal" role="grid" aria-label="{{month}}: дни приёма">
+        <span class="wd">Пн</span><span class="wd">Вт</span><span class="wd">Ср</span><span class="wd">Чт</span><span class="wd">Пт</span><span class="wd">Сб</span><span class="wd">Вс</span>
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="35"><a class="day {{d.cls}}" href="c-zapis.dc.html" aria-label="{{d.aria}}">{{d.n}}</a></sc-for>
+      </div>
+      <sc-if value="{{open}}" hint-placeholder-val="{{ true }}"><a class="btn" href="c-zapis.dc.html">Выбрать время</a></sc-if>
+      <sc-if value="{{soon}}" hint-placeholder-val="{{ false }}"><p class="small" style="color:var(--ink)">Дни видны заранее, время можно будет выбрать после открытия.</p></sc-if>
+    </section>
+  </div>
+
+  <section id="napomnit" class="w sec d-2">
+    <div class="st g10"><h2 class="h2">Напомнить об открытии</h2><p class="p">Одно сообщение в день открытия записи. Без рекламы. Отписаться можно из того же сообщения.</p></div>
+    <form class="sheet st g12" style="padding:18px 16px;margin-top:16px">
+      <div class="fld"><span class="l">Куда прислать</span><div class="cols3"><button type="button" class="fr on" aria-pressed="true" style="color:var(--sheet-acc-ink);background:var(--sheet-acc);border-color:var(--sheet-acc)">Telegram</button><button type="button" class="fr" style="border-color:var(--sheet-line);color:var(--sheet-ink)">MAX</button><button type="button" class="fr" style="border-color:var(--sheet-line);color:var(--sheet-ink)">SMS</button></div></div>
+      <div class="fld"><label for="rp">Телефон</label><input id="rp" class="inp" inputmode="tel" placeholder="+7" style="border-color:var(--sheet-ink2);background:#FFFFFF;color:#1E2113"></div>
+      <label class="cb"><input type="checkbox" required=""><span>Соглашаюсь на обработку персональных данных · <a class="link" href="c-legal.dc.html" style="min-height:0">текст согласия</a></span></label>
+      <label class="cb"><input type="checkbox" required=""><span>Соглашаюсь получать одно сообщение об открытии записи</span></label>
+      <button type="submit" class="btn">Напомнить</button>
+      <div class="ok" role="status" style="border-color:var(--sheet-ink)"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Готово. Напомню в Telegram в день открытия.</div>
+    </form>
+  </section>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-legal.dc.html">Правила записи</a><a href="c-voprosy.dc.html">Вопросы</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1920,"section":"Размер"},"state":{"editor":"enum","options":["open","soon"],"default":"open","section":"Состояние"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1920}}'>
+const OCT = { pad: 3, n: 31, les: [1,3,4,7,8,10,11,14,15,17,18,21,22,24,25,28,29,31], msk: [12,26], full: [1,4,7,8], name: 'октябрь', gen: 'октября' };
+const NOV = { pad: 6, n: 30, les: [4,5,7,8,11,12,14,15,18,19,21,22,25,26,28], msk: [9,23], full: [], name: 'ноябрь', gen: 'ноября' };
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const soon = (this.props.state ?? 'open') === 'soon';
+    const M = soon ? NOV : OCT;
+    const days = [];
+    for (let i = 0; i < M.pad; i++) days.push({ n: '', cls: '', aria: 'пусто' });
+    for (let n = 1; n <= M.n; n++) {
+      const l = M.les.indexOf(n) >= 0, m = M.msk.indexOf(n) >= 0, f = M.full.indexOf(n) >= 0;
+      days.push({ n: String(n), cls: (l ? 'les' : m ? 'msk' : '') + (f ? ' full' : ''), aria: n + ' ' + M.gen + (l ? ', Лесное и онлайн' : m ? ', Москва' : ', приёма нет') + (f ? ', всё занято' : '') });
+    }
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1920, cls: t === 'moss' ? '' : t, soon, open: !soon, days, month: M.name, monthState: soon ? 'откроется скоро' : 'запись открыта' };
+  }
+}
+</script>
+</body>
+</html>

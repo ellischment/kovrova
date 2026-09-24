@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Кабинет Ирины: день, месяц, записи, лист, цены</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg" style="min-height:{{h}}px">
+
+  <sc-if value="{{is.segodnya}}" hint-placeholder-val="{{ true }}">
+    <div class="w st g10" style="padding-top:22px">
+      <div class="between"><h1 class="h2">Сб, 3</h1><span class="hand" style="font-size:34px">октября</span></div>
+      <span class="small"><span class="sw les" style="width:12px;height:12px;margin-right:6px"></span>Лесное · 4 гостьи · свободно одно окно</span>
+      <div class="alert"><b style="font-weight:800">16:00 освободилось: Ольга отменила</b><span style="font-size:14px">В листе ожидания 3 гостьи на выходные</span><a class="btn btn-s" href="c-adm.dc.html">Предложить окно листу ожидания</a></div>
+      <div class="st">
+        <div class="slot"><span class="tm">11:00</span><div class="st g6"><b class="b">Мария К. <span class="tag" style="margin-left:6px">2-й визит</span></b><span class="small">Стоун, 90 мин · сменила вид вчера</span><div class="row" style="gap:6px"><button type="button" class="fr" style="min-height:44px">Пришла</button><button type="button" class="fr" style="min-height:44px">Не пришла</button><a class="fr" href="c-adm.dc.html" aria-label="Написать Марии" style="width:44px;min-height:44px;padding:0"><svg class="ico" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"></path></svg></a></div></div></div>
+        <div class="slot"><span class="tm">13:30</span><div class="st g4"><b class="b">Анна <span class="tag" style="margin-left:6px;border-color:var(--ink)">новенькая</span></b><span class="small">Первичный приём</span></div></div>
+        <div class="slot"><span class="tm free">16:00</span><div class="st g4"><b class="b muted">Свободно</b><span class="small">предложение отправлено в 10:40</span></div></div>
+        <div class="slot"><span class="tm">18:30</span><div class="st g4"><b class="b">Екатерина С.</b><span class="small">Классический, 60 мин</span></div></div>
+      </div>
+      <p class="xs">Сводка на завтра придёт в 20:00 в Telegram.</p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{is.mesyac}}" hint-placeholder-val="{{ false }}">
+    <div class="w st g10" style="padding-top:22px">
+      <div class="between"><span class="hand" style="font-size:44px">ноябрь</span><span class="tag">черновик</span></div>
+      <div class="cols3" role="group" aria-label="Чем красить дни"><button type="button" class="fr on les" aria-pressed="true"><span class="sw les"></span>Лесное</button><button type="button" class="fr"><span class="sw msk"></span>Москва</button><button type="button" class="fr">Выходной</button></div>
+      <div class="cal">
+        <span class="wd">Пн</span><span class="wd">Вт</span><span class="wd">Ср</span><span class="wd">Чт</span><span class="wd">Пт</span><span class="wd">Сб</span><span class="wd">Вс</span>
+        <sc-for list="{{nov}}" as="d" hint-placeholder-count="36"><button type="button" class="day {{d.cls}}" style="background-color:transparent;{{d.st}}" aria-label="{{d.aria}}">{{d.n}}</button></sc-for>
+      </div>
+      <p class="xs">Нажмите на день, чтобы покрасить. Лесное и онлайн идут в одни дни. Старты: 09:00 · 11:00 · 13:30 · 16:00 · 18:30 [?].</p>
+      <div class="band st g8" style="padding:14px;border-radius:4px">
+        <b class="b">Открыть запись на ноябрь</b>
+        <div class="cols2"><div class="fld"><label for="od" class="xs" style="font-weight:600;color:var(--ink)">Дата</label><input id="od" class="inp" value="16 октября"></div><div class="fld"><label for="ot" class="xs" style="font-weight:600;color:var(--ink)">Время</label><input id="ot" class="inp" value="22:00"></div></div>
+        <label class="cb"><input type="checkbox" checked=""><span>Постоянным гостьям на сутки раньше (3+ визита за полгода [?])</span></label>
+        <a class="btn" href="c-adm.dc.html">Запланировать открытие</a>
+        <span class="xs">Подписчицы получат напоминание сами. Сторис не нужна.</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{is.zapisi}}" hint-placeholder-val="{{ false }}">
+    <div class="w st g10" style="padding-top:22px">
+      <div class="between"><h1 class="h2">Записи</h1><a class="btn btn-s" href="c-adm.dc.html">+ Вручную</a></div>
+      <div class="srch"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path></svg><label for="as" class="vh">Поиск по имени или телефону</label><input id="as" type="search" placeholder="Имя или последние цифры телефона"></div>
+      <div class="row" style="gap:6px"><button type="button" class="fr on" aria-pressed="true" style="min-height:40px">Все</button><button type="button" class="fr" style="min-height:40px">Новые</button><button type="button" class="fr" style="min-height:40px">Переносы</button><button type="button" class="fr" style="min-height:40px">Отмены</button></div>
+      <sc-for list="{{rec}}" as="r" hint-placeholder-count="6">
+        <a class="frame between" href="c-adm2.dc.html" style="padding:10px 12px;text-decoration:none;align-items:center;border-color:var(--line)">
+          <span class="st"><b class="b">{{r.n}}</b><span class="xs">{{r.s}}</span></span>
+          <span class="st" style="align-items:flex-end"><b class="b num" style="font-size:15px">{{r.d}}</b><span class="tag" style="{{r.ts}}">{{r.t}}</span></span>
+        </a>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{is.list}}" hint-placeholder-val="{{ false }}">
+    <div class="w st g10" style="padding-top:22px">
+      <div class="between"><h1 class="h2">Лист ожидания</h1><span class="tag">7</span></div>
+      <p class="small">Окна предлагаются сами: по очереди, держатся 30 минут. После 22:00 пишем только тем, кто разрешил.</p>
+      <div class="sheet st" style="padding:4px 14px">
+        <div class="kv"><span class="st"><b class="b">Анна Л.</b><span class="xs">Лесное · массаж 90 · выходные утро</span></span><span class="tag" style="border-color:var(--sheet-acc)">предложено до 12:10</span></div>
+        <div class="kv"><span class="st"><b class="b">Ольга</b><span class="xs">Лесное · любой 90 · выходные</span></span><span class="xs">2-я</span></div>
+        <div class="kv"><span class="st"><b class="b">Вера</b><span class="xs">Москва · остео 60 · будни вечер</span></span><span class="xs">1-я</span></div>
+        <div class="kv" style="border:0"><span class="st"><b class="b">Ксения</b><span class="xs">онлайн · психосоматика · любые</span></span><span class="xs">1-я</span></div>
+      </div>
+      <a class="btn2" href="c-adm.dc.html">Предложить окно вручную</a>
+      <p class="xs">Выкуплено из листа в сентябре: [?] окон, это [?] ₽, которые иначе пропали бы.</p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{is.ceny}}" hint-placeholder-val="{{ false }}">
+    <div class="w st g10" style="padding-top:22px">
+      <div class="between" style="align-items:center"><h1 class="h2">Цены</h1><a class="fr" href="c-adm.dc.html" style="min-height:44px">Изменить несколько</a></div>
+      <div class="sheet" style="padding:4px 12px 10px">
+        <div class="mxg">
+          <div class="mxr mxh"><span>Вид</span><span>ПЛ</span><span>Москва</span><span>Онлайн</span></div>
+          <div class="mxr"><span>Первичный</span><span>[?]</span><span>[?]</span><span>[?]</span></div>
+          <div class="mxr"><span>Классический</span><span>3 цены</span><span>3</span><span class="no">нет</span></div>
+          <div class="mxr" style="border-bottom:0"><b style="font-weight:800">Лимфодренажный ▾</b><span></span><span></span><span></span></div>
+          <div class="mxr"><span style="padding-left:12px">60 мин</span><span><span class="cell unk">[?]</span></span><span><span class="cell unk">[?]</span></span><span class="no">нет</span></div>
+          <div class="mxr"><span style="padding-left:12px">90 мин</span><span><span class="cell focus">5 500</span></span><span><span class="cell unk">[?]</span></span><span class="no">нет</span></div>
+          <div class="mxr"><span style="padding-left:12px">120 мин</span><span><span class="cell unk">[?]</span></span><span><span class="cell hid">скрыто</span></span><span class="no">нет</span></div>
+          <div class="mxr"><span>Стоун</span><span>2</span><span>2</span><span class="no">нет</span></div>
+          <div class="mxr"><span>Остеопрактика</span><span>2</span><span>2</span><span class="no">нет</span></div>
+          <div class="mxr"><span>Психосоматика</span><span>2</span><span>2</span><span>2</span></div>
+          <div class="mxr" style="border:0"><span class="muted">ещё 8 видов</span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <div class="ok" role="status"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Сохранено. На сайте уже 5 500 ₽.</div>
+      <p class="xs">«Скрыто»: гости не видят, но цена не удаляется. <a class="link" href="c-prices.dc.html" style="min-height:0">Как видит гость</a></p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{is.massovo}}" hint-placeholder-val="{{ false }}">
+    <div class="w st g12" style="padding-top:22px">
+      <h1 class="h2">Изменить несколько цен</h1>
+      <div class="fld"><span class="l">Что</span><div class="cols3"><button type="button" class="fr">Все</button><button type="button" class="fr on" aria-pressed="true">90 мин</button><button type="button" class="fr">Массаж</button></div></div>
+      <div class="fld"><span class="l">Где</span><div class="cols3"><button type="button" class="fr">Лесное</button><button type="button" class="fr on" aria-pressed="true">Москва</button><button type="button" class="fr">Онлайн</button></div></div>
+      <div class="fld"><label for="am">На сколько</label><input id="am" class="inp" value="+300 ₽"></div>
+      <div class="band st g4" style="padding:12px 14px;border-radius:4px"><b class="b">Изменится 9 цен</b><span class="small">Классический, лимфодренажный, стоун, БЭМ, остеопрактика, эстетическая остео, психосоматика, эмоциональная коррекция, карты. Оплаченные записи не меняются.</span></div>
+      <a class="btn" href="c-adm.dc.html">Применить к 9 ценам</a>
+      <div class="ok between" role="status" style="align-items:center"><span>Готово, на сайте обновлено</span><a class="fr" href="c-adm.dc.html" style="min-height:44px">Отменить</a></div>
+    </div>
+  </sc-if>
+
+  <nav class="tabs" aria-label="Разделы кабинета" style="margin-top:auto">
+    <a class="{{t.segodnya}}" href="c-adm.dc.html">Сегодня</a><a class="{{t.mesyac}}" href="c-adm.dc.html">Месяц</a><a class="{{t.zapisi}}" href="c-adm.dc.html">Записи</a><a class="{{t.ceny}}" href="c-adm.dc.html">Цены</a><a class="{{t.eshche}}" href="c-adm2.dc.html">Ещё</a>
+  </nav>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":844,"section":"Размер"},"screen":{"editor":"enum","options":["segodnya","mesyac","zapisi","list","ceny","massovo"],"default":"segodnya","section":"Экран"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":844}}'>
+const LES=[4,5,7,8,11,12,14,15,18,19,21,22,25,26,28], MSK=[9,23];
+class Component extends DCLogic {
+  renderVals() {
+    const th = this.props.theme ?? 'moss';
+    const s = this.props.screen ?? 'segodnya';
+    const is = {}; ['segodnya','mesyac','zapisi','list','ceny','massovo'].forEach(k => is[k] = s === k);
+    const tab = { segodnya: 'segodnya', mesyac: 'mesyac', zapisi: 'zapisi', list: 'eshche', ceny: 'ceny', massovo: 'ceny' }[s];
+    const t = {}; ['segodnya','mesyac','zapisi','ceny','eshche'].forEach(k => t[k] = k === tab ? 'on' : '');
+    const nov = [];
+    for (let i = 0; i < 6; i++) nov.push({ n: '', cls: '', st: 'border-color:transparent', aria: '' });
+    for (let n = 1; n <= 30; n++) { const l = LES.indexOf(n) >= 0, m = MSK.indexOf(n) >= 0; nov.push({ n: String(n), cls: l ? 'les' : m ? 'msk' : '', st: m ? 'background-color:var(--msk)' : l ? '' : 'border-color:var(--line)', aria: n + ' ноября: ' + (l ? 'Лесное и онлайн' : m ? 'Москва' : 'выходной') }); }
+    const rec = [
+      { n: 'Мария К.', s: 'Стоун 90 · Лесное', d: 'сб 3.10 11:00', t: 'смена вида', ts: '' },
+      { n: 'Анна', s: 'Первичный · Лесное', d: 'сб 3.10 13:30', t: 'новая', ts: 'border-color:var(--ink)' },
+      { n: 'Ольга', s: 'Классический 90 · Лесное', d: 'сб 3.10 16:00', t: 'отмена', ts: 'border-style:dashed' },
+      { n: 'Екатерина С.', s: 'Классический 60 · Лесное', d: 'сб 3.10 18:30', t: 'оплачено', ts: '' },
+      { n: 'Вера', s: 'Остеопрактика · Москва', d: 'пн 12.10 13:30', t: 'перенос', ts: '' },
+      { n: 'Ксения', s: 'Психосоматика · онлайн', d: 'ср 7.10 16:00', t: 'оплачено', ts: '' }
+    ];
+    return { w: this.props.w ?? 390, h: this.props.h ?? 844, cls: th === 'moss' ? '' : th, is, t, nov, rec };
+  }
+}
+</script>
+</body>
+</html>

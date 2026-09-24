@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Запись</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px;background:var(--desk)">
+<div class="panel d-sheet" role="dialog" aria-label="Запись" style="min-height:{{h}}px">
+  <div class="ptop">
+    <sc-if value="{{hasBack}}" hint-placeholder-val="{{ true }}"><a class="ibtn" href="c-zapis.dc.html" aria-label="Назад"><svg class="ico" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></a></sc-if>
+    <sc-if value="{{noBack}}" hint-placeholder-val="{{ false }}"><b class="h4">Запись</b></sc-if>
+    <a class="ibtn" href="c-home.dc.html" aria-label="Закрыть запись"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+  </div>
+  <sc-if value="{{showSteps}}" hint-placeholder-val="{{ true }}">
+    <nav class="steps" aria-label="Шаги записи">
+      <sc-for list="{{steps}}" as="s" hint-placeholder-count="4"><a class="{{s.c}}" href="c-zapis.dc.html" aria-current="{{s.cur}}">{{s.t}}</a></sc-for>
+    </nav>
+  </sc-if>
+
+  <sc-if value="{{is.gde}}" hint-placeholder-val="{{ true }}">
+    <div class="pbody">
+      <div class="sheet st g8" style="padding:14px">
+        <span style="font-size:14px">Анна, это вы? <a class="link" href="c-zapis.dc.html" style="min-height:0">Нет, другой человек</a></span>
+        <b style="font-weight:700;font-size:17px">Как в прошлый раз: классический массаж, 90 мин, Лесное</b>
+        <a class="btn" href="c-zapis.dc.html">Повторить и выбрать время</a>
+      </div>
+      <h1 class="q">Где удобнее?</h1>
+      <a class="opt les on" href="c-zapis.dc.html"><b class="h4">Пригород Лесное</b><span class="small">Мисайлово · ближайшее окно сб, 3 окт.</span></a>
+      <a class="opt msk" href="c-zapis.dc.html"><b class="h4">Москва, Таганская</b><span class="small">ближайшее окно пн, 12 окт.</span></a>
+      <a class="opt" href="c-zapis.dc.html"><b class="h4">Онлайн</b><span class="small">психосоматика, карты, биодинамика</span></a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{is.chto}}" hint-placeholder-val="{{ false }}">
+    <div class="pbody" style="gap:10px">
+      <div class="cols2"><a class="fr" href="c-zapis.dc.html">Как в прошлый раз</a><a class="fr" href="c-podbor.dc.html" style="background:var(--field);border-color:var(--field);color:var(--field-ink)">Не знаю, подберите</a></div>
+      <h1 class="q" style="font-size:26px">Что?</h1>
+      <div class="cols3"><a class="fr" href="c-zapis.dc.html">Первый раз</a><a class="fr on" href="c-zapis.dc.html" aria-current="true">Массаж</a><a class="fr" href="c-zapis.dc.html">Лицо</a><a class="fr" href="c-zapis.dc.html">Остео</a><a class="fr" href="c-zapis.dc.html">Состояние</a><a class="fr" href="c-zapis.dc.html">Бережно</a></div>
+      <span class="b" style="margin-top:6px">Вид массажа</span>
+      <div class="cols2"><button type="button" class="fr">Классический</button><button type="button" class="fr on" aria-pressed="true">Лимфодренажный</button><button type="button" class="fr">Стоун</button><button type="button" class="fr">БЭМ</button></div>
+      <span class="b" style="margin-top:6px">Длительность и цена</span>
+      <div class="cols3"><a class="fr tall" href="c-zapis.dc.html"><span>60 мин</span><span class="xs">[?] ₽</span></a><a class="fr tall on" href="c-zapis.dc.html"><span>90 мин</span><span style="font-size:13px">5 500 ₽</span></a><a class="fr tall" href="c-zapis.dc.html"><span>120 мин</span><span class="xs">[?] ₽</span></a></div>
+      <p class="small">Вид можно поменять до 18:00 накануне, цена та же. Предоплата [?] ₽, остальное на месте.</p>
+    </div>
+    <div class="pfoot"><span class="grow st"><b class="b">5 500 ₽</b><span class="xs">предоплата [?] ₽</span></span><a class="btn" href="c-zapis.dc.html">К выбору времени</a></div>
+  </sc-if>
+
+  <sc-if value="{{showCal}}" hint-placeholder-val="{{ false }}">
+    <div class="pbody" style="gap:10px">
+      <sc-if value="{{is.rannij}}" hint-placeholder-val="{{ false }}">
+        <div class="sheet st g4" style="padding:14px"><b class="b">Ранний доступ для вас</b><span class="small">Вы у меня не первый раз, поэтому ноябрь открыт для вас на сутки раньше, до [17 окт., 22:00 ?]. Для всех запись откроется после.</span></div>
+      </sc-if>
+      <div class="between"><span class="hand" style="font-size:44px">{{month}}</span><a class="link" href="c-zapis.dc.html" style="min-height:44px">{{otherMonth}}</a></div>
+      <div class="cal" role="grid" aria-label="{{month}}: дни с окнами">
+        <span class="wd">Пн</span><span class="wd">Вт</span><span class="wd">Ср</span><span class="wd">Чт</span><span class="wd">Пт</span><span class="wd">Сб</span><span class="wd">Вс</span>
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="34"><a class="day {{d.cls}}" href="c-zapis.dc.html" aria-label="{{d.aria}}">{{d.n}}</a></sc-for>
+      </div>
+      <sc-if value="{{is.netokon}}" hint-placeholder-val="{{ false }}">
+        <div class="st g10" style="padding-top:6px">
+          <h1 class="q" style="font-size:24px">В октябре стоун в Лесном весь занят</h1>
+          <p class="p">Оставьте пожелания. Как только освободится подходящее время, я напишу вам первой из списка. Освободившееся окно держу для вас 30 минут.</p>
+          <div class="cols3"><button type="button" class="fr">Будни</button><button type="button" class="fr on" aria-pressed="true">Выходные</button><button type="button" class="fr">Любые</button><button type="button" class="fr on" aria-pressed="true">Утро</button><button type="button" class="fr">День</button><button type="button" class="fr">Вечер</button></div>
+          <label class="cb"><input type="checkbox"><span>Подойдёт и другой массаж 90 мин</span></label>
+          <a class="btn" href="c-list.dc.html">Встать в лист ожидания</a>
+          <p class="small">Или рядом: Москва, пн 12 окт., 13:30. <a class="link" href="c-zapis.dc.html" style="min-height:0">Посмотреть</a></p>
+        </div>
+      </sc-if>
+      <sc-if value="{{showTimes}}" hint-placeholder-val="{{ false }}">
+        <div class="st g8">
+          <sc-if value="{{is.zanyato}}" hint-placeholder-val="{{ false }}">
+            <div class="alert" role="alert"><b style="font-weight:800;font-size:18px">11:00 только что заняли</b><span style="font-size:15px;line-height:1.45">Так бывает в день открытия записи. Деньги не списаны. Вот что есть рядом.</span></div>
+          </sc-if>
+          <span class="b">{{dayTitle}}</span>
+          <div class="cols3"><sc-for list="{{times}}" as="t" hint-placeholder-count="3"><a class="fr {{t.c}}" href="c-zapis.dc.html" aria-disabled="{{t.dis}}">{{t.t}}</a></sc-for></div>
+          <sc-if value="{{is.zanyato}}" hint-placeholder-val="{{ false }}">
+            <span class="b">вс, 4 окт.</span>
+            <div class="cols3"><a class="fr" href="c-zapis.dc.html">11:00</a><a class="fr" href="c-zapis.dc.html">16:00</a><a class="fr" href="c-zapis.dc.html">18:30</a></div>
+          </sc-if>
+          <a class="link" href="c-list.dc.html">{{waitText}}</a>
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{showTimes}}" hint-placeholder-val="{{ false }}"><div class="pfoot"><b class="grow b">{{footSel}}</b><a class="btn" href="c-zapis.dc.html">Дальше</a></div></sc-if>
+  </sc-if>
+
+  <sc-if value="{{showForm}}" hint-placeholder-val="{{ false }}">
+    <div class="pbody" style="gap:10px">
+      <sc-if value="{{is.oshibka}}" hint-placeholder-val="{{ false }}">
+        <div class="alert" role="alert"><b style="font-weight:800;font-size:18px">Оплата не прошла</b><span style="font-size:15px;line-height:1.45">Деньги не списаны. Окно держится за вами до 12:10, можно спокойно попробовать ещё раз или другим способом.</span></div>
+      </sc-if>
+      <div class="fld"><label for="zn">Имя</label><input id="zn" class="inp" value="Мария"></div>
+      <div class="fld"><label for="zp">Телефон</label><input id="zp" class="inp {{phoneCls}}" value="{{phone}}" inputmode="tel" aria-invalid="{{phoneBad}}" aria-describedby="zpe"><sc-if value="{{phoneErr}}" hint-placeholder-val="{{ false }}"><span id="zpe" class="errmsg">Не хватает цифр: нужно 10 после +7</span></sc-if></div>
+      <div class="fld"><span class="l">Напоминание придёт в</span><div class="cols3"><button type="button" class="fr on" aria-pressed="true">Telegram</button><button type="button" class="fr">MAX</button><button type="button" class="fr">SMS</button></div></div>
+      <div class="fld"><label for="zc">Пожелания к сеансу</label><input id="zc" class="inp" placeholder="О здоровье лучше лично, не здесь" style="font-size:15px"></div>
+      <label class="cb"><input type="checkbox" required=""><span>Соглашаюсь на обработку персональных данных · <a class="link" href="c-legal.dc.html" style="min-height:0">текст согласия</a></span></label>
+      <label class="cb"><input type="checkbox"><span>Сообщать об открытии записи и событиях</span></label>
+      <sc-if value="{{is.oshibka}}" hint-placeholder-val="{{ false }}"><div class="fld"><span class="l">Способ оплаты</span><div class="cols2"><button type="button" class="fr">СБП</button><button type="button" class="fr on" aria-pressed="true">Картой</button></div></div></sc-if>
+    </div>
+    <div class="pfoot" style="flex-direction:column;align-items:stretch;gap:8px">
+      <div class="between" style="font-size:15px"><span>Лимфодренажный, 90 · сб, 3 окт., 11:00</span></div>
+      <div class="between" style="font-size:15px"><span>Итого 5 500 ₽</span><b class="b">сейчас [?] ₽</b></div>
+      <a class="btn" href="c-zapis.dc.html">{{payText}}</a>
+      <span class="xs" style="text-align:center">Отмена за [48 ч ?] возвращает предоплату полностью</span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{is.gotovo}}" hint-placeholder-val="{{ false }}">
+    <div class="pbody" style="gap:16px;padding-top:28px">
+      <span class="small" style="color:var(--ink)">Вы записаны</span>
+      <div class="row" style="flex-wrap:nowrap;gap:14px;align-items:stretch">
+        <div class="st" style="width:112px;flex-shrink:0;border:3px solid var(--les);border-radius:4px;align-items:center;justify-content:center;padding:10px 0"><span style="font-size:15px">сб</span><b style="font-size:56px;font-weight:800;line-height:1">3</b><span style="font-size:15px">11:00</span></div>
+        <div class="st g4" style="justify-content:center"><span class="hand" style="font-size:40px">октября</span><span class="small">Лимфодренажный, 90 мин</span></div>
+      </div>
+      <p class="p">Я жду вас в Пригороде Лесное, ул. Героя России Филиппова, 8. Вид массажа можно поменять до 18:00 пятницы.</p>
+      <div class="ok" role="status"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Подтверждение и чек уже в Telegram</div>
+      <div class="st g8"><a class="btn2" href="c-zapis.dc.html">Добавить в календарь</a><a class="btn2" href="c-mesto.dc.html">Как добраться</a><a class="btn" href="c-z.dc.html">Моя запись</a></div>
+      <p class="xs">Берегите себя. До встречи.</p>
+    </div>
+  </sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":844,"section":"Размер"},"step":{"editor":"enum","options":["gde","chto","kogda","kontakty","gotovo","netokon","zanyato","oshibka","rannij"],"default":"gde","section":"Шаг"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":844}}'>
+const OCT = { pad: 3, n: 31, les: [1,3,4,7,8,10,11,14,15,17,18,21,22,24,25,28,29,31], full: [1,4,7,8], gen: 'октября' };
+const NOV = { pad: 6, n: 30, les: [4,5,7,8,11,12,14,15,18,19,21,22,25,26,28], full: [], gen: 'ноября' };
+function month(M, mode, sel) {
+  const out = [];
+  for (let i = 0; i < M.pad; i++) out.push({ n: '', cls: '', aria: '' });
+  for (let n = 1; n <= M.n; n++) {
+    const l = M.les.indexOf(n) >= 0;
+    let cls = '';
+    if (l) { cls = 'les'; if (mode === 'full' || M.full.indexOf(n) >= 0) cls += ' full'; if (n === sel && mode !== 'full') cls = 'les sel'; }
+    out.push({ n: String(n), cls, aria: n + ' ' + M.gen + (l ? (cls.indexOf('full') >= 0 ? ', всё занято' : ', есть окна') : ', приёма нет') });
+  }
+  return out;
+}
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const s = this.props.step ?? 'gde';
+    const is = {}; ['gde','chto','kogda','kontakty','gotovo','netokon','zanyato','oshibka','rannij'].forEach(k => is[k] = s === k);
+    const stepIdx = { gde: 0, chto: 1, kogda: 2, netokon: 2, zanyato: 2, rannij: 2, kontakty: 3, oshibka: 3 }[s];
+    const labels = ['1 Где', '2 Что', '3 Когда', '4 Вы'];
+    const done = ['Лесное', is.netokon ? 'Стоун 90' : 'Лимфо 90', '3 окт 11:00', ''];
+    const steps = labels.map((l, i) => ({ t: i < stepIdx ? done[i] : l, c: i < stepIdx ? 'done' : i === stepIdx ? 'on' : '', cur: i === stepIdx ? 'step' : 'false' }));
+    const showCal = is.kogda || is.netokon || is.zanyato || is.rannij;
+    const times = is.zanyato ? [{ t: '11:00', c: 'off', dis: 'true' }, { t: '13:30', c: '', dis: 'false' }, { t: '16:00', c: 'off', dis: 'true' }]
+      : is.rannij ? [{ t: '11:00', c: 'on', dis: 'false' }, { t: '13:30', c: '', dis: 'false' }, { t: '16:00', c: '', dis: 'false' }]
+      : [{ t: '11:00', c: 'on', dis: 'false' }, { t: '13:30', c: '', dis: 'false' }, { t: '16:00', c: 'off', dis: 'true' }];
+    const bad = is.kontakty;
+    return {
+      w: this.props.w ?? 390, h: this.props.h ?? 844, cls: t === 'moss' ? '' : t, is,
+      hasBack: s !== 'gde' && s !== 'gotovo', noBack: s === 'gde' || s === 'gotovo',
+      showSteps: s !== 'gotovo', steps,
+      showCal, showTimes: is.kogda || is.zanyato || is.rannij,
+      showForm: is.kontakty || is.oshibka,
+      days: is.rannij ? month(NOV, 'a', 4) : month(OCT, is.netokon ? 'full' : 'a', is.zanyato ? 0 : 3),
+      month: is.rannij ? 'ноябрь' : 'октябрь', otherMonth: is.rannij ? 'октябрь' : 'ноябрь',
+      dayTitle: is.rannij ? 'Среда, 4 ноября' : 'Суббота, 3 октября', times,
+      waitText: is.zanyato ? 'Хочу именно сб, 11:00: встать в лист ожидания' : 'Нет подходящего времени? Лист ожидания',
+      footSel: is.rannij ? 'ср, 4 нояб., 11:00' : is.zanyato ? 'выберите время' : 'сб, 3 окт., 11:00',
+      phone: bad ? '+7 916 12' : '+7 916 123-45-67', phoneCls: bad ? 'err' : '', phoneBad: bad ? 'true' : 'false', phoneErr: bad,
+      payText: is.oshibka ? 'Попробовать ещё раз, картой' : 'Предоплата через СБП'
+    };
+  }
+}
+</script>
+</body>
+</html>

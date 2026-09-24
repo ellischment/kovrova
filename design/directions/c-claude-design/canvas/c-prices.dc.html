@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Услуги и цены</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a class="on" href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+
+  <div class="w d-48" style="padding-top:24px">
+    <section class="st g16">
+      <div class="row" style="align-items:baseline;gap:12px"><h1 class="h1" style="font-size:40px">Цены</h1><span class="hand" style="font-size:36px">на октябрь</span></div>
+      <p class="small">Строка: вид и длительность. Столбец: место. Нажмите на цену, чтобы сразу выбрать время.</p>
+      <div class="fld">
+        <label for="cq" class="vh">Найти услугу</label>
+        <div class="srch"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path></svg><input id="cq" type="search" value="{{q}}" onChange="{{onQ}}" placeholder="Найти: спина, лицо, стоун"></div>
+      </div>
+      <div class="fld"><span class="l">Где</span>
+        <div class="seg" role="group" aria-label="Место">
+          <sc-for list="{{segs}}" as="s" hint-placeholder-count="4"><button type="button" class="{{s.cls}}" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}">{{s.label}}</button></sc-for>
+        </div>
+      </div>
+      <div class="fld"><span class="l">Длительность</span>
+        <div class="row" role="group" aria-label="Длительность">
+          <sc-for list="{{durs}}" as="d" hint-placeholder-count="4"><button type="button" class="fr {{d.cls}}" aria-pressed="{{d.pressed}}" onClick="{{d.pick}}" style="min-height:44px">{{d.label}}</button></sc-for>
+          <button type="button" class="fr {{firstCls}}" aria-pressed="{{firstPressed}}" onClick="{{toggleFirst}}" style="min-height:44px">Для первого раза</button>
+        </div>
+      </div>
+      <div class="between" style="align-items:center;min-height:44px">
+        <p class="small" style="color:var(--ink);font-weight:600" aria-live="polite">{{summary}}</p>
+        <sc-if value="{{filtered}}" hint-placeholder-val="{{ false }}"><button type="button" class="link" onClick="{{clear}}" style="border:0;background:none;padding:0">Сбросить</button></sc-if>
+      </div>
+      <sc-if value="{{firstNote}}" hint-placeholder-val="{{ false }}">
+        <div class="field st g8" style="padding:16px"><b class="b">Для первой встречи: первичный приём</b><p style="font-size:15px;line-height:1.5">Знакомимся, выбираем методы и уже начинаем работу. Условия для первого раза особые.</p><a class="link" href="c-pervichnyj.dc.html" style="color:var(--field-ink)">Как он проходит</a></div>
+      </sc-if>
+      <div class="note d-only"><b class="b">Не знаете, что выбрать?</b><a class="link" href="c-podbor.dc.html">Три вопроса, около минуты</a></div>
+    </section>
+
+    <section class="sheet" style="padding:4px 14px 18px;margin-top:20px">
+      <sc-if value="{{all}}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) repeat(3,{{colw}});gap:4px;align-items:end;min-height:44px;padding-top:8px;border-bottom:2px solid var(--sheet-ink)">
+          <span class="lbl">Вид</span>
+          <span class="xs b" style="text-align:center;color:var(--sheet-ink);border-bottom:4px solid var(--sheet-acc);padding-bottom:4px">ПЛ</span>
+          <span class="xs b" style="text-align:center;color:var(--sheet-ink);border-bottom:4px solid #7E1F2A;padding-bottom:4px">Москва</span>
+          <span class="xs b" style="text-align:center;color:var(--sheet-ink);border-bottom:4px solid var(--sheet-acc);padding-bottom:4px">Онлайн</span>
+        </div>
+      </sc-if>
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="5">
+        <div class="st">
+          <div class="between" style="padding:18px 0 8px;border-bottom:2px solid var(--sheet-ink)"><h2 class="h4" style="font-weight:800">{{g.title}}</h2><span class="xs">{{g.count}}</span></div>
+          <sc-for list="{{g.rows}}" as="r" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) repeat({{ncols}},{{colw}});gap:4px;align-items:center;min-height:52px;border-bottom:1px solid var(--sheet-line)">
+              <a href="c-vid.dc.html" class="st" style="text-decoration:none;padding:6px 0;min-width:0"><b style="font-weight:650;font-size:14px;line-height:1.2">{{r.title}}</b><span class="xs">{{r.dur}}</span></a>
+              <sc-for list="{{r.cells}}" as="c" hint-placeholder-count="3"><a class="pc {{c.cls}}" href="{{c.href}}" aria-label="{{c.aria}}">{{c.label}}</a></sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+      <sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+        <div class="st g10" style="padding:22px 0 6px">
+          <p class="h3">Ничего не нашлось</p>
+          <p class="small">Попробуйте проще: «спина», «лицо», «отёки». Или ответьте на три вопроса.</p>
+          <a class="btn" href="c-podbor.dc.html">Подобрать за три вопроса</a>
+          <button type="button" class="link" onClick="{{clear}}" style="border:0;background:none;padding:0;align-self:flex-start">Сбросить фильтры</button>
+        </div>
+      </sc-if>
+      <p class="xs" style="padding-top:14px">Цены в рублях. Пунктир [?]: цена уточняется. «нет»: в этом месте не проводится. Предоплата при записи: [?] ₽, остальное на месте.</p>
+    </section>
+  </div>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-legal.dc.html">Правила записи</a><a href="c-voprosy.dc.html">Вопросы</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":2880,"section":"Размер"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":2880}}'>
+const FAM={perv:['Первичный приём','first','первый раз впервые знакомство'],klass:['Классический','body','классический массаж спина шея плечи общий оздоровительный напряжение отдых'],limfo:['Лимфодренажный','body','лимфодренажный массаж лимфо отёки отеки тяжесть ноги'],stoun:['Стоун','body','стоун-массаж камни тепло горячие отдых'],bem:['БЭМ','body','бэм биоэнергорегуляционный массаж энергия'],lico:['Лицо и шея (ШВЗ)','face','массаж лица шея швз шейно-воротниковая'],maski:['Маски для лица','face','маска уход кожа лицо'],osteo:['Остеопрактика','osteo','остео спина осанка напряжение'],esteo:['Эстетическая остео','osteo','эстетическая остеопрактика лицо овал'],psy:['Психосоматика','psy','сессия психосоматики эмоции тревога состояние'],emo:['Эмоциональная коррекция','psy','эмоции чувства состояние'],mak:['Метафорические карты','psy','мак карты консультация'],bio:['Биодинамика','gentle','малыши дети бережно']};
+const DIRS=[['first','Первый раз'],['body','Массаж тела'],['face','Лицо'],['osteo','Остеопрактика'],['psy','Психосоматика и состояние'],['gentle','Бережные практики']];
+const LOCN={L:'в Пригороде Лесное',M:'в Москве',O:'онлайн',A:'во всех местах'};
+const LOCL={L:'Лесное',M:'Москва',O:'онлайн'};
+const RAW='L:perv0,klass60,klass90=5500,klass120,limfo60,limfo90=5500,limfo120,stoun90=5500,stoun120,bem90,bem120,lico45=4000,lico60,maski30,osteo60=5500,osteo90,esteo60,esteo90,psy60,psy90,emo60,emo90,mak60,mak90,bio45,bio60|M:perv0,klass60,klass90,klass120,limfo60,limfo90,limfo120,stoun90,stoun120,bem90,bem120,lico45,lico60,maski30,osteo60,osteo90,esteo60,esteo90,psy60,psy90,emo60,emo90,mak60,mak90,bio45,bio60|O:perv0,psy60,psy90,emo60,emo90,mak60,mak90,bio45,bio60';
+const CAT=[];
+RAW.split('|').forEach(function(s){var p=s.split(':');p[1].split(',').forEach(function(it){var m=it.match(/^([a-z]+)(\d+)(?:=(\d+))?$/);var f=FAM[m[1]];CAT.push({fid:m[1],loc:p[0],dur:+m[2],price:m[3]?+m[3]:0,dir:f[1],hay:(f[0]+' '+f[2]).toLowerCase().replace(/ё/g,'е')});});});
+function fmt(n){return n?String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' '):'[?]';}
+function pl(n,a,b,c){var x=n%10,y=n%100;if(x===1&&y!==11)return a;if(x>=2&&x<=4&&(y<12||y>14))return b;return c;}
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const W = +(this.props.w ?? 390);
+    const st = this.state || {};
+    const loc = st.loc || 'A', q = st.q || '', dur = st.dur || 'all', first = !!st.first;
+    const nq = q.trim().toLowerCase().replace(/ё/g, 'е');
+    const rows = CAT.filter(r => (loc === 'A' || r.loc === loc)
+      && (dur === 'all' || (dur === '60' ? (r.dur > 0 && r.dur <= 60) : r.dur === +dur))
+      && (!first || r.fid === 'perv')
+      && (!nq || nq.split(/\s+/).every(w => r.hay.indexOf(w) >= 0)));
+    const locs = loc === 'A' ? ['L', 'M', 'O'] : [loc];
+    const order = [], by = {};
+    rows.forEach(r => { const k = r.fid + '|' + r.dur; if (!by[k]) { by[k] = {}; order.push(k); } by[k][r.loc] = r; });
+    const groups = DIRS.map(d => {
+      const rs = order.filter(k => FAM[k.split('|')[0]][1] === d[0]).map(k => {
+        const fid = k.split('|')[0], du = +k.split('|')[1];
+        return { title: FAM[fid][0], dur: du ? du + ' мин' : 'длительность [?]', cells: locs.map(L => {
+          const r = by[k][L];
+          if (!r) return { label: 'нет', cls: 'no', href: '#', aria: FAM[fid][0] + ', ' + LOCL[L] + ': не проводится' };
+          const lab = loc === 'A' ? fmt(r.price) : (r.price ? fmt(r.price) + ' ₽' : '[?] ₽');
+          return { label: lab, cls: r.price ? '' : 'unk', href: 'c-zapis.dc.html', aria: 'Выбрать время: ' + FAM[fid][0] + (du ? ', ' + du + ' мин' : '') + ', ' + LOCL[L] + ', ' + (r.price ? fmt(r.price) + ' рублей' : 'цена уточняется') };
+        }) };
+      });
+      return { title: d[1], count: rs.length + ' ' + pl(rs.length, 'строка', 'строки', 'строк'), rows: rs };
+    }).filter(g => g.rows.length);
+    const set = o => () => this.setState(o);
+    const mk = (list, cur, key) => list.map(x => ({ label: x[1], cls: cur === x[0] ? 'on' : '', pressed: cur === x[0] ? 'true' : 'false', pick: set({ [key]: x[0] }) }));
+    return {
+      w: W, h: this.props.h ?? 2880, cls: t === 'moss' ? '' : t,
+      q, groups, all: loc === 'A', ncols: locs.length,
+      colw: loc === 'A' ? (W > 900 ? "120px" : "62px") : (W > 900 ? '160px' : '104px'),
+      summary: (nq ? '«' + q.trim() + '»: ' : '') + rows.length + ' ' + pl(rows.length, 'позиция', 'позиции', 'позиций') + ' ' + LOCN[loc],
+      segs: mk([['A','Все'],['L','Лесное'],['M','Москва'],['O','Онлайн']], loc, 'loc'),
+      durs: mk([['all','Любая'],['60','до 60 мин'],['90','90'],['120','120']], dur, 'dur'),
+      empty: rows.length === 0, filtered: !!nq || dur !== 'all' || first,
+      firstNote: first, firstCls: first ? 'on' : '', firstPressed: first ? 'true' : 'false',
+      toggleFirst: set({ first: !first }),
+      onQ: e => this.setState({ q: e.target.value }),
+      clear: set({ q: '', dur: 'all', first: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

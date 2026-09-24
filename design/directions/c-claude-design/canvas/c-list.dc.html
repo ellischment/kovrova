@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Лист ожидания</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <a class="btn btn-s" href="c-kontakty.dc.html">Написать</a>
+  </header>
+  <div class="w d-center st g16" style="padding-top:20px;padding-bottom:40px">
+
+    <sc-if value="{{is.forma}}" hint-placeholder-val="{{ true }}">
+      <div class="st g14" style="gap:14px">
+        <p class="lbl">Лист ожидания</p>
+        <h1 class="q">Когда освободится окно, я напишу вам первой из списка</h1>
+        <div class="fld"><span class="l">Где</span><div class="cols3"><button type="button" class="fr on les" aria-pressed="true">Лесное</button><button type="button" class="fr">Москва</button><button type="button" class="fr">Онлайн</button></div></div>
+        <div class="fld"><span class="l">Что</span><div class="cols2"><button type="button" class="fr on" aria-pressed="true">Массаж 90 мин</button><button type="button" class="fr">Другое</button></div></div>
+        <div class="fld"><span class="l">Когда удобно</span><div class="cols3"><button type="button" class="fr">Будни</button><button type="button" class="fr on" aria-pressed="true">Выходные</button><button type="button" class="fr">Любые</button><button type="button" class="fr on" aria-pressed="true">Утро</button><button type="button" class="fr">День</button><button type="button" class="fr">Вечер</button></div></div>
+        <div class="fld"><label for="lp">Телефон</label><input id="lp" class="inp" value="+7 916 123-45-67" inputmode="tel"></div>
+        <div class="fld"><span class="l">Куда написать</span><div class="cols3"><button type="button" class="fr on" aria-pressed="true">Telegram</button><button type="button" class="fr">MAX</button><button type="button" class="fr">SMS</button></div></div>
+        <label class="cb"><input type="checkbox"><span>Можно писать и после 22:00, если окно на утро</span></label>
+        <label class="cb"><input type="checkbox" required=""><span>Соглашаюсь на обработку персональных данных · <a class="link" href="c-legal.dc.html" style="min-height:0">текст</a></span></label>
+        <a class="btn" href="c-list.dc.html">Встать в лист ожидания</a>
+        <p class="xs">Как это работает: окно предлагаю по очереди, держу 30 минут. Не успели ответить, окно уходит следующей, а вы остаётесь в списке.</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{is.podtv}}" hint-placeholder-val="{{ false }}">
+      <div class="st g16">
+        <div class="ok" role="status"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Вы в листе ожидания</div>
+        <h1 class="q">Напишу в Telegram, как только освободится окно</h1>
+        <div class="sheet st" style="padding:6px 16px">
+          <div class="kv"><span>Где</span><b class="b">Лесное</b></div>
+          <div class="kv"><span>Что</span><b class="b">Массаж 90 мин, любой вид</b></div>
+          <div class="kv"><span>Когда</span><b class="b">выходные, утро</b></div>
+          <div class="kv" style="border:0"><span>Вы в очереди</span><b class="b">[3-я ?]</b></div>
+        </div>
+        <p class="small">Платить сейчас ничего не нужно. Предоплата понадобится, только когда заберёте окно.</p>
+        <div class="st g8"><a class="btn2" href="c-list.dc.html">Изменить пожелания</a><a class="link" href="c-list.dc.html">Выйти из листа ожидания</a></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{is.predl}}" hint-placeholder-val="{{ false }}">
+      <div class="st g16">
+        <p class="lbl">Из листа ожидания</p>
+        <div class="row" style="flex-wrap:nowrap;gap:14px;align-items:stretch">
+          <div class="st" style="width:104px;flex-shrink:0;border:3px solid var(--les);border-radius:4px;align-items:center;justify-content:center;padding:10px 0"><span style="font-size:15px">сб</span><b style="font-size:52px;font-weight:800;line-height:1">10</b><span style="font-size:15px">11:00</span></div>
+          <div class="st g4" style="justify-content:center"><span class="hand" style="font-size:38px">октября</span><span class="small">Лесное · массаж 90 мин</span></div>
+        </div>
+        <h1 class="q">Освободилось окно, и оно ваше, если подходит</h1>
+        <div class="note"><b class="b">Держится за вами до 12:10</b><span class="small" style="color:var(--ink)">Не подходит? Просто пропустите, место в очереди сохранится.</span></div>
+        <div class="fld"><span class="l">Какой массаж</span><div class="cols2"><button type="button" class="fr on" aria-pressed="true">Классический</button><button type="button" class="fr">Лимфодренажный</button><button type="button" class="fr">Стоун</button><button type="button" class="fr">БЭМ</button></div></div>
+        <div class="between"><span>5 500 ₽</span><b class="b">сейчас [?] ₽</b></div>
+        <a class="btn" href="c-zapis.dc.html">Забрать окно</a>
+        <a class="btn2" href="c-list.dc.html">Не подходит, ждать дальше</a>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{is.ushlo}}" hint-placeholder-val="{{ false }}">
+      <div class="st g16">
+        <span class="hand" style="font-size:44px">увы</span>
+        <h1 class="q">Это окно уже забрали</h1>
+        <p class="p">Вы по-прежнему в листе ожидания. Напишу, как только освободится следующее.</p>
+        <a class="btn" href="c-raspisanie.dc.html">Посмотреть свободные дни</a>
+        <a class="link" href="c-list.dc.html">Изменить пожелания</a>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1000,"section":"Размер"},"state":{"editor":"enum","options":["forma","podtv","predl","ushlo"],"default":"forma","section":"Состояние"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const s = this.props.state ?? 'forma';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1000, cls: t === 'moss' ? '' : t, is: { forma: s === 'forma', podtv: s === 'podtv', predl: s === 'predl', ushlo: s === 'ushlo' } };
+  }
+}
+</script>
+</body>
+</html>

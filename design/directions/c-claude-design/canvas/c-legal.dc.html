@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Правила записи и отмены</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+
+  <div class="w" style="padding-top:20px">
+    <nav class="seg" aria-label="Документы" style="max-width:640px"><a href="c-legal.dc.html">Политика</a><a href="c-legal.dc.html">Согласие</a><a class="on" href="c-legal.dc.html">Правила записи</a></nav>
+  </div>
+
+  <div class="w d-48" style="padding-top:20px">
+    <aside class="st g8 d-only">
+      <p class="lbl">Содержание</p>
+      <a class="link" href="#p1" style="min-height:36px">1. Как записаться</a>
+      <a class="link" href="#p2" style="min-height:36px">2. Предоплата</a>
+      <a class="link" href="#p3" style="min-height:36px">3. Перенос и отмена</a>
+      <a class="link" href="#p4" style="min-height:36px">4. Лист ожидания</a>
+      <a class="link" href="#p5" style="min-height:36px">5. Смена техники</a>
+      <a class="link" href="#p6" style="min-height:36px">6. Сертификаты и абонементы</a>
+    </aside>
+    <article class="sheet" style="padding:24px 18px">
+      <div class="prose d-read">
+        <p class="lbl">Редакция [1.0 ?] от [дата ?]</p>
+        <h1 style="font-weight:800;font-size:32px;line-height:1.05;letter-spacing:-.025em">Правила записи, предоплаты и отмены</h1>
+        <p>Здесь коротко и по-человечески о том, как устроена запись. Юридически значимый текст оферты [ссылка ?] проверяет юрист.</p>
+        <h2 id="p1">1. Как записаться</h2>
+        <p>Запись идёт на сайте: место, практика, время, контакты и предоплата. После оплаты сразу приходят подтверждение и чек.</p>
+        <h2 id="p2">2. Предоплата</h2>
+        <p>Размер предоплаты: [1 000 ₽ за сеанс ?]. Для событий и сертификатов оплата полная. Способы: СБП, карта.</p>
+        <h2 id="p3">3. Перенос и отмена</h2>
+        <ul><li>Бесплатно, если до визита больше [48 ?] часов: предоплата возвращается полностью.</li><li>Позже: предоплата остаётся, но возвращается, если ваше окно выкупят из листа ожидания.</li><li>Если отменяю я, возвращаю всё и предлагаю перенос.</li></ul>
+        <h2 id="p4">4. Лист ожидания</h2>
+        <p>Когда окно освобождается, я пишу первой в списке. Окно держится 30 минут, потом переходит следующей. После 22:00 не пишу, если вы не разрешили.</p>
+        <h2 id="p5">5. Смена техники</h2>
+        <p>Вид массажа той же длительности можно поменять до 18:00 накануне. Цена не меняется.</p>
+        <h2 id="p6">6. Сертификаты и абонементы</h2>
+        <p>Срок действия: [12 месяцев ?]. Сертификат можно передать другому человеку и потратить частями.</p>
+        <p class="small" style="padding-top:12px;border-top:2px solid var(--sheet-line)">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p>
+      </div>
+    </article>
+  </div>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">[ФИО, статус ?], ИНН [?]</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-legal.dc.html">Согласие</a><a href="c-legal.dc.html">Cookie</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":2190,"section":"Размер"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":2190}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 2190, cls: t === 'moss' ? '' : t };
+  }
+}
+</script>
+</body>
+</html>

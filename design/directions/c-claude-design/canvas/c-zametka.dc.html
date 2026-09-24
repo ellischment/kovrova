@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Заметка: руки и су-джок</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+  <nav class="crumbs w" aria-label="Путь" style="padding-top:8px"><a href="c-zametki.dc.html">Заметки</a><span aria-hidden="true">/</span><span>Практики</span></nav>
+
+  <div class="w" style="padding-top:8px">
+    <article class="sheet d-read" style="padding:24px 18px;margin:0 auto">
+      <div class="st g12">
+        <span class="lbl">Практика · из канала, сентябрь 2026</span>
+        <h1 class="h1s" style="color:var(--sheet-ink)">Почему иногда достаточно поработать с руками</h1>
+      </div>
+      <div class="prose" style="padding-top:20px">
+        <p>Порой, чтобы обратить внимание на весь организм, совсем не обязательно массировать его целиком. Есть направления телесной работы, в которых используются так называемые представительные зоны: участки тела, которым приписывается соответствие другим его областям. Радужка глаза, язык, ухо, лицо, стопы, кисти и ладони.</p>
+        <p>Сегодня предлагаю посмотреть на кисти рук. Они накапливают много напряжения в течение дня. В корейской системе су-джок кисть и пальцы рассматриваются как система соответствий.</p>
+        <h2>Практика</h2>
+        <p>Мягко разомните большой палец от основания к кончику, пройдитесь по его боковым поверхностям. Без боли. Без сильного давления. Скорее с любопытством и вниманием к своим ощущениям.</p>
+        <div style="padding:14px 16px;border-left:0;border:2px solid var(--sheet-line);border-radius:4px;font-size:16px;line-height:1.55">Такая практика не отменяет необходимых медицинских мер.</div>
+        <p>А ведь руки могут быть ещё и способом вернуться к себе. Почувствовать тепло ладоней. Замечать напряжение в пальцах. Мягко прикоснуться к себе. И хотя бы на несколько минут остановиться.</p>
+        <p class="b">Берегите себя и не проходите мимо маленьких сигналов вашего тела.</p>
+      </div>
+      <div class="st g8" style="padding-top:24px;margin-top:24px;border-top:2px solid var(--sheet-ink)">
+        <p class="small">Если хочется, чтобы с руками и плечами поработали бережно, есть массаж и остеопрактика.</p>
+        <a class="btn" href="c-prices.dc.html">Посмотреть практики и цены</a>
+      </div>
+    </article>
+  </div>
+
+  <section class="w sec st g12 d-read" style="margin:0 auto;width:100%">
+    <h2 class="h3">Ещё заметки</h2>
+    <a class="frame between" href="c-zametki.dc.html" style="padding:12px 14px;min-height:60px;align-items:center;text-decoration:none"><span class="b">Первичный приём: что это и как проходит</span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+  </section>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-voprosy.dc.html">Вопросы</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":2240,"section":"Размер"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":2240}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 2240, cls: t === 'moss' ? '' : t };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Где принимаю</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a class="on" href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+
+  <div class="w" style="padding-top:16px">
+    <div class="seg" role="navigation" aria-label="Места">
+      <a class="{{t1}}" href="c-mesto.dc.html">Лесное</a><a class="{{t2}}" href="c-mesto.dc.html">Москва</a><a class="{{t3}}" href="c-mesto.dc.html">Онлайн</a>
+    </div>
+  </div>
+
+  <sc-if value="{{isL}}" hint-placeholder-val="{{ true }}">
+    <section class="w d-75" style="padding-top:28px">
+      <div class="st g16">
+        <div class="row" style="gap:10px"><span class="sw les" style="width:20px;height:20px"></span><span class="lbl" style="color:var(--ink)">Лесное и онлайн в одни дни</span></div>
+        <h1 class="h1s">Пригород Лесное</h1>
+        <p class="lead">Мисайлово, ул. Героя России Филиппова, 8. Кабинет у леса: тишина, тёплый свет, пледы, масла и камни.</p>
+        <div class="sheet st" style="padding:6px 16px">
+          <div class="kv"><span>Как пройти</span><span class="b">[подъезд, этаж, домофон ?]</span></div>
+          <div class="kv"><span>Парковка</span><span class="b">[?]</span></div>
+          <div class="kv" style="border:0"><span>Дни приёма</span><a class="link" href="c-raspisanie.dc.html" style="min-height:0">в расписании</a></div>
+        </div>
+        <div class="st g8 d-row"><a class="btn" href="c-zapis.dc.html">Записаться в Лесное</a><a class="btn2" href="c-kontakty.dc.html">Открыть в Яндекс Картах</a></div>
+        <p class="xs">Карта откроется в приложении. Встроенную карту не показываем, чтобы не передавать ваши данные без согласия.</p>
+      </div>
+      <div class="st g8" style="padding-top:24px" data-x="cal">
+        <div class="ph" style="height:260px"><b>Нужно фото</b>вход в дом и дверь кабинета, днём, с табличкой</div>
+        <div class="cols2"><div class="ph" style="height:140px"><b>Нужно фото</b>подъезд с дороги</div><img src="/_blob/9b0d86e86e13e6649917411ba6b1aa59" alt="Окно кабинета между синими шторами" style="width:100%;height:140px;object-fit:cover;border-radius:4px"></div>
+      </div>
+    </section>
+    <section class="w sec st g12">
+      <h2 class="h2">Что есть в Лесном</h2>
+      <div class="cols2 d-4">
+        <a class="tile" href="c-vid.dc.html" style="min-height:80px">Массаж тела: классический, лимфодренажный, стоун, БЭМ</a>
+        <a class="tile" href="c-vid.dc.html" style="min-height:80px">Лицо и шея, маски</a>
+        <a class="tile" href="c-vid.dc.html" style="min-height:80px">Остеопрактика</a>
+        <a class="tile" href="c-vid.dc.html" style="min-height:80px">Психосоматика и биодинамика</a>
+      </div>
+      <a class="link" href="c-prices.dc.html">Все цены в Лесном</a>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{isM}}" hint-placeholder-val="{{ false }}">
+    <section class="w d-75" style="padding-top:28px">
+      <div class="st g16">
+        <div class="row" style="gap:10px"><span class="sw msk" style="width:20px;height:20px"></span><span class="lbl" style="color:var(--ink)">Отдельные дни месяца</span></div>
+        <h1 class="h1s">Москва, Таганская</h1>
+        <p class="lead">Приём у метро Таганская в отдельные дни. В календаре они залиты бордо.</p>
+        <div class="sheet st" style="padding:6px 16px">
+          <div class="kv"><span>Адрес</span><span class="b">[?]</span></div>
+          <div class="kv"><span>От метро</span><span class="b">[? мин пешком]</span></div>
+          <div class="kv" style="border:0"><span>Ближайший день</span><span class="b">пн, 12 окт.</span></div>
+        </div>
+        <div class="st g8 d-row"><a class="btn" href="c-zapis.dc.html">Записаться в Москву</a><a class="btn2" href="c-kontakty.dc.html">Открыть в Яндекс Картах</a></div>
+      </div>
+      <div class="st g8" style="padding-top:24px" data-x="cal"><div class="ph" style="height:300px"><b>Нужно фото</b>московский кабинет и вход. Пока адреса нет, блок скрыт</div></div>
+    </section>
+    <section class="w sec st g12">
+      <h2 class="h2">Что есть в Москве</h2>
+      <p class="p">[?] Список уточняется: стоун и БЭМ требуют оборудования и могут быть только в Лесном.</p>
+      <a class="link" href="c-prices.dc.html">Цены в Москве</a>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{isO}}" hint-placeholder-val="{{ false }}">
+    <section class="w d-75" style="padding-top:28px">
+      <div class="st g16">
+        <div class="row" style="gap:10px"><span class="sw les" style="width:20px;height:20px"></span><span class="lbl" style="color:var(--ink)">В те же дни, что Лесное</span></div>
+        <h1 class="h1s">Онлайн</h1>
+        <p class="lead">Психосоматика, эмоциональная коррекция, метафорические карты и биодинамика по видеосвязи.</p>
+        <ol class="st g8" style="list-style:none">
+          <li class="frame row" style="padding:12px 14px;flex-wrap:nowrap;gap:14px"><b style="font-weight:800;font-size:24px">1</b><span class="p">Вы записываетесь и выбираете время. Время показано по вашему часовому поясу.</span></li>
+          <li class="frame row" style="padding:12px 14px;flex-wrap:nowrap;gap:14px"><b style="font-weight:800;font-size:24px">2</b><span class="p">До первой встречи договариваемся о платформе ([?]) и, если нужно, проверяем связь.</span></li>
+          <li class="frame row" style="padding:12px 14px;flex-wrap:nowrap;gap:14px"><b style="font-weight:800;font-size:24px">3</b><span class="p">В назначенное время я присылаю ссылку в мессенджер.</span></li>
+        </ol>
+        <a class="btn" href="c-zapis.dc.html">Записаться онлайн</a>
+      </div>
+      <div class="sheet st g8" style="padding:18px 16px;margin-top:24px" data-x="cal">
+        <b class="h4">Что понадобится</b>
+        <ul class="st g6" style="padding-left:20px;font-size:16px;line-height:1.5"><li>Тихое место, где вас не прервут</li><li>Наушники</li><li>Камера: почти все онлайн-услуги идут по видео</li><li>Для биодинамики онлайн: [?] уточнит Ирина</li></ul>
+      </div>
+    </section>
+  </sc-if>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-legal.dc.html">Правила записи</a><a href="c-voprosy.dc.html">Вопросы</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1880,"section":"Размер"},"loc":{"editor":"enum","options":["lesnoe","moskva","online"],"default":"lesnoe","section":"Место"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1880}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const l = this.props.loc ?? 'lesnoe';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1880, cls: t === 'moss' ? '' : t,
+      isL: l === 'lesnoe', isM: l === 'moskva', isO: l === 'online',
+      t1: l === 'lesnoe' ? 'on' : '', t2: l === 'moskva' ? 'on' : '', t3: l === 'online' ? 'on' : '' };
+  }
+}
+</script>
+</body>
+</html>

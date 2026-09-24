@@ -1,0 +1,86 @@
+/* Варианты оформления поверх base.css. Обёртка .lk-* вокруг страницы меняет токены и несколько приёмов.
+   ДНК во всех: календарь с рамками, олива = Лесное, бордо = Москва, рукописный месяц. */
+
+@font-face{font-family:'Literata';src:url(fonts/literata-latin-wght-normal.woff2) format('woff2');font-weight:200 900;font-style:normal;unicode-range:U+0000-00FF,U+2000-206F,U+2212}
+@font-face{font-family:'Literata';src:url(fonts/literata-cyrillic-wght-normal.woff2) format('woff2');font-weight:200 900;font-style:normal;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Literata';src:url(fonts/literata-cyrillic-wght-italic.woff2) format('woff2');font-weight:200 900;font-style:italic;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+
+/* общее для вариантов: ошибки не бордовой заливкой, а рамкой, чтобы бордо значило только Москву */
+[class*="lk-"] .c-root .alert{background:transparent;color:var(--ink);border:2px solid #9A2A36}
+[class*="lk-"] .c-root .errmsg{background:transparent;color:var(--ink);border-left:3px solid #9A2A36;border-radius:0;padding:2px 8px}
+
+/* ---------- 1. Крем и мох: светлый фон, мох в шапке и календаре ---------- */
+.lk-krem .c-root{
+  --bg:#F6EDE0; --bg2:#EEE2D0; --bg3:#E6D6BF; --ink:#232616; --ink2:#55503F; --line:#D2BE9C;
+  --les:#5E7338; --msk:#7E1F2A; --msk-ink:#F6E7D2;
+  --sheet:#FFFBF4; --sheet-ink:#232616; --sheet-ink2:#55503F; --sheet-line:#E3D3B8; --sheet-acc:#3D4E21; --sheet-acc-ink:#F2DCB9;
+  --field:#3D4E21; --field-ink:#F2DCB9; --btn:#3D4E21; --btn-ink:#F2DCB9; --inp:#FFFBF4; --inp-ink:#232616; --inp-line:#8C7D62;
+  --focus:#7E1F2A; --desk:#E9DCC8;
+}
+.lk-krem .hdr,.lk-krem .ftr{background:#3D4E21;color:#F2DCB9;--ink:#F2DCB9;--ink2:#D9C9A8;--btn:#F2DCB9;--btn-ink:#1E2113;--focus:#F6E7D2}
+.lk-krem .ftr{border-top:0}
+.lk-krem .status{background:#EEE2D0}
+.lk-krem .band{background:#3D4E21;--ink:#F2DCB9;--ink2:#D9C9A8;--les:#B7C98A;--line:#6E7D4E;--bg:#3D4E21;--btn:#F2DCB9;--btn-ink:#1E2113;--focus:#F6E7D2;color:#F2DCB9}
+.lk-krem .h1,.lk-krem .h1s,.lk-krem .h2{font-weight:650;letter-spacing:-.025em}
+.lk-krem .h1{line-height:1.02}
+.lk-krem .tile{border:0;background:#FFFBF4;box-shadow:0 1px 0 #D2BE9C}
+.lk-krem ol .frame,.lk-krem .cols3>.frame{border:0;background:#FFFBF4}
+.lk-krem .hand{color:#7E1F2A}
+.lk-krem .band .hand{color:#F2DCB9}
+.lk-krem .bar{border-top:1px solid #D2BE9C}
+
+/* ---------- 2. Бумага и лес: книжная бумага, серифные заголовки, тонкие линии, круглые кнопки ---------- */
+.lk-bumaga .c-root{
+  --bg:#F3EDE2; --bg2:#E9E0D0; --bg3:#DDD1BD; --ink:#1E2113; --ink2:#55503F; --line:#CFC2AA;
+  --les:#4B5A28; --msk:#7E1F2A; --msk-ink:#F6E7D2;
+  --sheet:#FFFDF8; --sheet-ink:#1E2113; --sheet-ink2:#55503F; --sheet-line:#E4DACA; --sheet-acc:#3D4E21; --sheet-acc-ink:#F2DCB9;
+  --field:#3D4E21; --field-ink:#F2DCB9; --btn:#3D4E21; --btn-ink:#F2DCB9; --inp:#FFFDF8; --inp-ink:#1E2113; --inp-line:#8C7D62;
+  --focus:#7E1F2A; --desk:#E2D8C6;
+}
+.lk-bumaga .h1,.lk-bumaga .h1s,.lk-bumaga .h2,.lk-bumaga .quote,.lk-bumaga .q{font-family:'Literata',Georgia,serif;font-weight:500;letter-spacing:-.02em}
+.lk-bumaga .h1{line-height:1.03}
+.lk-bumaga .btn,.lk-bumaga .btn2{border-radius:999px}
+.lk-bumaga .frame,.lk-bumaga .tile,.lk-bumaga .fr,.lk-bumaga details.acc{border-width:1px}
+.lk-bumaga .tile{border-color:var(--line);font-weight:500}
+.lk-bumaga .hdr{border-bottom:1px solid var(--line)}
+.lk-bumaga .ftr{background:#3D4E21;color:#F2DCB9;border-top:0;--ink:#F2DCB9;--ink2:#D9C9A8}
+.lk-bumaga .band{background:#3D4E21;--ink:#F2DCB9;--ink2:#D9C9A8;--les:#B7C98A;--line:#6E7D4E;--bg:#3D4E21;--btn:#F2DCB9;--btn-ink:#1E2113;--focus:#F6E7D2;color:#F2DCB9}
+.lk-bumaga .day{border-width:1.5px}
+.lk-bumaga .lbl{letter-spacing:.14em}
+
+/* ---------- 3. Лес ночью: глубокий тёмный, лёгкий шрифт, тонкие рамки, много воздуха ---------- */
+.lk-noch .c-root{
+  --bg:#1B2214; --bg2:#232C1A; --bg3:#2B3520; --ink:#EFE3CC; --ink2:#B9AE96; --line:#3E4A32;
+  --les:#A9BC7C; --msk:#8B2432; --msk-ink:#F6E7D2;
+  --sheet:#232C1A; --sheet-ink:#EFE3CC; --sheet-ink2:#B9AE96; --sheet-line:#3E4A32; --sheet-acc:#F2DCB9; --sheet-acc-ink:#1B2214;
+  --field:#2B3520; --field-ink:#EFE3CC; --btn:#F2DCB9; --btn-ink:#1B2214; --inp:#232C1A; --inp-ink:#EFE3CC; --inp-line:#5A6848;
+  --focus:#F2DCB9; --desk:#11160C;
+}
+.lk-noch .h1,.lk-noch .h1s,.lk-noch .h2,.lk-noch .q{font-weight:300;letter-spacing:-.035em}
+.lk-noch .h3,.lk-noch .h4{font-weight:500}
+.lk-noch .btn,.lk-noch .btn2{border-radius:999px}
+.lk-noch .btn2{border-width:1px}
+.lk-noch .frame,.lk-noch .tile,.lk-noch .fr,.lk-noch details.acc{border-width:1px;border-color:var(--line)}
+.lk-noch .tile{font-weight:400}
+.lk-noch .fr.on{border-color:var(--ink)}
+.lk-noch .sec{padding-top:72px}
+.lk-noch .hdr,.lk-noch .ftr{border-color:var(--line)}
+.lk-noch .bar{border-top:1px solid var(--line)}
+
+/* ---------- 4. Персик и бордо: как её сторис, бордовые заголовки ---------- */
+.lk-persik .c-root{
+  --bg:#F4E3CF; --bg2:#EDD6BC; --bg3:#E4C9AA; --ink:#2B2418; --ink2:#5E5140; --line:#D8BB98;
+  --les:#5E7338; --msk:#7E1F2A; --msk-ink:#F6E7D2;
+  --sheet:#FFFFFF; --sheet-ink:#2B2418; --sheet-ink2:#5E5140; --sheet-line:#EADFD0; --sheet-acc:#3D4E21; --sheet-acc-ink:#F2DCB9;
+  --field:#3D4E21; --field-ink:#F2DCB9; --btn:#3D4E21; --btn-ink:#F2DCB9; --inp:#FFFFFF; --inp-ink:#2B2418; --inp-line:#8C7560;
+  --focus:#7E1F2A; --desk:#EBD6BD;
+}
+.lk-persik .h1,.lk-persik .h1s,.lk-persik .h2,.lk-persik .q{color:#7E1F2A;font-weight:700;letter-spacing:-.025em}
+.lk-persik .hand{color:#7E1F2A;font-size:1.15em}
+.lk-persik .tile{border:0;background:#FFFFFF;border-left:0}
+.lk-persik .tile:nth-child(odd){background:#FBF3E8}
+.lk-persik .frame{border-color:#5E7338}
+.lk-persik .band{background:#FFFFFF}
+.lk-persik .hdr{border-bottom:2px solid #7E1F2A}
+.lk-persik .ftr{border-top:2px solid #7E1F2A}
+.lk-persik .bar{border-top:2px solid #7E1F2A}

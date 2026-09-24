@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Контакты</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a class="on" href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+
+  <section class="w d-2" style="padding-top:28px">
+    <div class="st g16">
+      <h1 class="h1s">Контакты</h1>
+      <p class="lead">Быстрее всего написать. Во время сеансов я не беру трубку и отвечаю между гостями.</p>
+      <div class="st g8">
+        <a class="btn" href="c-kontakty.dc.html">Написать в Telegram</a>
+        <a class="btn2" href="c-kontakty.dc.html">Написать в MAX</a>
+        <a class="btn2" href="c-kontakty.dc.html"><svg class="ico" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"></path></svg>Позвонить: [телефон ?]</a>
+      </div>
+      <p class="xs">Telegram: @protchenko_irina [? новый ник]. Канал: safe_massage_PL [?]. Почта для вопросов о персональных данных: [?]</p>
+    </div>
+    <div class="st g12" style="padding-top:28px">
+      <a class="frame st g6" href="c-mesto.dc.html" style="padding:16px;text-decoration:none;border-color:var(--les)"><span class="row h4" style="flex-wrap:nowrap"><span class="sw les"></span>Пригород Лесное</span><span class="small">Мисайлово, ул. Героя России Филиппова, 8</span><span class="link" style="min-height:0">Как добраться</span></a>
+      <a class="st g6" href="c-mesto.dc.html" style="padding:16px;text-decoration:none;background:var(--msk);color:var(--msk-ink);border-radius:4px"><span class="row h4" style="flex-wrap:nowrap">Москва, м. Таганская</span><span style="font-size:15px">[адрес ?]</span><span class="link" style="min-height:0">Как добраться</span></a>
+      <a class="frame st g6" href="c-mesto.dc.html" style="padding:16px;text-decoration:none"><span class="row h4" style="flex-wrap:nowrap"><span class="sw les"></span>Онлайн</span><span class="small">видеосвязь, связь проверим заранее</span><span class="link" style="min-height:0">Как проходит</span></a>
+    </div>
+  </section>
+
+  <section class="w sec d-2">
+    <div class="st g8"><h2 class="h3">Режим</h2><p class="p">Дни приёма меняются от месяца к месяцу и видны в расписании. Время начала сеансов: [09:00, 11:00, 13:30, 16:00, 18:30 ?].</p><a class="link" href="c-raspisanie.dc.html">Расписание</a></div>
+    <div class="st g8" style="padding-top:20px"><h2 class="h3">Реквизиты</h2><p class="small">[ФИО, статус: ИП или самозанятая ?], ИНН [?]. Документы: <a class="link" href="c-legal.dc.html" style="min-height:0">политика и правила записи</a>.</p></div>
+  </section>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-legal.dc.html">Правила записи</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1620,"section":"Размер"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1620}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1620, cls: t === 'moss' ? '' : t };
+  }
+}
+</script>
+</body>
+</html>

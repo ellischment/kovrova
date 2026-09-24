@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Заметки</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+
+  <section class="w st g12" style="padding-top:28px">
+    <h1 class="h1s">Заметки</h1>
+    <p class="lead d-read">Посты из моего Telegram-канала: о теле, состоянии, записи и простых практиках самопомощи.</p>
+    <div class="row" role="group" aria-label="Рубрики"><button type="button" class="fr on" aria-pressed="true" style="min-height:44px">Все</button><button type="button" class="fr" style="min-height:44px">Практики</button><button type="button" class="fr" style="min-height:44px">О записи</button><button type="button" class="fr" style="min-height:44px">Подход</button></div>
+  </section>
+
+  <section class="w sec st g12 d-3" style="padding-top:28px">
+    <a class="sheet st g8" href="c-zametka.dc.html" style="padding:18px;text-decoration:none">
+      <span class="lbl">Практика · сентябрь 2026</span>
+      <span class="h3">Почему иногда достаточно поработать с руками</span>
+      <span class="small">Представительные зоны, су-джок и простая практика для кистей. Без боли и сильного давления, скорее с любопытством.</span>
+      <span class="link" style="min-height:0">Читать</span>
+    </a>
+    <a class="sheet st g8" href="c-zametka.dc.html" style="padding:18px;text-decoration:none">
+      <span class="lbl">О записи · сентябрь 2026</span>
+      <span class="h3">Первичный приём: что это и как проходит</span>
+      <span class="small">Знакомимся, отмечаем «точку А», выбираем методы и уже начинаем. Очно и онлайн.</span>
+      <span class="link" style="min-height:0">Читать</span>
+    </a>
+    <a class="sheet st g8" href="c-zametka.dc.html" style="padding:18px;text-decoration:none">
+      <span class="lbl">О записи · сентябрь 2026</span>
+      <span class="h3">Запись на октябрь</span>
+      <span class="small">Когда откроется запись, как выбрать место, услугу и время, когда придёт чек.</span>
+      <span class="link" style="min-height:0">Читать</span>
+    </a>
+  </section>
+
+  <section class="w sec d-2c">
+    <div class="st g10"><h2 class="h3">Новые заметки появляются в канале</h2><p class="small">Я публикую пост в Telegram, а на сайт он попадает после моего подтверждения.</p></div>
+    <a class="btn2" href="c-kontakty.dc.html" style="margin-top:12px">Канал в Telegram [?]</a>
+  </section>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-voprosy.dc.html">Вопросы</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1600,"section":"Размер"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1600, cls: t === 'moss' ? '' : t };
+  }
+}
+</script>
+</body>
+</html>

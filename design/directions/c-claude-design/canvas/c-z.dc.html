@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Моя запись</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <a class="btn btn-s" href="c-kontakty.dc.html">Написать</a>
+  </header>
+  <div class="w d-center st g14" style="padding-top:16px;padding-bottom:40px;gap:14px">
+
+    <sc-if value="{{is.obzor}}" hint-placeholder-val="{{ true }}">
+      <div class="st g14" style="gap:14px">
+        <span class="small" style="color:var(--ink);font-weight:600">Анна, ваша запись подтверждена · предоплата внесена</span>
+        <div class="row" style="flex-wrap:nowrap;gap:12px;align-items:stretch">
+          <div class="st" style="width:96px;flex-shrink:0;border:3px solid var(--les);border-radius:4px;align-items:center;justify-content:center;padding:8px 0"><span style="font-size:14px">сб</span><b style="font-size:46px;font-weight:800;line-height:1">3</b><span style="font-size:14px">11:00</span></div>
+          <div class="st g4" style="justify-content:center"><span class="hand" style="font-size:36px">октября</span><span class="small">Лесное, ул. Героя России Филиппова, 8</span></div>
+        </div>
+        <div class="band st g8" style="padding:14px;border-radius:4px">
+          <b class="b">Массаж 90 мин. Какой вид?</b>
+          <div class="cols2"><button type="button" class="fr">Классический</button><button type="button" class="fr">Лимфодренажный</button><button type="button" class="fr on" aria-pressed="true">Стоун</button><button type="button" class="fr">БЭМ</button></div>
+          <div class="ok" role="status" style="border:0;padding:4px 0"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Сохранено: будет стоун. Менять можно до 18:00 пятницы.</div>
+        </div>
+        <div class="st">
+          <a class="kv" href="c-z.dc.html" style="text-decoration:none;min-height:56px;font-weight:600"><span>Перенести</span><span aria-hidden="true">›</span></a>
+          <a class="kv" href="c-zapis.dc.html" style="text-decoration:none;min-height:56px;font-weight:600"><span>Добавить в календарь</span><span aria-hidden="true">›</span></a>
+          <a class="kv" href="c-mesto.dc.html" style="text-decoration:none;min-height:56px;font-weight:600"><span>Как добраться</span><span aria-hidden="true">›</span></a>
+          <a class="kv" href="c-z.dc.html" style="text-decoration:none;min-height:56px;font-weight:600"><span>Отменить запись</span><span aria-hidden="true">›</span></a>
+        </div>
+        <div class="sheet st g8" style="padding:14px 16px">
+          <b class="b">Напоминания</b>
+          <div class="kv"><span>Telegram</span><span class="b">подключён</span></div>
+          <div class="kv" style="border:0"><span>MAX</span><a class="link" href="c-z.dc.html" style="min-height:44px">Подключить</a></div>
+          <span class="xs">Напомню за 48 часов и за 3 часа.</span>
+        </div>
+        <a class="btn2" href="c-zapis.dc.html">Записаться ещё раз</a>
+        <p class="xs">Это вы, если открыли ссылку из своего сообщения. Пароль не нужен. Не вы? <a class="link" href="c-kontakty.dc.html" style="min-height:0">Напишите мне</a></p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{is.perenos}}" hint-placeholder-val="{{ false }}">
+      <div class="st g12">
+        <a class="link" href="c-z.dc.html">‹ К записи</a>
+        <h1 class="q">Перенести на другое время</h1>
+        <p class="small">Лесное · массаж 90 мин. Предоплата переходит на новое время.</p>
+        <div class="band st g10" style="padding:16px 14px;border-radius:4px">
+          <span class="hand" style="font-size:40px">октябрь</span>
+          <div class="cal" aria-label="Дни с окнами">
+            <span class="wd">Пн</span><span class="wd">Вт</span><span class="wd">Ср</span><span class="wd">Чт</span><span class="wd">Пт</span><span class="wd">Сб</span><span class="wd">Вс</span>
+            <sc-for list="{{days}}" as="d" hint-placeholder-count="34"><a class="day {{d.cls}}" href="c-z.dc.html">{{d.n}}</a></sc-for>
+          </div>
+        </div>
+        <span class="b">Суббота, 10 октября</span>
+        <div class="cols3"><a class="fr" href="c-z.dc.html">11:00</a><a class="fr on" href="c-z.dc.html">13:30</a><a class="fr off" href="c-z.dc.html" aria-disabled="true">16:00</a></div>
+        <a class="btn" href="c-z.dc.html">Перенести на сб, 10 окт., 13:30</a>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{is.otmena}}" hint-placeholder-val="{{ false }}">
+      <div class="st g14" style="gap:14px">
+        <a class="link" href="c-z.dc.html">‹ К записи</a>
+        <h1 class="q">Отменить запись на 3 октября?</h1>
+        <div class="sheet st" style="padding:6px 16px">
+          <div class="kv"><span>До визита</span><b class="b">больше [48 ?] часов</b></div>
+          <div class="kv"><span>Вернётся</span><b class="b">[?] ₽, вся предоплата</b></div>
+          <div class="kv" style="border:0"><span>Куда</span><span>тем же способом, за [?] дня</span></div>
+        </div>
+        <p class="p">Может, удобнее перенести? Окно в любом случае предложу тем, кто ждёт в листе.</p>
+        <a class="btn" href="c-z.dc.html">Перенести на другое время</a>
+        <a class="btn2" href="c-z.dc.html" style="border-color:var(--ink)">Отменить и вернуть предоплату</a>
+        <p class="xs">Если до визита меньше [48 ?] часов: предоплата остаётся, но вернётся, если окно заберут из листа ожидания.</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{is.otmeneno}}" hint-placeholder-val="{{ false }}">
+      <div class="st g14" style="gap:14px">
+        <div class="ok" role="status"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Запись отменена</div>
+        <h1 class="q">Предоплата вернётся тем же способом</h1>
+        <p class="p">Спасибо, что предупредили. Окно я уже предложила тем, кто ждёт.</p>
+        <a class="btn" href="c-zapis.dc.html">Записаться на другой день</a>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1080,"section":"Размер"},"state":{"editor":"enum","options":["obzor","perenos","otmena","otmeneno"],"default":"obzor","section":"Состояние"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1080}}'>
+const LES=[1,3,4,7,8,10,11,14,15,17,18,21,22,24,25,28,29,31], FULL=[1,4,7,8];
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const s = this.props.state ?? 'obzor';
+    const days = [];
+    for (let i = 0; i < 3; i++) days.push({ n: '', cls: '' });
+    for (let n = 1; n <= 31; n++) { const l = LES.indexOf(n) >= 0; days.push({ n: String(n), cls: l ? (n === 10 ? 'les sel' : n <= 3 ? 'les full' : FULL.indexOf(n) >= 0 ? 'les full' : 'les') : '' }); }
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1080, cls: t === 'moss' ? '' : t, days, is: { obzor: s === 'obzor', perenos: s === 'perenos', otmena: s === 'otmena', otmeneno: s === 'otmeneno' } };
+  }
+}
+</script>
+</body>
+</html>

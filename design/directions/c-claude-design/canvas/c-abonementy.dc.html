@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Абонементы</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+
+  <section class="w st g12" style="padding-top:28px">
+    <h1 class="h1s">Абонементы</h1>
+    <p class="lead d-read">Пакет сеансов для тех, кто приходит регулярно. Оплачиваете один раз, а при записи сеанс списывается сам. Остаток виден в ссылке из напоминания.</p>
+  </section>
+
+  <section class="w sec d-3" style="padding-top:28px">
+    <div class="sheet st g10" style="padding:18px 16px">
+      <span class="lbl">Массаж 90 мин</span>
+      <p style="font-weight:800;font-size:36px;letter-spacing:-.03em;line-height:1">5 сеансов</p>
+      <div class="row" style="gap:4px" aria-hidden="true"><span class="sw" style="border:2px solid var(--sheet-acc);width:24px;height:24px"></span><span class="sw" style="border:2px solid var(--sheet-acc);width:24px;height:24px"></span><span class="sw" style="border:2px solid var(--sheet-acc);width:24px;height:24px"></span><span class="sw" style="border:2px solid var(--sheet-acc);width:24px;height:24px"></span><span class="sw" style="border:2px solid var(--sheet-acc);width:24px;height:24px"></span></div>
+      <div class="kv"><span>Цена</span><b class="b">[?] ₽ <span class="xs">(−5% [?])</span></b></div>
+      <div class="kv"><span>Где</span><span>Лесное [?]</span></div>
+      <div class="kv"><span>Срок</span><span>[?] месяцев</span></div>
+      <a class="btn" href="c-zapis.dc.html">Купить абонемент</a>
+    </div>
+    <div class="sheet st g10" style="padding:18px 16px;margin-top:12px">
+      <span class="lbl">Остеопрактика 60 мин</span>
+      <p style="font-weight:800;font-size:36px;letter-spacing:-.03em;line-height:1">[? сеансов]</p>
+      <div class="kv"><span>Цена</span><b class="b">[?] ₽</b></div>
+      <div class="kv"><span>Где</span><span>[?]</span></div>
+      <a class="btn2" href="c-zapis.dc.html">Купить абонемент</a>
+    </div>
+    <div class="note" style="margin-top:12px"><b class="b">Вид массажа можно менять</b><p class="small" style="color:var(--ink)">Абонемент на «Массаж 90 мин»: классический, лимфодренажный или стоун, как захочется. Цена одинаковая.</p></div>
+  </section>
+
+  <section class="w sec d-2">
+    <h2 class="h2">Как это работает</h2>
+    <ol class="st g8" style="list-style:none;padding-top:12px">
+      <li class="frame row" style="padding:12px 14px;flex-wrap:nowrap;gap:14px"><b style="font-weight:800;font-size:22px">1</b><span class="p">Покупаете абонемент, чек приходит сразу</span></li>
+      <li class="frame row" style="padding:12px 14px;flex-wrap:nowrap;gap:14px"><b style="font-weight:800;font-size:22px">2</b><span class="p">Записываетесь как обычно, предоплата не нужна</span></li>
+      <li class="frame row" style="padding:12px 14px;flex-wrap:nowrap;gap:14px"><b style="font-weight:800;font-size:22px">3</b><span class="p">Остаток сеансов видно в «Моей записи»</span></li>
+    </ol>
+  </section>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-legal.dc.html">Правила записи</a></nav>
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1860,"section":"Размер"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1860}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1860, cls: t === 'moss' ? '' : t };
+  }
+}
+</script>
+</body>
+</html>

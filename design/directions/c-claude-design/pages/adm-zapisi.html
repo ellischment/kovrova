@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><style>/* Ирина Коврова · направление C «Календарь» · base.css
+   Слои: шрифты → токены (moss / night / cream / auto) → основа → раскладка → типографика → компоненты → десктоп (container queries).
+   Шрифты только свои (self-host). Ни одного запроса к Google. */
+
+@font-face{font-family:'Geologica';src:url(../fonts/geologica-latin-wght-normal.woff2) format('woff2');font-weight:100 900;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F,U+2212}
+@font-face{font-family:'Geologica';src:url(../fonts/geologica-cyrillic-wght-normal.woff2) format('woff2');font-weight:100 900;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Geologica';src:url(../fonts/geologica-latin-ext-wght-normal.woff2) format('woff2');font-weight:100 900;font-display:swap;unicode-range:U+20A0-20C0}
+@font-face{font-family:'Marck Script';src:url(../fonts/marck-script-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap;unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:'Marck Script';src:url(../fonts/marck-script-cyrillic-400-normal.woff2) format('woff2');font-weight:400;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+
+/* ---------- токены ---------- */
+.c-root{
+  --bg:#3D4E21; --bg2:#34431C; --bg3:#2E3B18;
+  --ink:#F2DCB9; --ink2:#D9C9A8; --line:#6E7D4E;
+  --les:#B7C98A; --msk:#7E1F2A; --msk-ink:#F6E7D2;
+  --sheet:#F6E7D2; --sheet-ink:#1E2113; --sheet-ink2:#4C4A3A; --sheet-line:#D9C6A6; --sheet-acc:#3D4E21; --sheet-acc-ink:#F2DCB9;
+  --field:#7E1F2A; --field-ink:#F6E7D2;
+  --btn:#F2DCB9; --btn-ink:#1E2113;
+  --inp:#F6E7D2; --inp-ink:#1E2113; --inp-line:#F6E7D2;
+  --ok:#B7C98A; --focus:#F6E7D2; --sk:#4A5B2C; --shadow:rgba(10,14,5,.45);
+  --desk:#2A3616;
+  background:var(--bg); color:var(--ink);
+  font-family:'Geologica',system-ui,-apple-system,'Segoe UI',sans-serif; font-weight:350;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  container-type:inline-size; container-name:page;
+  position:relative; overflow:hidden; box-sizing:border-box;
+}
+.c-root.night{
+  --bg:#14170E; --bg2:#1D2115; --bg3:#23281A;
+  --ink:#F3E6CF; --ink2:#BDB29B; --line:#3A4128;
+  --les:#B7C98A; --msk:#6A1A24; --msk-ink:#F6E7D2;
+  --sheet:#1D2115; --sheet-ink:#F3E6CF; --sheet-ink2:#BDB29B; --sheet-line:#3A4128; --sheet-acc:#B7C98A; --sheet-acc-ink:#14170E;
+  --field:#5E1720; --field-ink:#F6E7D2;
+  --btn:#F2DCB9; --btn-ink:#1E2113;
+  --inp:#23281A; --inp-ink:#F3E6CF; --inp-line:#5A6340;
+  --focus:#F2DCB9; --sk:#2A301D; --desk:#0C0E08;
+}
+.c-root.cream{
+  --bg:#F6E7D2; --bg2:#EEDCC2; --bg3:#E7D2B4;
+  --ink:#1E2113; --ink2:#4C4A3A; --line:#CDB894;
+  --les:#5E7338; --msk:#7E1F2A; --msk-ink:#F6E7D2;
+  --sheet:#FBF3E7; --sheet-ink:#1E2113; --sheet-ink2:#4C4A3A; --sheet-line:#D9C6A6; --sheet-acc:#3D4E21; --sheet-acc-ink:#F2DCB9;
+  --btn:#3D4E21; --btn-ink:#F2DCB9;
+  --inp:#FBF3E7; --inp-ink:#1E2113; --inp-line:#4C4A3A;
+  --ok:#3D4E21; --focus:#7E1F2A; --sk:#E4D3BA; --desk:#E4D3BA;
+}
+@media (prefers-color-scheme:dark){
+  .c-root.auto{
+    --bg:#14170E; --bg2:#1D2115; --bg3:#23281A; --ink:#F3E6CF; --ink2:#BDB29B; --line:#3A4128;
+    --msk:#6A1A24; --sheet:#1D2115; --sheet-ink:#F3E6CF; --sheet-ink2:#BDB29B; --sheet-line:#3A4128; --sheet-acc:#B7C98A; --sheet-acc-ink:#14170E;
+    --field:#5E1720; --inp:#23281A; --inp-ink:#F3E6CF; --inp-line:#5A6340; --focus:#F2DCB9; --sk:#2A301D; --desk:#0C0E08;
+  }
+}
+
+/* ---------- основа ---------- */
+.c-root *,.c-root *::before,.c-root *::after{box-sizing:border-box}
+.c-root a{color:inherit}
+.c-root img{display:block;max-width:100%}
+.c-root :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:2px}
+.c-root button{font:inherit;color:inherit;cursor:pointer}
+.c-root p,.c-root h1,.c-root h2,.c-root h3,.c-root h4,.c-root figure,.c-root ul,.c-root ol,.c-root blockquote,.c-root dl,.c-root dd{margin:0}
+.c-root ul,.c-root ol{padding:0}
+.vh{position:absolute !important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- раскладка ---------- */
+.pg{display:flex;flex-direction:column;min-height:100%}
+.w{padding-left:20px;padding-right:20px}
+.sec{padding-top:56px}
+.st{display:flex;flex-direction:column}
+.g4{gap:4px}.g6{gap:6px}.g8{gap:8px}.g10{gap:10px}.g12{gap:12px}.g16{gap:16px}.g20{gap:20px}.g24{gap:24px}.g32{gap:32px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.vgrid{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "aside" "rest";row-gap:24px}
+.va-head{grid-area:head}.va-aside{grid-area:aside}.va-rest{grid-area:rest}
+.between{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.band{background:var(--bg2)}
+.grow{flex-grow:1}
+.mt-a{margin-top:auto}
+
+/* ---------- типографика ---------- */
+.lbl{font-size:13px;font-weight:650;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.h1{font-weight:800;font-size:44px;line-height:.98;letter-spacing:-.03em;text-wrap:balance}
+.h2{font-weight:800;font-size:34px;line-height:1.02;letter-spacing:-.025em;text-wrap:balance}
+.h3{font-weight:700;font-size:22px;line-height:1.15;letter-spacing:-.01em}
+.h1s{font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;text-wrap:balance;overflow-wrap:break-word}
+.h4{font-weight:700;font-size:18px;line-height:1.25}
+.lead{font-size:18px;line-height:1.55}
+.p{font-size:17px;line-height:1.6}
+.small{font-size:15px;line-height:1.45;color:var(--ink2)}
+.xs{font-size:13px;line-height:1.4;color:var(--ink2)}
+.b{font-weight:700}
+.hand{font-family:'Marck Script','Segoe Script',cursive;font-weight:400;letter-spacing:0;line-height:1}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--ink2)}
+.prose{display:flex;flex-direction:column;gap:14px;font-size:17px;line-height:1.65}
+.prose h2{font-weight:800;font-size:24px;line-height:1.15;letter-spacing:-.015em;margin-top:18px}
+.prose h3{font-weight:700;font-size:19px;margin-top:8px}
+.prose ul,.prose ol{padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.quote{font-weight:700;font-size:24px;line-height:1.2;letter-spacing:-.015em}
+.link{font-weight:600;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1.5px;display:inline-flex;align-items:center;min-height:44px}
+
+/* ---------- кнопки ---------- */
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 24px;border:0;border-radius:6px;background:var(--btn);color:var(--btn-ink) !important;font-weight:700;font-size:17px;text-decoration:none;text-align:center}
+.btn-s{min-height:44px;padding:0 16px;font-size:15px}
+.btn2{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 20px;border:2px solid var(--ink);border-radius:6px;background:transparent;font-weight:600;font-size:16px;text-decoration:none;text-align:center}
+.btn-in{display:inline-flex}
+.ibtn{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:transparent;border-radius:4px;flex-shrink:0}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* ---------- рамки (язык её календаря) ---------- */
+.frame{border:2px solid var(--ink);border-radius:4px}
+.fr{display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:0 12px;border:2px solid var(--line);border-radius:3px;background:transparent;font-size:15px;font-weight:600;text-decoration:none;text-align:center;line-height:1.2}
+.fr.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.fr.off{border-style:dashed;color:var(--ink2);text-decoration:line-through;font-weight:400}
+.fr.les{border-color:var(--les)}
+.fr.msk{background:var(--msk);border-color:var(--msk);color:var(--msk-ink)}
+.fr.tall{flex-direction:column;min-height:64px;gap:0}
+.tile{display:flex;align-items:flex-end;min-height:96px;padding:12px;border:2px solid var(--ink);border-radius:4px;font-weight:650;font-size:17px;line-height:1.2;text-decoration:none}
+.sw{display:inline-block;width:16px;height:16px;border-radius:2px;flex-shrink:0}
+.sw.les{border:2px solid var(--les)}
+.sw.msk{background:var(--msk)}
+.sw.full{border:2px dashed var(--ink2)}
+
+/* ---------- календарь ---------- */
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.cal .wd{text-align:center;font-size:13px;color:var(--ink2);padding-bottom:4px}
+.day{display:flex;align-items:center;justify-content:center;height:44px;border:2px solid transparent;border-radius:3px;font-size:17px;font-weight:500;color:var(--ink2);text-decoration:none}
+.day.les{border-color:var(--les);color:var(--ink);font-weight:700}
+.day.msk{border-color:var(--msk);background:var(--msk);color:var(--msk-ink);font-weight:700}
+.day.full{border-style:dashed;background:transparent;color:var(--ink2);font-weight:400;text-decoration:line-through}
+.day.sel{background:var(--ink);border-color:var(--ink);color:var(--bg);text-decoration:none}
+.day.past{opacity:.55}
+.legend{display:flex;flex-direction:column;gap:6px}
+.legend span{display:flex;gap:10px;align-items:center;font-size:15px}
+
+/* ---------- кремовые листы и таблицы ---------- */
+.sheet{background:var(--sheet);color:var(--sheet-ink);border-radius:4px}
+.sheet .small,.sheet .xs,.sheet .muted{color:var(--sheet-ink2)}
+.sheet .lbl{color:var(--sheet-ink2)}
+.sheet :focus-visible{outline-color:var(--sheet-acc)}
+.sheet .btn{background:var(--sheet-acc);color:var(--sheet-acc-ink) !important}
+.sheet .btn2{border-color:var(--sheet-ink)}
+.mx{width:100%;border-collapse:collapse;font-size:15px}
+.mx th,.mx td{height:48px;padding:0 4px;border-bottom:1px solid var(--sheet-line);text-align:right;font-variant-numeric:tabular-nums}
+.mx th:first-child,.mx td:first-child{text-align:left;padding-left:0}
+.mx thead th{font-size:13px;font-weight:700;border-bottom:2px solid var(--sheet-ink);height:40px}
+.mx .no{color:var(--sheet-ink2);font-weight:400}
+.mxg{display:flex;flex-direction:column;font-size:15px}
+.mxr{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:4px;align-items:center;min-height:48px;border-bottom:1px solid var(--sheet-line);font-variant-numeric:tabular-nums}
+.mxr>*:not(:first-child){text-align:right}
+.mxh{min-height:40px;border-bottom:2px solid var(--sheet-ink);font-size:13px;font-weight:700}
+.mxr .no{color:var(--sheet-ink2)}
+.pc{display:flex;align-items:center;justify-content:center;min-height:44px;border:2px solid var(--sheet-ink);border-radius:3px;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pc.unk{border-style:dashed;border-color:var(--sheet-line);color:var(--sheet-ink2);font-weight:500}
+.pc.no{border:0;color:var(--sheet-ink2);font-weight:400}
+
+/* ---------- цветные поля ---------- */
+.field{background:var(--field);color:var(--field-ink);border-radius:4px}
+.field .small,.field .xs{color:var(--field-ink)}
+.field .btn{background:var(--field-ink);color:#5E1720 !important}
+.field .btn2{border-color:var(--field-ink)}
+.field :focus-visible{outline-color:var(--field-ink)}
+
+/* ---------- формы ---------- */
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld label,.fld .l{font-size:15px;font-weight:700}
+.inp{width:100%;min-height:52px;padding:0 14px;border:2px solid var(--inp-line);border-radius:4px;background:var(--inp);color:var(--inp-ink);font-family:inherit;font-size:17px;font-weight:400}
+textarea.inp{min-height:96px;padding:12px 14px;resize:vertical}
+.inp.err{border-color:#7E1F2A;box-shadow:0 0 0 2px var(--field-ink)}
+.errmsg{align-self:flex-start;padding:4px 8px;border-radius:3px;background:var(--field);color:var(--field-ink);font-size:14px;font-weight:600}
+.cb{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.45;min-height:44px}
+.cb input{width:22px;height:22px;margin:0;accent-color:var(--ink);flex-shrink:0}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);border:2px solid var(--ink);border-radius:4px}
+.seg>*{display:flex;align-items:center;justify-content:center;min-height:46px;border:0;border-left:2px solid var(--ink);background:transparent;font-size:15px;font-weight:600;text-decoration:none}
+.seg>*:first-child{border-left:0}
+.seg>.on{background:var(--ink);color:var(--bg)}
+.srch{display:flex;align-items:center;gap:10px;min-height:52px;padding:0 14px;border-radius:4px;background:var(--inp);color:var(--inp-ink);border:2px solid var(--inp-line)}
+.srch input{flex-grow:1;border:0;background:transparent;color:inherit;font:inherit;font-size:17px;min-height:48px;outline:none}
+
+/* ---------- сообщения и состояния ---------- */
+.alert{padding:16px;border-radius:4px;background:var(--field);color:var(--field-ink);display:flex;flex-direction:column;gap:6px}
+.ok{padding:12px 14px;border:2px solid var(--ink);border-radius:4px;display:flex;gap:10px;align-items:center;font-size:15px;font-weight:600}
+.note{padding:14px 16px;border-radius:4px;background:var(--bg2);display:flex;flex-direction:column;gap:6px}
+.sk{background:var(--sk);border-radius:3px}
+.ph{display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:16px;border:2px dashed var(--ink2);border-radius:4px;font-size:14px;line-height:1.4;color:var(--ink2)}
+.ph b{color:var(--ink);font-weight:700}
+.tag{display:inline-flex;align-items:center;min-height:26px;padding:0 8px;border:2px solid var(--line);border-radius:3px;font-size:13px;font-weight:650}
+.kv{display:flex;justify-content:space-between;gap:12px;min-height:48px;align-items:center;border-bottom:1px solid var(--line);font-size:16px}
+.sheet .kv{border-color:var(--sheet-line)}
+details.acc{border:2px solid var(--ink);border-radius:4px}
+details.acc summary{min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 14px;cursor:pointer;font-weight:700;font-size:17px;list-style:none}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:'+';font-size:22px;font-weight:400}
+details.acc[open] summary::after{content:'\2212'}
+details.acc>div{padding:0 14px 16px}
+
+/* ---------- шапка, меню, низ ---------- */
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:68px;padding:0 12px 0 20px}
+.logo{display:flex;flex-direction:column;text-decoration:none;min-height:44px;justify-content:center}
+.logo b{font-weight:800;font-size:20px;letter-spacing:-.02em;line-height:1.1}
+.logo span{font-size:11px;font-weight:650;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.nav{display:none}
+.status{display:flex;gap:10px;align-items:center;min-height:44px;padding:8px 20px;background:var(--bg2);font-size:14px;text-decoration:none}
+.status .sw{width:12px;height:12px}
+.bar{position:absolute;left:0;right:0;top:772px;height:72px;display:flex;gap:8px;align-items:center;padding:0 12px;background:var(--bg);border-top:2px solid var(--ink);z-index:5}
+.crumbs{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--ink2)}
+.crumbs a{min-height:44px;display:inline-flex;align-items:center}
+.ftr{margin-top:64px;padding:28px 20px 120px;border-top:2px solid var(--ink);display:flex;flex-direction:column;gap:14px}
+.ftr nav{display:flex;flex-wrap:wrap;gap:0 18px;font-size:14px}
+.ftr nav a{min-height:44px;display:inline-flex;align-items:center}
+
+/* ---------- лист записи ---------- */
+.panel{display:flex;flex-direction:column;min-height:100%;background:var(--bg)}
+.ptop{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 0 16px;min-height:56px}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:6px 16px 0}
+.steps>*{display:flex;align-items:center;justify-content:center;min-height:36px;padding:0 4px;border:2px solid var(--line);border-radius:3px;font-size:13px;font-weight:600;color:var(--ink2);text-decoration:none;text-align:center;line-height:1.1;overflow:hidden}
+.steps>.done{border-color:var(--ink);color:var(--ink)}
+.steps>.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.pbody{padding:18px 16px 0;display:flex;flex-direction:column;gap:12px}
+.pfoot{margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px 16px 22px;border-top:2px solid var(--ink);background:var(--bg2)}
+.q{font-weight:800;font-size:30px;line-height:1.02;letter-spacing:-.025em}
+.opt{display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:72px;padding:10px 14px;border:2px solid var(--line);border-radius:4px;text-decoration:none}
+.opt.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.opt.les{border-color:var(--les)}
+.opt.msk{background:var(--msk);border-color:var(--msk);color:var(--msk-ink)}
+.opt.msk .small{color:var(--msk-ink)}
+
+/* ---------- мессенджер и письма ---------- */
+.chat{background:#E9E4DA;color:#1E2113;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.45}
+.bub{align-self:flex-start;max-width:92%;background:#FFFFFF;color:#1E2113;border-radius:14px 14px 14px 4px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.bub .mb{display:flex;align-items:center;justify-content:center;min-height:40px;border-radius:8px;background:#EEF0E6;color:#2E3B18;font-weight:600;font-size:14px;text-decoration:none}
+.mail{background:#FFFFFF;color:#1E2113;border-radius:6px;overflow:hidden;font-size:15px;line-height:1.55}
+
+/* ---------- кабинет Ирины ---------- */
+.tabs{margin-top:auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:2px solid var(--ink);padding-bottom:14px;background:var(--bg2)}
+.tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;font-size:12px;font-weight:600;text-decoration:none;color:var(--ink2)}
+.tabs a.on{color:var(--ink);box-shadow:inset 0 3px 0 var(--ink)}
+.slot{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:10px 0;border-bottom:2px solid var(--line)}
+.tm{display:flex;align-items:center;justify-content:center;height:44px;border:2px solid var(--les);border-radius:3px;font-weight:800;font-variant-numeric:tabular-nums}
+.tm.free{border-style:dashed;border-color:var(--ink2);color:var(--ink2)}
+.tm.msk{border-color:var(--msk);background:var(--msk);color:var(--msk-ink)}
+.cell{display:inline-flex;align-items:center;justify-content:flex-end;min-width:62px;min-height:40px;padding:0 6px;border:2px solid var(--sheet-ink);border-radius:3px;font-weight:700;font-size:14px}
+.cell.unk{border-style:dashed;border-color:var(--sheet-line);color:var(--sheet-ink2);font-weight:500}
+.cell.hid{border-style:dashed;border-color:var(--sheet-line);color:var(--sheet-ink2);text-decoration:line-through;font-weight:500}
+.cell.focus{outline:3px solid var(--sheet-acc);outline-offset:2px}
+.bars{display:flex;align-items:flex-end;gap:6px;height:120px}
+.bars span{flex:1;background:var(--ink);border-radius:2px 2px 0 0}
+
+/* ---------- десктоп: контейнер шире 900 px ---------- */
+@container page (min-width: 900px){
+  .w{padding-left:64px;padding-right:64px}
+  .sec{padding-top:104px}
+  .h1{font-size:84px;line-height:.95;letter-spacing:-.045em}
+  .h2{font-size:56px;line-height:.98;letter-spacing:-.035em}
+  .h3{font-size:26px}
+  .lead{font-size:21px}
+  .p,.prose{font-size:19px}
+  .prose h2{font-size:30px}
+  .quote{font-size:34px}
+  .hdr{min-height:88px;padding:0 64px;border-bottom:2px solid var(--ink)}
+  .logo b{font-size:24px}
+  .nav{display:flex;gap:28px;font-size:16px;font-weight:500}
+  .nav a{min-height:44px;display:inline-flex;align-items:center;text-decoration:none}
+  .nav a.on{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+  .m-only{display:none !important}
+  .bar{display:none}
+  .status{padding:8px 64px}
+  .ftr{padding:36px 64px 48px;flex-direction:row;flex-wrap:wrap;justify-content:space-between;gap:20px 48px}
+  .d-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px;align-items:start}
+  .d-2c{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px;align-items:center}
+  .d-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+  .d-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .d-57{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:start}
+  .d-75{display:grid;grid-template-columns:7fr 5fr;gap:48px;align-items:start}
+  .d-48{display:grid;grid-template-columns:4fr 8fr;gap:48px;align-items:start}
+  .d-read{max-width:760px}
+  .h1s{font-size:64px;letter-spacing:-.04em}
+  .vgrid{grid-template-columns:7fr 5fr;column-gap:48px;grid-template-areas:"head aside" "rest aside";align-items:start}
+  .d-row{flex-direction:row;flex-wrap:wrap;align-items:center}
+  .d-row>*{flex:0 0 auto}
+  [data-x=cal]{margin-top:0 !important}
+  .day{height:56px;font-size:20px}
+  .cal{gap:8px}
+  .tile{min-height:150px;padding:20px;font-size:23px}
+  .d-center{max-width:560px;margin-left:auto;margin-right:auto;width:100%}
+  .panel.d-sheet{max-width:560px;margin:32px auto;border:2px solid var(--ink);border-radius:6px;min-height:auto;overflow:hidden}
+}
+@container page (max-width: 899px){
+  .d-only{display:none !important}
+}
+
+body{margin:0}</style></head><body style="margin:0">
+
+<div class="c-root " style="width:390px;height:autopx">
+<div class="pg" style="min-height:autopx">
+
+  
+
+  
+
+  
+    <div class="w st g10" style="padding-top:22px">
+      <div class="between"><h1 class="h2">Записи</h1><a class="btn btn-s" href="c-adm.dc.html">+ Вручную</a></div>
+      <div class="srch"><svg class="ico" viewbox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path></svg><label for="as" class="vh">Поиск по имени или телефону</label><input id="as" type="search" placeholder="Имя или последние цифры телефона"></div>
+      <div class="row" style="gap:6px"><button type="button" class="fr on" aria-pressed="true" style="min-height:40px">Все</button><button type="button" class="fr" style="min-height:40px">Новые</button><button type="button" class="fr" style="min-height:40px">Переносы</button><button type="button" class="fr" style="min-height:40px">Отмены</button></div>
+      
+        <a class="frame between" href="c-adm2.dc.html" style="padding:10px 12px;text-decoration:none;align-items:center;border-color:var(--line)">
+          <span class="st"><b class="b">Мария К.</b><span class="xs">Стоун 90 · Лесное</span></span>
+          <span class="st" style="align-items:flex-end"><b class="b num" style="font-size:15px">сб 3.10 11:00</b><span class="tag" style="">смена вида</span></span>
+        </a>
+      
+        <a class="frame between" href="c-adm2.dc.html" style="padding:10px 12px;text-decoration:none;align-items:center;border-color:var(--line)">
+          <span class="st"><b class="b">Анна</b><span class="xs">Первичный · Лесное</span></span>
+          <span class="st" style="align-items:flex-end"><b class="b num" style="font-size:15px">сб 3.10 13:30</b><span class="tag" style="border-color:var(--ink)">новая</span></span>
+        </a>
+      
+        <a class="frame between" href="c-adm2.dc.html" style="padding:10px 12px;text-decoration:none;align-items:center;border-color:var(--line)">
+          <span class="st"><b class="b">Ольга</b><span class="xs">Классический 90 · Лесное</span></span>
+          <span class="st" style="align-items:flex-end"><b class="b num" style="font-size:15px">сб 3.10 16:00</b><span class="tag" style="border-style:dashed">отмена</span></span>
+        </a>
+      
+        <a class="frame between" href="c-adm2.dc.html" style="padding:10px 12px;text-decoration:none;align-items:center;border-color:var(--line)">
+          <span class="st"><b class="b">Екатерина С.</b><span class="xs">Классический 60 · Лесное</span></span>
+          <span class="st" style="align-items:flex-end"><b class="b num" style="font-size:15px">сб 3.10 18:30</b><span class="tag" style="">оплачено</span></span>
+        </a>
+      
+        <a class="frame between" href="c-adm2.dc.html" style="padding:10px 12px;text-decoration:none;align-items:center;border-color:var(--line)">
+          <span class="st"><b class="b">Вера</b><span class="xs">Остеопрактика · Москва</span></span>
+          <span class="st" style="align-items:flex-end"><b class="b num" style="font-size:15px">пн 12.10 13:30</b><span class="tag" style="">перенос</span></span>
+        </a>
+      
+        <a class="frame between" href="c-adm2.dc.html" style="padding:10px 12px;text-decoration:none;align-items:center;border-color:var(--line)">
+          <span class="st"><b class="b">Ксения</b><span class="xs">Психосоматика · онлайн</span></span>
+          <span class="st" style="align-items:flex-end"><b class="b num" style="font-size:15px">ср 7.10 16:00</b><span class="tag" style="">оплачено</span></span>
+        </a>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  <nav class="tabs" aria-label="Разделы кабинета" style="margin-top:auto">
+    <a class="" href="c-adm.dc.html">Сегодня</a><a class="" href="c-adm.dc.html">Месяц</a><a class="on" href="c-adm.dc.html">Записи</a><a class="" href="c-adm.dc.html">Цены</a><a class="" href="c-adm2.dc.html">Ещё</a>
+  </nav>
+</div>
+</div>
+</body></html>

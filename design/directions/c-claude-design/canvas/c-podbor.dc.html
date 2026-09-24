@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Подбор: не знаю, что выбрать</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <a class="ibtn frame" href="c-home.dc.html" aria-label="Закрыть подбор"><svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+  </header>
+  <div class="w d-center st g16" style="padding-top:12px">
+    <div class="between" style="align-items:center"><span class="small" style="color:var(--ink);font-weight:600">Подбор · без регистрации</span><span class="xs">{{progressText}}</span></div>
+    <div class="cols3" aria-hidden="true"><span style="height:8px;border:2px solid var(--ink);border-radius:2px;background:{{p1}}"></span><span style="height:8px;border:2px solid var(--ink);border-radius:2px;background:{{p2}}"></span><span style="height:8px;border:2px solid var(--ink);border-radius:2px;background:{{p3}}"></span></div>
+
+    <sc-if value="{{isQ}}" hint-placeholder-val="{{ true }}">
+      <div class="st g16" style="padding-top:16px">
+        <p class="small" style="color:var(--ink)">{{crumb}}</p>
+        <h1 class="q" style="font-size:34px">{{question}}</h1>
+        <p class="small">{{hint}}</p>
+        <div class="cols2" role="group" aria-label="{{question}}">
+          <sc-for list="{{answers}}" as="a" hint-placeholder-count="6"><button type="button" class="tile {{a.cls}}" aria-pressed="{{a.pressed}}" onClick="{{a.pick}}" style="min-height:84px;text-align:left;background:transparent;{{a.style}}">{{a.label}}</button></sc-for>
+        </div>
+        <div class="between" style="align-items:center">
+          <sc-if value="{{canBack}}" hint-placeholder-val="{{ false }}"><button type="button" class="link" onClick="{{back}}" style="border:0;background:none;padding:0">Назад</button></sc-if>
+          <button type="button" class="link" onClick="{{skip}}" style="border:0;background:none;padding:0;margin-left:auto">Пропустить</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isResult}}" hint-placeholder-val="{{ false }}">
+      <div class="st g12" style="padding-top:16px">
+        <p class="small" style="color:var(--ink)">{{crumb}}</p>
+        <h1 class="q" style="font-size:32px">Вам может подойти</h1>
+        <div class="sheet st g6" style="padding:16px">
+          <b style="font-size:22px;font-weight:800;letter-spacing:-.02em">{{r1.t}}</b>
+          <span class="small">{{r1.m}}</span>
+          <p style="font-size:16px;line-height:1.5">{{r1.x}}</p>
+          <a class="btn" href="c-zapis.dc.html" style="margin-top:6px">Выбрать время</a>
+        </div>
+        <a class="frame between" href="c-vid.dc.html" style="padding:12px 14px;min-height:64px;align-items:center;text-decoration:none"><span class="st"><b class="b">{{r2.t}}</b><span class="small">{{r2.m}}</span></span><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        <div class="field st g6" style="padding:16px">
+          <b style="font-size:19px;font-weight:800">Сомневаетесь? Первичный приём</b>
+          <span style="font-size:15px">Знакомимся и выбираем методы вместе. Цена [?] ₽.</span>
+          <a class="btn2" href="c-pervichnyj.dc.html" style="margin-top:4px;border-color:var(--field-ink)">Записаться впервые</a>
+        </div>
+        <button type="button" class="link" onClick="{{restart}}" style="border:0;background:none;padding:0;align-self:flex-start">Пройти заново</button>
+        <p class="xs">Ответы никуда не сохраняются. Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":844,"section":"Размер"},"step":{"editor":"enum","options":["1","2","3","result"],"default":"1","section":"Показать"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":844}}'>
+const Q = [
+  { q: 'Чего хочется сейчас?', hint: 'Одного ответа достаточно. Подробности обсудим лично.', a: [['back','Напряжение в спине, шее, плечах'],['swell','Отёки и тяжесть'],['face','Лицо и шея'],['state','Эмоции и состояние'],['rest','Хочу просто отдохнуть'],['baby','Бережно, для малыша']] },
+  { q: 'Как удобнее встретиться?', hint: 'Можно выбрать «всё равно».', a: [['L','В Пригороде Лесное'],['M','В Москве, у Таганской'],['O','Онлайн, по видеосвязи'],['any','Всё равно']] },
+  { q: 'Сколько времени у вас есть?', hint: '', a: [['60','Около часа'],['90','Полтора часа'],['120','Два часа, не спеша'],['any','Не важно']] }
+];
+const REC = {
+  back: [['Классический массаж','Помогает расслабить мышцы спины и плеч. Силу вы регулируете сами.'],['Остеопрактика','']],
+  swell: [['Лимфодренажный массаж','Мягкий ритмичный массаж, когда хочется лёгкости в теле.'],['Классический массаж','']],
+  face: [['Массаж лица и шеи','Лицо и шейно-воротниковая зона за одну встречу.'],['Эстетическая остеопрактика','']],
+  state: [['Сессия психосоматики','Разбираем, как состояние связано с телом. Можно онлайн.'],['Метафорические карты','']],
+  rest: [['Стоун-массаж','Тёплые камни и неспешный ритм.'],['Классический массаж','']],
+  baby: [['Биодинамика','Очень бережная практика. [?] С какого возраста, уточнит Ирина.'],['Первичный приём','']]
+};
+const PRICE = { 'Классический массаж': { 90: '5 500 ₽' }, 'Лимфодренажный массаж': { 90: '5 500 ₽' }, 'Стоун-массаж': { 90: '5 500 ₽' }, 'Остеопрактика': { 60: '5 500 ₽' }, 'Массаж лица и шеи': { 45: '4 000 ₽' } };
+const LOCN = { L: 'Лесное', M: 'Москва', O: 'онлайн', any: '' };
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const st = this.state || {};
+    const step = st.step || this.props.step || '1';
+    const ans = st.ans || (this.props.step && this.props.step !== '1' ? { 0: 'back', 1: 'L', 2: '90' } : {});
+    const i = step === 'result' ? 3 : (+step - 1);
+    const set = o => () => this.setState(o);
+    const next = (k, v) => () => { const a = Object.assign({}, ans, { [k]: v }); this.setState({ ans: a, step: k === 2 ? 'result' : String(k + 2) }); };
+    const crumbBits = [];
+    if (ans[0]) crumbBits.push(Q[0].a.find(x => x[0] === ans[0])[1]);
+    if (ans[1] && ans[1] !== 'any') crumbBits.push(LOCN[ans[1]]);
+    if (ans[2] && ans[2] !== 'any') crumbBits.push(ans[2] + ' мин');
+    const pick = REC[ans[0] || 'back'];
+    const dur = ans[2] && ans[2] !== 'any' ? +ans[2] : 90;
+    const loc = ans[1] && ans[1] !== 'any' ? LOCN[ans[1]] : 'Лесное';
+    const price = n => (PRICE[n] && PRICE[n][dur]) || '[?] ₽';
+    const cur = i < 3 ? Q[i] : null;
+    return {
+      w: this.props.w ?? 390, h: this.props.h ?? 844, cls: t === 'moss' ? '' : t,
+      isQ: i < 3, isResult: i === 3,
+      progressText: i < 3 ? 'Вопрос ' + (i + 1) + ' из 3' : 'Готово',
+      p1: i >= 0 ? 'var(--ink)' : 'transparent', p2: i >= 1 ? 'var(--ink)' : 'transparent', p3: i >= 2 ? 'var(--ink)' : 'transparent',
+      question: cur ? cur.q : '', hint: cur ? cur.hint : '',
+      crumb: crumbBits.join(' · '),
+      answers: cur ? cur.a.map(x => ({ label: x[1], cls: ans[i] === x[0] ? 'on' : '', pressed: ans[i] === x[0] ? 'true' : 'false', style: ans[i] === x[0] ? 'background:var(--ink);color:var(--bg)' : '', pick: next(i, x[0]) })) : [],
+      canBack: i > 0 && i < 3, back: set({ step: String(i) }),
+      skip: set({ step: i === 2 ? 'result' : String(i + 2) }),
+      restart: set({ step: '1', ans: {} }),
+      r1: { t: pick[0][0], m: dur + ' мин · ' + price(pick[0][0]) + ' · ' + loc, x: pick[0][1] },
+      r2: { t: pick[1][0], m: 'подробнее о практике' }
+    };
+  }
+}
+</script>
+</body>
+</html>

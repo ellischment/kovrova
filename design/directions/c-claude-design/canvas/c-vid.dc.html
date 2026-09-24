@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Страница вида услуги</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+    <nav class="nav" aria-label="Разделы"><a class="on" href="c-prices.dc.html">Цены</a><a href="c-raspisanie.dc.html">Расписание</a><a href="c-pervichnyj.dc.html">Впервые</a><a href="c-ob-irine.dc.html">Об Ирине</a><a href="c-sobytiya.dc.html">События</a><a href="c-kontakty.dc.html">Контакты</a></nav>
+    <div class="row" style="flex-wrap:nowrap"><a class="btn btn-s" href="c-zapis.dc.html">Записаться</a><a class="ibtn frame m-only" href="c-menu.dc.html" aria-label="Меню"><svg class="ico" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"></path></svg></a></div>
+  </header>
+  <nav class="crumbs w" aria-label="Путь" style="padding-top:8px"><a href="c-prices.dc.html">Цены</a><span aria-hidden="true">/</span><a href="c-prices.dc.html">{{v.dir}}</a></nav>
+
+  <div class="w vgrid" style="padding-top:8px">
+    <div class="va-head st g20">
+      <h1 class="h1s">{{v.title}}</h1>
+      <p class="lead">{{v.lead}}</p>
+      <div class="cols3">
+        <div class="frame st" style="padding:10px"><span class="xs">длительность</span><b class="b">{{v.durs}}</b></div>
+        <div class="frame st" style="padding:10px"><span class="xs">цена</span><b class="b">{{v.from}}</b></div>
+        <div class="frame st" style="padding:10px"><span class="xs">формат</span><b class="b">{{v.fmt}}</b></div>
+      </div>
+    </div>
+    <article class="va-rest st g20">
+      <sc-if value="{{v.photo}}" hint-placeholder-val="{{ true }}"><div class="ph" style="height:240px"><b>Нужно фото</b>{{v.photo}}</div></sc-if>
+      <div class="st g8">
+        <sc-for list="{{v.acc}}" as="a" hint-placeholder-count="4">
+          <details class="acc" open="{{a.open}}"><summary>{{a.t}}</summary><div><p class="p">{{a.x}}</p></div></details>
+        </sc-for>
+      </div>
+      <section class="sheet st g6" style="padding:14px 16px">
+        <h2 class="h4" style="font-weight:800">Где и сколько</h2>
+        <div class="mxg" role="table" aria-label="Цены по местам">
+          <div class="mxr mxh" role="row"><span role="columnheader">Длительность</span><span role="columnheader">ПЛ</span><span role="columnheader">Москва</span><span role="columnheader">Онлайн</span></div>
+          <sc-for list="{{v.tbl}}" as="r" hint-placeholder-count="3"><div class="mxr" role="row"><span role="cell">{{r.d}}</span><span role="cell" class="{{r.lc}}">{{r.l}}</span><span role="cell" class="{{r.mc}}">{{r.m}}</span><span role="cell" class="{{r.oc}}">{{r.o}}</span></div></sc-for>
+        </div>
+        <p class="xs">Рубли. Предоплата при записи [?] ₽. {{v.note}}</p>
+      </section>
+      <div class="st g8">
+        <p class="lbl">Похоже по ощущениям</p>
+        <div class="cols2"><sc-for list="{{v.rel}}" as="x" hint-placeholder-count="2"><a class="tile" href="c-vid.dc.html" style="min-height:64px">{{x}}</a></sc-for></div>
+      </div>
+      <p class="small" style="padding-top:12px;border-top:2px solid var(--ink)">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p>
+    </article>
+
+    <aside class="va-aside band st g10" style="padding:18px 16px;border-radius:4px">
+      <div class="between"><span class="hand" style="font-size:42px">октябрь</span><span class="small">{{v.slotDur}}</span></div>
+      <div class="cols3">
+        <sc-for list="{{v.slots}}" as="s" hint-placeholder-count="3"><a class="fr tall {{s.c}}" href="c-zapis.dc.html" style="min-height:76px"><span class="xs" style="color:inherit">{{s.wd}}</span><b style="font-size:24px;font-weight:800">{{s.d}}</b><span style="font-size:14px">{{s.t}}</span></a></sc-for>
+      </div>
+      <p class="xs">{{v.legend}}</p>
+      <a class="btn" href="c-zapis.dc.html">Выбрать время</a>
+      <p class="xs">{{v.change}}</p>
+    </aside>
+  </div>
+
+  <footer class="ftr">
+    <div class="st g8" style="max-width:520px"><b style="font-weight:800;font-size:20px">Ирина Коврова</b><p class="small">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом.</p></div>
+    <nav aria-label="Документы"><a href="c-legal.dc.html">Политика данных</a><a href="c-legal.dc.html">Правила записи</a><a href="c-voprosy.dc.html">Вопросы</a></nav>
+  </footer>
+</div>
+<nav class="bar" aria-label="Быстрые действия"><a class="btn2" href="c-kontakty.dc.html" style="padding:0 16px">Написать</a><a class="btn grow" href="c-zapis.dc.html" style="min-height:52px">Выбрать время</a></nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":2360,"section":"Размер"},"vid":{"editor":"enum","options":["limfo","psy"],"default":"limfo","section":"Шаблон"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":2360}}'>
+const V = {
+  limfo: {
+    dir: 'Массаж тела', title: 'Лимфодренажный массаж',
+    lead: 'Мягкий ритмичный массаж. С ним приходят, когда к вечеру тяжелеют ноги и хочется лёгкости в теле.',
+    durs: '60 или 90', from: 'от 5 500 ₽', fmt: 'очно',
+    photo: 'руки Ирины, голень гостьи, тёплый боковой свет. Лицо гостьи не в кадре',
+    acc: [
+      { t: 'Как проходит', x: 'Пара минут разговора: самочувствие, нужная сила. Потом лёгкие медленные движения, без боли. Силу вы регулируете сами. [?] Как Ирина завершает сеанс, её словами.', open: true },
+      { t: 'Кому подходит', x: 'Если ноги к вечеру тяжёлые, после долгого сидения или дороги. Если хочется лёгкости. Сомневаетесь? Начните с первичного приёма.', open: false },
+      { t: 'Когда лучше перенести', x: 'При температуре и плохом самочувствии. [?] Остальной список Ирина уточнит. При заболеваниях сначала поговорите с врачом.', open: false },
+      { t: 'Можно поменять на классический?', x: 'Да, до 18:00 накануне, по ссылке из напоминания. Цена та же.', open: false },
+      { t: 'Будет больно?', x: 'Нет. Силу вы регулируете сами.', open: false }
+    ],
+    tbl: [
+      { d: '60 мин', l: '[?]', m: '[?]', o: 'нет', oc: 'no' },
+      { d: '90 мин', l: '5 500', lc: 'b', m: '[?]', o: 'нет', oc: 'no' },
+      { d: '120 мин', l: '[?]', m: '[?]', o: 'нет', oc: 'no' }
+    ],
+    note: 'Вид массажа меняется до 18:00 накануне, цена та же.',
+    rel: ['Классический', 'Стоун'],
+    slotDur: '90 мин',
+    slots: [{ wd: 'сб', d: '3', t: '11:00', c: 'les' }, { wd: 'вс', d: '4', t: '16:00', c: 'les' }, { wd: 'пн', d: '12', t: '13:30', c: 'msk' }],
+    legend: 'Рамка: Пригород Лесное. Бордо: Москва.',
+    change: 'Вид массажа можно поменять до 18:00 накануне.'
+  },
+  psy: {
+    dir: 'Психосоматика и состояние', title: 'Психосоматика онлайн',
+    lead: 'Сессия по видеосвязи. Разбираем, как состояние связано с телом, и ищем бережный путь к изменениям.',
+    durs: '60 или 90', from: '[?] ₽', fmt: 'онлайн',
+    photo: '',
+    acc: [
+      { t: 'Как проходит онлайн', x: 'Мы встречаемся по видеосвязи. До первой встречи согласуем и, если нужно, проверим связь. Нужны тихое место и наушники. Платформа: [?].', open: true },
+      { t: 'С чем приходят', x: 'Когда хочется понять, как эмоции и события отражаются в теле. Я опираюсь на научную психосоматику и метод легализации правды.', open: false },
+      { t: 'Чего не будет', x: 'Это не медицинская практика, и результатов я не обещаю. Мы работаем вместе, и то, что меняется, принадлежит вам.', open: false },
+      { t: 'Впервые онлайн?', x: 'Начните с первичного приёма онлайн: познакомимся, обсудим запрос и методы.', open: false }
+    ],
+    tbl: [
+      { d: '60 мин', l: '[?]', m: '[?]', o: '[?]' },
+      { d: '90 мин', l: '[?]', m: '[?]', o: '[?]' }
+    ],
+    note: 'Время онлайн-сессий показываем по вашему часовому поясу.',
+    rel: ['Эмоциональная коррекция', 'Метафорические карты'],
+    slotDur: '60 мин, онлайн',
+    slots: [{ wd: 'сб', d: '3', t: '18:30', c: 'les' }, { wd: 'ср', d: '7', t: '16:00', c: 'les' }, { wd: 'чт', d: '8', t: '11:00', c: 'les' }],
+    legend: 'Онлайн-окна отмечены той же рамкой, что и Лесное.',
+    change: 'Время по Москве. Ваш часовой пояс: определим при записи.'
+  }
+};
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    const v = V[this.props.vid ?? 'limfo'] || V.limfo;
+    return { w: this.props.w ?? 390, h: this.props.h ?? 2360, cls: t === 'moss' ? '' : t, v };
+  }
+}
+</script>
+</body>
+</html>

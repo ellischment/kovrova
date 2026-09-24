@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Сертификат: страница получателя</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root {{cls}}" style="width:{{w}}px;height:{{h}}px">
+<div class="pg">
+  <header class="hdr">
+    <a class="logo" href="c-home.dc.html"><b>Ирина Коврова</b><span>тело и состояние</span></a>
+  </header>
+  <div class="w d-center st g20" style="padding-top:20px;padding-bottom:40px">
+    <div style="background:#3D4E21;color:#F2DCB9;border:3px solid #F2DCB9;border-radius:6px;padding:22px 20px;display:flex;flex-direction:column;gap:18px;min-height:300px">
+      <div class="between"><b style="font-weight:800;font-size:18px">Ирина Коврова</b><span class="hand" style="font-size:30px">подарок</span></div>
+      <p style="font-weight:800;font-size:42px;line-height:1;letter-spacing:-.03em">5 500 ₽</p>
+      <p style="font-size:17px;line-height:1.5">Маме от Оли: «Отдохни от всего, ты заслужила».</p>
+      <div class="row" style="gap:4px"><span style="width:22px;height:22px;border:2px solid #B7C98A;border-radius:2px"></span><span style="width:22px;height:22px;border:2px solid #B7C98A;border-radius:2px"></span><span style="width:22px;height:22px;background:#7E1F2A;border-radius:2px"></span><span style="width:22px;height:22px;border:2px solid #B7C98A;border-radius:2px"></span></div>
+    </div>
+    <h1 class="h2">Вам подарили сеанс</h1>
+    <p class="p">Сертификатом можно оплатить любую практику в Пригороде Лесное, в Москве или онлайн. Если не знаете, что выбрать, начните с первичного приёма.</p>
+    <div class="sheet st" style="padding:6px 16px">
+      <div class="kv"><span>Код</span><b class="b num">KOV-7Q4M-[?]</b></div>
+      <div class="kv"><span>Действует до</span><b class="b">[8 марта 2028 ?]</b></div>
+      <div class="kv" style="border:0"><span>Остаток</span><b class="b">5 500 ₽</b></div>
+    </div>
+    <a class="btn" href="c-zapis.dc.html">Записаться по сертификату</a>
+    <div class="cols2"><a class="btn2" href="c-podbor.dc.html">Помочь выбрать</a><a class="btn2" href="c-sertifikat.dc.html">Скачать PDF</a></div>
+    <p class="xs">Код подставится при записи сам. Сертификат можно передать другому человеку.</p>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"w":{"editor":"int","default":390,"section":"Размер"},"h":{"editor":"int","default":1000,"section":"Размер"},"theme":{"editor":"enum","options":["moss","night","cream","auto"],"default":"moss","section":"Тема"},"$preview":{"width":390,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const t = this.props.theme ?? 'moss';
+    return { w: this.props.w ?? 390, h: this.props.h ?? 1000, cls: t === 'moss' ? '' : t };
+  }
+}
+</script>
+</body>
+</html>

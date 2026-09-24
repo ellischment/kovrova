@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Кабинет: гости, события, сертификаты, сообщения, настройки, отчёты</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/84b85ad021fbdfaddfd85f19e1a26066">
+</head>
+<body>
+<x-dc>
+<helmet><style>body{margin:0}</style></helmet>
+<div class="c-root" style="width:3040px;height:1040px;background:var(--desk);padding:40px;display:flex;gap:40px;align-items:flex-start">
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">Гость: карточка и согласия</p><dc-import name="c-adm2" screen="gost" w="390" h="900" hint-size="390px,900px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">События</p><dc-import name="c-adm2" screen="sobytiya" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">Сертификаты</p><dc-import name="c-adm2" screen="sertifikaty" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">Сообщения: шаблон и превью</p><dc-import name="c-adm2" screen="soobshcheniya" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">Настройки</p><dc-import name="c-adm2" screen="nastrojki" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">Отчёты</p><dc-import name="c-adm2" screen="otchety" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+  <div class="st g12"><p class="lbl" style="color:var(--ink)">Загрузка, пусто, ошибка, успех, фокус</p><dc-import name="c-adm2" screen="sostoyaniya" w="390" h="844" hint-size="390px,844px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":3040,"height":1040}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>
