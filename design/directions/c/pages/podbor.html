@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru" data-theme="moss">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Не знаю, что выбрать · Ирина Коврова</title>
+<meta name="description" content="Три вопроса — и мы подберём подходящую услугу или направление.">
+<link rel="icon" href="data:,">
+<link rel="preload" href="../fonts/geologica-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="../base.css">
+</head>
+<body data-slug="podbor.html">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="container site-header__row">
+    <a class="site-header__brand" href="index.html">Ирина Коврова <span class="hand">· практика</span></a>
+    <nav aria-label="Основная навигация">
+      <ul class="site-header__nav"><li><a href="uslugi.html">Услуги и цены</a></li><li><a href="raspisanie.html">Расписание</a></li><li><a href="ob-irine.html">Об Ирине</a></li><li><a href="zametki.html">Заметки</a></li><li><a href="sobytiya.html">События</a></li><li><a href="voprosy.html">Вопросы</a></li><li><a href="kontakty.html">Контакты</a></li></ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn-primary" href="booking/index.html">Записаться</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav-panel" id="nav-toggle" aria-label="Меню">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="site-nav-panel" id="site-nav-panel">
+    <div class="container">
+      <ul><li><a href="uslugi.html">Услуги и цены</a></li><li><a href="raspisanie.html">Расписание</a></li><li><a href="ob-irine.html">Об Ирине</a></li><li><a href="zametki.html">Заметки</a></li><li><a href="sobytiya.html">События</a></li><li><a href="voprosy.html">Вопросы</a></li><li><a href="kontakty.html">Контакты</a></li><li><a href="booking/index.html">Записаться</a></li></ul>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="section container">
+  <h1>Не знаю, что выбрать</h1>
+  <p class="hero__lede">Ответьте на три коротких вопроса — предложим 1–2 варианта. Это не диагностика и не замена разговора с Ириной, просто ориентир.</p>
+
+  <form id="podbor-form" class="sheet stack" style="max-width:520px">
+    <fieldset class="field">
+      <legend>С чем вам хотелось бы поработать?</legend>
+      <label style="display:flex;gap:10px;align-items:center;min-height:44px;padding:6px 0"><input type="radio" name="zapros" value="napryazhenie" required> Напряжение в теле</label>
+      <label style="display:flex;gap:10px;align-items:center;min-height:44px;padding:6px 0"><input type="radio" name="zapros" value="emocii"> Эмоции, тревога, психосоматика</label>
+      <label style="display:flex;gap:10px;align-items:center;min-height:44px;padding:6px 0"><input type="radio" name="zapros" value="otdyh"> Просто отдохнуть и восстановиться</label>
+      <label style="display:flex;gap:10px;align-items:center;min-height:44px;padding:6px 0"><input type="radio" name="zapros" value="lico"> Лицо</label>
+      <label style="display:flex;gap:10px;align-items:center;min-height:44px;padding:6px 0"><input type="radio" name="zapros" value="vpervye"> Я впервые к вам обращаюсь</label>
+    </fieldset>
+    <fieldset class="field">
+      <legend>Где удобнее?</legend>
+      <label style="display:flex;gap:10px;align-items:center;min-height:44px;padding:6px 0"><input type="radio" name="mesto" value="lesnoe" required> Пригород Лесное</label>
+      <label style="display:flex;gap:10px;align-items:center;min-height:44px;padding:6px 0"><input type="radio" name="mesto" value="moskva"> Москва</label>
+      <label style="display:flex;gap:10px;align-items:center;min-height:44px;padding:6px 0"><input type="radio" name="mesto" value="online"> Онлайн</label>
+    </fieldset>
+    <button class="btn btn-primary btn-block" type="submit">Показать вариант</button>
+  </form>
+
+  <div class="sheet" id="podbor-result" hidden style="margin-top:20px">
+    <h2>Похоже, вам подойдёт</h2>
+    <p data-podbor-text></p>
+    <a class="btn btn-primary" href="uslugi.html">Смотреть в прайсе</a>
+  </div>
+</section>
+</main><footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <h4>Места</h4>
+        <ul>
+          <li><a href="lesnoe.html">Пригород Лесное (ПЛ)</a></li>
+          <li><a href="moskva.html">Москва · м. Таганская</a></li>
+          <li><a href="online.html">Онлайн</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Сайт</h4>
+        <ul>
+          <li><a href="uslugi.html">Услуги и цены</a></li>
+          <li><a href="raspisanie.html">Расписание</a></li>
+          <li><a href="otzyvy.html">Слова гостей</a></li>
+          <li><a href="sertifikaty.html">Сертификаты</a></li>
+          <li><a href="abonementy.html">Абонементы</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Документы</h4>
+        <ul>
+          <li><a href="legal-pravila.html">Правила записи</a></li>
+          <li><a href="legal-politika.html">Политика конфиденциальности</a></li>
+          <li><a href="legal-soglasie.html">Согласие на обработку ПДн</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Связь</h4>
+        <ul>
+          <li><a href="kontakty.html">Контакты</a></li>
+          <li><a href="https://t.me/protchenko_irina">Telegram: @protchenko_irina</a></li>
+        </ul>
+        <div class="theme-switch" role="group" aria-label="Тема оформления">
+          <button type="button" data-theme-btn="moss" aria-pressed="true">Мох</button>
+          <button type="button" data-theme-btn="night" aria-pressed="false">Ночь</button>
+          <button type="button" data-theme-btn="cream" aria-pressed="false">Крем</button>
+        </div>
+      </div>
+    </div>
+    <p class="site-footer__disclaimer">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом. ИП/самозанятость и реквизиты — уточняются [?]. © 2026 Ирина Коврова.</p>
+  </div>
+</footer>
+<script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru" data-theme="moss">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Расписание и открытие записи · Ирина Коврова</title>
+<meta name="description" content="Расписание по датам месяца и честный статус открытия записи.">
+<link rel="icon" href="data:,">
+<link rel="preload" href="../fonts/geologica-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="../base.css">
+</head>
+<body data-slug="raspisanie.html">
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<header class="site-header">
+  <div class="container site-header__row">
+    <a class="site-header__brand" href="index.html">Ирина Коврова <span class="hand">· практика</span></a>
+    <nav aria-label="Основная навигация">
+      <ul class="site-header__nav"><li><a href="uslugi.html">Услуги и цены</a></li><li><a href="raspisanie.html" aria-current="page">Расписание</a></li><li><a href="ob-irine.html">Об Ирине</a></li><li><a href="zametki.html">Заметки</a></li><li><a href="sobytiya.html">События</a></li><li><a href="voprosy.html">Вопросы</a></li><li><a href="kontakty.html">Контакты</a></li></ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="btn btn-primary" href="booking/index.html">Записаться</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav-panel" id="nav-toggle" aria-label="Меню">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="site-nav-panel" id="site-nav-panel">
+    <div class="container">
+      <ul><li><a href="uslugi.html">Услуги и цены</a></li><li><a href="raspisanie.html" aria-current="page">Расписание</a></li><li><a href="ob-irine.html">Об Ирине</a></li><li><a href="zametki.html">Заметки</a></li><li><a href="sobytiya.html">События</a></li><li><a href="voprosy.html">Вопросы</a></li><li><a href="kontakty.html">Контакты</a></li><li><a href="booking/index.html">Записаться</a></li></ul>
+    </div>
+  </div>
+</header>
+<main id="main">
+<section class="section container">
+  <h1>Расписание</h1>
+  <div class="status-ribbon">
+    <span>Запись на ноябрь откроется <strong>21 октября в 11:00</strong> (пример из практики Ирины; точная дата и время задаются в её кабинете и могут измениться).</span>
+  </div>
+  <form class="sheet" style="max-width:480px;margin-bottom:32px" aria-label="Подписка на напоминание об открытии записи">
+    <h2 style="margin-top:0">Напомнить об открытии</h2>
+    <p class="muted">Пришлём сообщение в Telegram или MAX, когда откроется запись — без «сторис накануне» и без спешки.</p>
+    <div class="field">
+      <label for="remind-contact">Telegram или телефон</label>
+      <input id="remind-contact" name="contact" type="text" placeholder="@ник или +7…" autocomplete="tel">
+    </div>
+    <button class="btn btn-primary" type="submit">Напомнить</button>
+  </form>
+
+  <h2>Октябрь</h2>
+  <div class="calendar">
+    <div class="calendar__head">
+      <span class="calendar__month hand">октябрь</span>
+      <span class="calendar__note">Демо-дни для примера · <span class="badge-demo">демо</span></span>
+    </div>
+    <div class="calendar__grid">
+      <div class="calendar__dow">Пн</div><div class="calendar__dow">Вт</div><div class="calendar__dow">Ср</div><div class="calendar__dow">Чт</div><div class="calendar__dow">Пт</div><div class="calendar__dow">Сб</div><div class="calendar__dow">Вс</div>
+      <div class="calendar__day calendar__day--empty" aria-hidden="true"></div><div class="calendar__day calendar__day--empty" aria-hidden="true"></div><div class="calendar__day calendar__day--empty" aria-hidden="true"></div><div class="calendar__day">1</div><div class="calendar__day">2</div><div class="calendar__day calendar__day--lesnoe"><button type="button">3<span class="visually-hidden"> — Пригород Лесное, демо</span></button></div><div class="calendar__day calendar__day--online"><button type="button">4<span class="visually-hidden"> — Онлайн, демо</span></button></div><div class="calendar__day">5</div><div class="calendar__day">6</div><div class="calendar__day calendar__day--lesnoe"><button type="button">7<span class="visually-hidden"> — Пригород Лесное, демо</span></button></div><div class="calendar__day calendar__day--moskva"><button type="button">8<span class="visually-hidden"> — Москва, демо</span></button></div><div class="calendar__day">9</div><div class="calendar__day calendar__day--online"><button type="button">10<span class="visually-hidden"> — Онлайн, демо</span></button></div><div class="calendar__day calendar__day--lesnoe"><button type="button">11<span class="visually-hidden"> — Пригород Лесное, демо</span></button></div><div class="calendar__day">12</div><div class="calendar__day">13</div><div class="calendar__day calendar__day--lesnoe calendar__day--full"><button type="button">14<span class="visually-hidden"> — мест нет, демо</span></button></div><div class="calendar__day">15</div><div class="calendar__day">16</div><div class="calendar__day calendar__day--lesnoe"><button type="button">17<span class="visually-hidden"> — Пригород Лесное, демо</span></button></div><div class="calendar__day calendar__day--online"><button type="button">18<span class="visually-hidden"> — Онлайн, демо</span></button></div><div class="calendar__day">19</div><div class="calendar__day">20</div><div class="calendar__day calendar__day--moskva"><button type="button">21<span class="visually-hidden"> — Москва, демо</span></button></div><div class="calendar__day">22</div><div class="calendar__day">23</div><div class="calendar__day calendar__day--lesnoe"><button type="button">24<span class="visually-hidden"> — Пригород Лесное, демо</span></button></div><div class="calendar__day calendar__day--online"><button type="button">25<span class="visually-hidden"> — Онлайн, демо</span></button></div><div class="calendar__day">26</div><div class="calendar__day">27</div><div class="calendar__day calendar__day--lesnoe"><button type="button">28<span class="visually-hidden"> — Пригород Лесное, демо</span></button></div><div class="calendar__day">29</div><div class="calendar__day">30</div><div class="calendar__day">31</div>
+    </div>
+    <div class="calendar__legend">
+      <span><span class="calendar__swatch calendar__swatch--lesnoe"></span>Пригород Лесное / Онлайн</span>
+      <span><span class="calendar__swatch calendar__swatch--moskva"></span>Москва</span>
+      <span><span class="calendar__swatch calendar__swatch--demo"></span>мест нет</span>
+    </div>
+  </div>
+
+  <h2 style="margin-top:32px">Ноябрь</h2>
+  <div class="calendar">
+    <div class="calendar__head">
+      <span class="calendar__month hand">ноябрь</span>
+      <span class="calendar__note">Демо-дни для примера · <span class="badge-demo">демо</span></span>
+    </div>
+    <div class="calendar__grid">
+      <div class="calendar__dow">Пн</div><div class="calendar__dow">Вт</div><div class="calendar__dow">Ср</div><div class="calendar__dow">Чт</div><div class="calendar__dow">Пт</div><div class="calendar__dow">Сб</div><div class="calendar__dow">Вс</div>
+      <div class="calendar__day calendar__day--empty" aria-hidden="true"></div><div class="calendar__day calendar__day--empty" aria-hidden="true"></div><div class="calendar__day calendar__day--empty" aria-hidden="true"></div><div class="calendar__day calendar__day--empty" aria-hidden="true"></div><div class="calendar__day calendar__day--empty" aria-hidden="true"></div><div class="calendar__day calendar__day--empty" aria-hidden="true"></div><div class="calendar__day">1</div><div class="calendar__day calendar__day--lesnoe"><button type="button">2<span class="visually-hidden"> — Пригород Лесное, демо</span></button></div><div class="calendar__day">3</div><div class="calendar__day">4</div><div class="calendar__day calendar__day--online"><button type="button">5<span class="visually-hidden"> — Онлайн, демо</span></button></div><div class="calendar__day">6</div><div class="calendar__day">7</div><div class="calendar__day calendar__day--moskva"><button type="button">8<span class="visually-hidden"> — Москва, демо</span></button></div><div class="calendar__day">9</div><div class="calendar__day">10</div><div class="calendar__day calendar__day--lesnoe"><button type="button">11<span class="visually-hidden"> — Пригород Лесное, демо</span></button></div><div class="calendar__day">12</div><div class="calendar__day">13</div><div class="calendar__day calendar__day--online"><button type="button">14<span class="visually-hidden"> — Онлайн, демо</span></button></div><div class="calendar__day">15</div><div class="calendar__day">16</div><div class="calendar__day">17</div><div class="calendar__day calendar__day--lesnoe calendar__day--full"><button type="button">18<span class="visually-hidden"> — мест нет, демо</span></button></div><div class="calendar__day">19</div><div class="calendar__day">20</div><div class="calendar__day calendar__day--lesnoe"><button type="button">21<span class="visually-hidden"> — Пригород Лесное, демо</span></button></div><div class="calendar__day">22</div><div class="calendar__day">23</div><div class="calendar__day">24</div><div class="calendar__day calendar__day--moskva"><button type="button">25<span class="visually-hidden"> — Москва, демо</span></button></div><div class="calendar__day">26</div><div class="calendar__day">27</div><div class="calendar__day calendar__day--online"><button type="button">28<span class="visually-hidden"> — Онлайн, демо</span></button></div><div class="calendar__day">29</div><div class="calendar__day">30</div>
+    </div>
+    <div class="calendar__legend">
+      <span><span class="calendar__swatch calendar__swatch--lesnoe"></span>Пригород Лесное / Онлайн</span>
+      <span><span class="calendar__swatch calendar__swatch--moskva"></span>Москва</span>
+      <span><span class="calendar__swatch calendar__swatch--demo"></span>мест нет</span>
+    </div>
+  </div>
+
+  <p class="small muted" style="margin-top:16px">Показаны демо-дни для примера вёрстки. Реальные дни, места и остаток окон формируются в кабинете Ирины и подтягиваются по датам месяца (ADR 0006).</p>
+</section>
+</main><footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div>
+        <h4>Места</h4>
+        <ul>
+          <li><a href="lesnoe.html">Пригород Лесное (ПЛ)</a></li>
+          <li><a href="moskva.html">Москва · м. Таганская</a></li>
+          <li><a href="online.html">Онлайн</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Сайт</h4>
+        <ul>
+          <li><a href="uslugi.html">Услуги и цены</a></li>
+          <li><a href="raspisanie.html">Расписание</a></li>
+          <li><a href="otzyvy.html">Слова гостей</a></li>
+          <li><a href="sertifikaty.html">Сертификаты</a></li>
+          <li><a href="abonementy.html">Абонементы</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Документы</h4>
+        <ul>
+          <li><a href="legal-pravila.html">Правила записи</a></li>
+          <li><a href="legal-politika.html">Политика конфиденциальности</a></li>
+          <li><a href="legal-soglasie.html">Согласие на обработку ПДн</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Связь</h4>
+        <ul>
+          <li><a href="kontakty.html">Контакты</a></li>
+          <li><a href="https://t.me/protchenko_irina">Telegram: @protchenko_irina</a></li>
+        </ul>
+        <div class="theme-switch" role="group" aria-label="Тема оформления">
+          <button type="button" data-theme-btn="moss" aria-pressed="true">Мох</button>
+          <button type="button" data-theme-btn="night" aria-pressed="false">Ночь</button>
+          <button type="button" data-theme-btn="cream" aria-pressed="false">Крем</button>
+        </div>
+      </div>
+    </div>
+    <p class="site-footer__disclaimer">Услуги не являются медицинскими. При наличии заболеваний и противопоказаний проконсультируйтесь с врачом. ИП/самозанятость и реквизиты — уточняются [?]. © 2026 Ирина Коврова.</p>
+  </div>
+</footer>
+<script src="../app.js"></script>
+</body>
+</html>
