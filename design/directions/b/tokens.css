@@ -1,0 +1,43 @@
+/* Направление B · Вечер в кабинете. Тёмная по умолчанию, дневная по системной настройке.
+   Шрифты self-host: Bona Nova (400, 400 italic, 700), Onest (variable). */
+
+:root {
+  --night-900: #111822; --night-800: #18212E; --night-700: #202B3B; --night-600: #2E3A4C;
+  --day-100: #F3EBDF; --day-50: #FBF6EE; --day-200: #EDE2D2; --day-300: #D6CCBC;
+  --cream-100: #F2E8D8; --cream-300: #BCB2A3;
+  --sand-200: #F2DCB9; --ink-950: #151515;
+  --navy-900: #152032; --navy-700: #1F3550; --slate-600: #4A5264;
+  --moss-500: #3D4E21; --olive-300: #B3C483; --olive-600: #4B5A28;
+  --bordo-600: #8B1E2A; --bordo-200: #E6979F;
+
+  --font-display: 'Bona Nova', Georgia, serif;   /* курсив, заголовки */
+  --font-text: 'Onest', system-ui, sans-serif;
+  --radius-card: 22px; --radius-pill: 999px; --tap: 44px;
+
+  --bg: var(--night-900); --surface: var(--night-800); --surface-2: var(--night-700);
+  --text: var(--cream-100); --text-muted: var(--cream-300);        /* 14.7:1 и 8.5:1 */
+  --line: var(--night-600);
+  --btn-bg: var(--sand-200); --btn-text: var(--ink-950);           /* 13.7:1 */
+  --link: var(--sand-200);
+  --loc-lesnoe: var(--olive-300); --loc-moskva: var(--bordo-200);  /* 9.5:1 и 7.9:1 */
+  --field-moss: var(--moss-500); --field-moss-text: var(--sand-200);   /* 6.8:1 */
+  --field-bordo: var(--bordo-600); --field-bordo-text: var(--cream-100); /* 7.5:1 */
+  --focus: var(--sand-200);
+}
+
+[data-theme="light"] {
+  --bg: var(--day-100); --surface: var(--day-50); --surface-2: var(--day-200);
+  --text: var(--navy-900); --text-muted: var(--slate-600); --line: var(--day-300);
+  --btn-bg: var(--navy-700); --btn-text: #F6EEE2; --link: var(--navy-700);
+  --loc-lesnoe: var(--olive-600); --loc-moskva: var(--bordo-600);
+  --focus: var(--bordo-600);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg: var(--day-100); --surface: var(--day-50); --surface-2: var(--day-200);
+    --text: var(--navy-900); --text-muted: var(--slate-600); --line: var(--day-300);
+    --btn-bg: var(--navy-700); --btn-text: #F6EEE2; --link: var(--navy-700);
+    --loc-lesnoe: var(--olive-600); --loc-moskva: var(--bordo-600); --focus: var(--bordo-600);
+  }
+}

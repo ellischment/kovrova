@@ -1,0 +1,45 @@
+/* Направление A · Книга. Бумага, чернила, бордо, мох.
+   Темы: light (по умолчанию), dark («ночная бумага»), авто по prefers-color-scheme.
+   Шрифты self-host: Literata (variable, normal + italic), Golos Text (variable). */
+
+:root {
+  --paper-100: #F4EEE3; --paper-50: #FBF7F0; --paper-900: #17150F; --paper-800: #211E17;
+  --ink-900: #1D1A15; --ink-600: #4F473B; --ink-100: #EEE6D6; --ink-300: #B8AD98;
+  --rule-200: #D8CCB6; --rule-400: #8F8470; --rule-800: #3B352A;
+  --bordo-600: #7D1F2C; --bordo-200: #E0949A;
+  --olive-600: #4B5A28; --olive-200: #AFC07F;
+  --moss-500: #3D4E21; --sand-200: #F2DCB9;
+
+  --font-serif: 'Literata', Georgia, serif;
+  --font-ui: 'Golos Text', system-ui, sans-serif;
+  --tap: 44px; --radius: 2px;
+
+  --bg: var(--paper-100); --surface: var(--paper-50);
+  --text: var(--ink-900); --text-muted: var(--ink-600);          /* 15.0:1 и 7.9:1 */
+  --line: var(--rule-200); --leader: var(--rule-400);
+  --accent: var(--bordo-600);                                      /* 8.6:1 */
+  --loc-lesnoe: var(--olive-600); --loc-moskva: var(--bordo-600);
+  --btn-bg: var(--moss-500); --btn-text: var(--paper-50);          /* 8.5:1 */
+  --highlight: var(--sand-200);
+  --focus: var(--bordo-600);
+}
+
+[data-theme="dark"] {
+  --bg: var(--paper-900); --surface: var(--paper-800);
+  --text: var(--ink-100); --text-muted: var(--ink-300);            /* 14.7:1 и 8.2:1 */
+  --line: var(--rule-800); --leader: #6E6553;
+  --accent: var(--bordo-200); --loc-lesnoe: var(--olive-200); --loc-moskva: var(--bordo-200);
+  --btn-bg: var(--sand-200); --btn-text: var(--ink-900);           /* 13.0:1 */
+  --highlight: #3A3322; --focus: var(--sand-200);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: var(--paper-900); --surface: var(--paper-800);
+    --text: var(--ink-100); --text-muted: var(--ink-300);
+    --line: var(--rule-800); --leader: #6E6553;
+    --accent: var(--bordo-200); --loc-lesnoe: var(--olive-200); --loc-moskva: var(--bordo-200);
+    --btn-bg: var(--sand-200); --btn-text: var(--ink-900);
+    --highlight: #3A3322; --focus: var(--sand-200);
+  }
+}
