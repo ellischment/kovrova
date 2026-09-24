@@ -79,6 +79,8 @@
   var fmtDay = new Intl.DateTimeFormat('ru-RU', { weekday: 'short', day: 'numeric', month: 'long' });
   var fmtShort = new Intl.DateTimeFormat('ru-RU', { weekday: 'short', day: 'numeric', month: 'short' });
 
+  /* переход: в просмотрщике макетов навигацию делает родительская страница */
+  function go(url) { var u = new URL(url, location.href).href; try { if (window.parent !== window && window.parent.__mkNav) { window.parent.__mkNav(u); return; } } catch (e) {} location.href = u; }
   function qs(name) { return new URLSearchParams(location.search).get(name); }
   var DEMO = qs('demo') || 'default'; // default | no-slots | race | pay-error | early-access
   var IS_REGULAR = DEMO === 'early-access' || qs('regular') === '1';
@@ -177,6 +179,6 @@
     dayLocation: dayLocation, worksOn: worksOn, slotsFor: slotsFor, partOf: partOf, releaseInfo: releaseInfo,
     findDirection: findDirection, findFamily: findFamily, familyAvailableIn: familyAvailableIn,
     formatPhone: formatPhone, MED_RE: MED_RE, saveLastBooking: saveLastBooking, loadLastBooking: loadLastBooking,
-    downloadIcs: downloadIcs, qrSvg: qrSvg, shortCode: shortCode, qs: qs,
+    downloadIcs: downloadIcs, qrSvg: qrSvg, shortCode: shortCode, qs: qs, go: go,
   };
 })(window);

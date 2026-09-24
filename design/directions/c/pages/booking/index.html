@@ -107,7 +107,7 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       var b = backTargetFor(S.step);
-      if (b) { goStep(b); } else { window.location.href = '../index.html'; }
+      if (b) { goStep(b); } else { K.go('../index.html'); }
     }
   });
 
@@ -426,7 +426,7 @@
     if (ds.goWl) {
       var f = famObj();
       var params = new URLSearchParams({ loc: S.loc || '', svc: S.dirId || '', fam: S.famId || '' });
-      window.location.href = 'waitlist.html?' + params.toString();
+      K.go('waitlist.html?' + params.toString());
       return;
     }
     if (ds.next) { goStep('contacts'); return; }

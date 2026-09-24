@@ -58,8 +58,8 @@
       '<button class="link-btn" style="display:block;margin:10px auto 0" data-skip="1">Мне уже не актуально — уйти из листа</button>';
   }
   document.addEventListener('click', function (e) {
-    if (e.target.closest('[data-claim]')) { K.track('waitlist_offer_accepted', { state: state }); location.href = 'index.html?loc=lesnoe&svc=massage&fam=massage90&date=2026-10-04&time=11:00&step=contacts'; }
-    if (e.target.closest('[data-skip]')) { K.track('waitlist_offer_declined', { state: state }); location.href = '../index.html'; }
+    if (e.target.closest('[data-claim]')) { K.track('waitlist_offer_accepted', { state: state }); K.go('index.html?loc=lesnoe&svc=massage&fam=massage90&date=2026-10-04&time=11:00&step=contacts'); }
+    if (e.target.closest('[data-skip]')) { K.track('waitlist_offer_declined', { state: state }); K.go('../index.html'); }
   });
   K.track('waitlist_offer_shown', { state: state });
   render();
