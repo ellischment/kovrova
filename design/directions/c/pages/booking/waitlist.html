@@ -27,6 +27,7 @@
   </header>
   <main class="bk-body" id="body" aria-live="polite" tabindex="-1"></main>
   <div class="bk-foot" id="foot"></div>
+  <p class="bk-legal">Услуги не являются медицинскими. При заболеваниях и противопоказаниях проконсультируйтесь с врачом.</p>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <script src="../../booking-data.js"></script>
@@ -52,8 +53,8 @@
     if (S.done) return renderDone();
     var f = famObj();
     body.innerHTML =
-      '<p class="small muted">Отметьте, когда вам удобно. Как только освободится подходящее окно, я пришлю сообщение. На ответ будет 30 минут, потом предложу следующей гостье.</p>' +
-      '<div class="summary"><dl><dt>Где</dt><dd>' + K.esc(locObj().name) + '</dd><dt>Что</dt><dd>' + (f ? K.esc(f.title) : 'Любая длительность от 60 мин') + '</dd></dl></div>' +
+      '<p class="small muted">Отметьте, когда вам удобно. Как только освободится подходящее окно, я пришлю сообщение. На ответ будет 30&nbsp;минут, потом предложу следующей гостье.</p>' +
+      '<div class="summary"><dl><dt>Где</dt><dd>' + K.esc(locObj().name) + '</dd><dt>Что</dt><dd>' + (f ? K.esc(f.title) : 'Любая длительность от 60&nbsp;мин') + '</dd></dl></div>' +
       '<p class="small" style="font-weight:600;margin-bottom:8px">Удобное время</p>' +
       '<div class="chips" style="margin-bottom:16px">' + WINDOWS.map(function (kv) { return '<button class="chip" data-w="' + kv[0] + '" aria-pressed="' + S.windows.has(kv[0]) + '">' + kv[1] + '</button>'; }).join('') + '</div>' +
       '<p class="small" style="font-weight:600;margin-bottom:8px">Жду не дольше</p>' +
@@ -66,7 +67,7 @@
     return '<div class="field' + (e.name ? ' has-error' : '') + '"><label for="f-name">Как к вам обращаться</label><input id="f-name" autocomplete="name" value="' + K.esc(S.name) + '" data-bind="name">' + (e.name ? '<p class="err">Напишите, пожалуйста, имя</p>' : '') + '</div>' +
       '<div class="field' + (e.phone ? ' has-error' : '') + '"><label for="f-phone">Телефон</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" value="' + K.esc(S.phone) + '" data-bind="phone">' + (e.phone ? '<p class="err">Проверьте номер</p>' : '') + '</div>' +
       '<div class="field"><span style="display:block;font-weight:600;font-size:15px;margin-bottom:6px">Куда написать</span><div class="chips">' + [['telegram', 'Telegram'], ['max', 'MAX'], ['sms', 'SMS']].map(function (kv) { return '<button class="chip" data-channel="' + kv[0] + '" aria-pressed="' + (S.channel === kv[0]) + '">' + kv[1] + '</button>'; }).join('') + '</div></div>' +
-      '<label class="check"><input type="checkbox" data-bind="consent" ' + (S.consent ? 'checked' : '') + '><span>Соглашаюсь на <a href="#legal" data-legal="soglasie">обработку персональных данных</a></span></label>' +
+      '<label class="check"><input type="checkbox" data-bind="consent" ' + (S.consent ? 'checked' : '') + '><span>Соглашаюсь на <a href="../legal-soglasie.html" target="_blank" rel="noopener">обработку персональных данных</a></span></label>' +
       (e.consent ? '<p class="err">Без согласия не сможем добавить вас в лист — это требование 152-ФЗ</p>' : '') +
       '<label class="check"><input type="checkbox" data-bind="marketing" ' + (S.marketing ? 'checked' : '') + '><span class="muted">Хочу получать новости и приглашения (необязательно)</span></label>';
   }
@@ -82,8 +83,6 @@
   function phoneDigits() { return S.phone.replace(/\D/g, ''); }
 
   document.addEventListener('click', function (e) {
-    var legal = e.target.closest('[data-legal]');
-    if (legal) { e.preventDefault(); K.toast('В продукте: отдельный документ /legal/soglasie (152-ФЗ)'); return; }
     var t = e.target.closest('button'); if (!t) return; var ds = t.dataset;
     if (ds.w) { S.windows.has(ds.w) ? S.windows.delete(ds.w) : S.windows.add(ds.w); render(); return; }
     if (ds.h) { S.horizon = ds.h; render(); return; }

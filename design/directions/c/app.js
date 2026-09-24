@@ -68,7 +68,7 @@
       var rowLoc = row.dataset.loc;
       var rowTags = (row.dataset.tags || "").split(" ");
       var matchesQuery = !q || text.indexOf(q) !== -1;
-      var matchesLoc = loc === "all" || rowLoc === loc || rowLoc === "online-any";
+      var matchesLoc = loc === "all" || rowLoc === loc || rowLoc === "online-any" || rowLoc === "any";
       var matchesFilters = filters.every(function (f) { return rowTags.indexOf(f) !== -1; });
       var show = matchesQuery && matchesLoc && matchesFilters;
       row.hidden = !show;
@@ -98,12 +98,12 @@
   if (podborForm) {
     var result = document.getElementById("podbor-result");
     var MAP = {
-      "napryazhenie-lesnoe": "Классический массаж или лимфодренажный массаж (Пригород Лесное), 90 минут.",
+      "napryazhenie-lesnoe": "Классический массаж или лимфодренажный массаж (Пригород Лесное), 90&nbsp;минут.",
       "napryazhenie-online": "Сессия психосоматики онлайн — работа с телом через разговор и практики.",
       "otdyh-lesnoe": "Стоун-массаж (Пригород Лесное) — тёплые камни, глубокое расслабление.",
       "emocii-online": "Консультация с метафорическими картами онлайн или сессия психосоматики.",
-      "emocii-lesnoe": "Эмоциональная коррекция очно, Пригород Лесное.",
-      "lico-lesnoe": "Массаж лица и шейно-воротниковой зоны, 45 минут.",
+      "emocii-lesnoe": "Сессия психосоматики очно, Пригород Лесное.",
+      "lico-lesnoe": "Массаж лица и шейно-воротниковой зоны, 45&nbsp;минут.",
       "vpervye-lesnoe": "Первичный приём очно — знакомство, точка А, начало работы.",
       "vpervye-online": "Первичный приём онлайн — знакомство и проверка связи заранее."
     };

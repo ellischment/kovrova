@@ -33,385 +33,109 @@
 <main id="main">
 <section class="section container">
   <h1>Услуги и цены</h1>
-  <p class="hero__lede">13 семейств услуг, 60 вариантов по месту и длительности. Известные цены отмечены; остальное помечено «уточняется» — полный прайс появится, когда Ирина выгрузит все 68 позиций из DIKIDI.</p>
+  <p class="hero__lede">Черновой список услуг, которые можно записать через сайт. Известные цены отмечены; остальное помечено «уточняется» — полный прайс появится после разговора с Ириной.</p>
 
   <div class="stack" style="margin-bottom:8px">
     <div class="location-switch" data-loc-switch role="group" aria-label="Место"><button type="button" data-loc="all" aria-pressed="true">Все места</button><button type="button" data-loc="lesnoe" aria-pressed="false">Пригород Лесное</button><button type="button" data-loc="moskva" aria-pressed="false">Москва</button><button type="button" data-loc="online" aria-pressed="false">Онлайн</button></div>
   </div>
   <div class="filters">
     <input type="search" id="price-search" placeholder="Найти услугу…" aria-label="Найти услугу">
-    <button type="button" class="filter-chip" data-filter="dur-short" aria-pressed="false">До 60 минут</button><button type="button" class="filter-chip" data-filter="dur-long" aria-pressed="false">90+ минут</button><button type="button" class="filter-chip" data-filter="online-ok" aria-pressed="false">Можно онлайн</button><button type="button" class="filter-chip" data-filter="vpervye" aria-pressed="false">Для первого раза</button>
+    <button type="button" class="filter-chip" data-filter="dur-short" aria-pressed="false">До 60&nbsp;минут</button><button type="button" class="filter-chip" data-filter="dur-long" aria-pressed="false">90+ минут</button><button type="button" class="filter-chip" data-filter="online-ok" aria-pressed="false">Можно онлайн</button><button type="button" class="filter-chip" data-filter="vpervye" aria-pressed="false">Для первого раза</button>
   </div>
 
   <p><a class="btn btn-primary" href="podbor.html">Не знаю, что выбрать</a></p>
 
   <div class="price-table-wrap">
     <table class="price-table" id="price-table">
-      <caption>Цена, длительность и предоплата видны до выбора времени. Предоплата — 1000 ₽ за сеанс (значение по умолчанию, уточняется у Ирины).</caption>
+      <caption>Цена, длительность и предоплата видны до выбора времени. Предоплата — 1000&nbsp;₽ за сеанс (значение по умолчанию, уточняется у Ирины).</caption>
       <thead>
         <tr><th>Услуга</th><th>Место</th><th>Длительность</th><th>Цена</th><th></th></tr>
       </thead>
       <tbody>
-        <tr data-title="Классический массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Классич. массаж<div class="small muted">Классический массаж</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
+        <tr data-title="Первичный приём" data-loc="any" data-tags="vpervye">
+      <td>Первичный приём<div class="small muted">Знакомство, «точка А», начало работы</div></td>
+      <td class="muted">место уточняется [?]</td>
+      <td>длительность уточняется [?]</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=klassicheskiy&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="Классический массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Классич. массаж<div class="small muted">Классический массаж</div></td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=first&fam=first">Записаться</a></td>
+    </tr><tr data-title="Массаж 60&nbsp;минут Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
+      <td>Массаж 60<div class="small muted">Классический, лимфодренажный</div></td>
       <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price">5 500 ₽</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=klassicheskiy&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="Классический массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Классич. массаж<div class="small muted">Классический массаж</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>120 мин</td>
+      <td>60&nbsp;мин</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=klassicheskiy&loc=lesnoe&dur=120">Записаться</a></td>
-    </tr><tr data-title="Классический массаж Москва" data-loc="moskva" data-tags="dur-short">
-      <td>Классич. массаж<div class="small muted">Классический массаж</div></td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=massage&fam=massage60&loc=lesnoe">Записаться</a></td>
+    </tr><tr data-title="Массаж 60&nbsp;минут Москва" data-loc="moskva" data-tags="dur-short">
+      <td>Массаж 60<div class="small muted">Классический, лимфодренажный</div></td>
       <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>60 мин</td>
+      <td>60&nbsp;мин</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=klassicheskiy&loc=moskva&dur=60">Записаться</a></td>
-    </tr><tr data-title="Классический массаж Москва" data-loc="moskva" data-tags="dur-long">
-      <td>Классич. массаж<div class="small muted">Классический массаж</div></td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=massage&fam=massage60&loc=moskva">Записаться</a></td>
+    </tr><tr data-title="Массаж 90&nbsp;минут Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
+      <td>Массаж 90<div class="small muted">Классический, лимфодренажный, стоун-массаж — техника не меняет цену</div></td>
+      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
+      <td>90&nbsp;мин</td>
+      <td class="price">5&nbsp;500&nbsp;₽</td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=massage&fam=massage90&loc=lesnoe">Записаться</a></td>
+    </tr><tr data-title="Массаж 90&nbsp;минут Москва" data-loc="moskva" data-tags="dur-long">
+      <td>Массаж 90<div class="small muted">Классический, лимфодренажный, стоун-массаж — техника не меняет цену</div></td>
       <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>90 мин</td>
+      <td>90&nbsp;мин</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=klassicheskiy&loc=moskva&dur=90">Записаться</a></td>
-    </tr><tr data-title="Классический массаж Москва" data-loc="moskva" data-tags="dur-long">
-      <td>Классич. массаж<div class="small muted">Классический массаж</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>120 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=klassicheskiy&loc=moskva&dur=120">Записаться</a></td>
-    </tr><tr data-title="Лимфодренажный массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Лимфодренаж<div class="small muted">Лимфодренажный массаж</div></td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=massage&fam=massage90&loc=moskva">Записаться</a></td>
+    </tr><tr data-title="Остеопрактика Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
+      <td>Остеопрактика<div class="small muted">Мягкая работа с телом</div></td>
       <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=limfodrenazh&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="Лимфодренажный массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Лимфодренаж<div class="small muted">Лимфодренажный массаж</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price">5 500 ₽</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=limfodrenazh&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="Лимфодренажный массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Лимфодренаж<div class="small muted">Лимфодренажный массаж</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>120 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=limfodrenazh&loc=lesnoe&dur=120">Записаться</a></td>
-    </tr><tr data-title="Лимфодренажный массаж Москва" data-loc="moskva" data-tags="dur-short">
-      <td>Лимфодренаж<div class="small muted">Лимфодренажный массаж</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=limfodrenazh&loc=moskva&dur=60">Записаться</a></td>
-    </tr><tr data-title="Лимфодренажный массаж Москва" data-loc="moskva" data-tags="dur-long">
-      <td>Лимфодренаж<div class="small muted">Лимфодренажный массаж</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=limfodrenazh&loc=moskva&dur=90">Записаться</a></td>
-    </tr><tr data-title="Стоун-массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Стоун-массаж<div class="small muted">Стоун-массаж</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=stone&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="Стоун-массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Стоун-массаж<div class="small muted">Стоун-массаж</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price">5 500 ₽</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=stone&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="Стоун-массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Стоун-массаж<div class="small muted">Стоун-массаж</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>120 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=stone&loc=lesnoe&dur=120">Записаться</a></td>
-    </tr><tr data-title="Массаж лица и шейно-воротниковой зоны Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
+      <td>60&nbsp;мин</td>
+      <td class="price">5&nbsp;500&nbsp;₽</td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=osteo&fam=osteo60&loc=lesnoe">Записаться</a></td>
+    </tr><tr data-title="Массаж лица и ШВЗ Пригород Лесное" data-loc="lesnoe" data-tags="dur-short vpervye">
       <td>Массаж лица и ШВЗ<div class="small muted">Массаж лица и шейно-воротниковой зоны</div></td>
       <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>45 мин</td>
-      <td class="price">4 000 ₽</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=lico&loc=lesnoe&dur=45">Записаться</a></td>
-    </tr><tr data-title="Массаж лица и шейно-воротниковой зоны Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Массаж лица и ШВЗ<div class="small muted">Массаж лица и шейно-воротниковой зоны</div></td>
+      <td>45&nbsp;мин</td>
+      <td class="price">4&nbsp;000&nbsp;₽</td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=face&fam=face45&loc=lesnoe">Записаться</a></td>
+    </tr><tr data-title="Сессия психосоматики Пригород Лесное" data-loc="lesnoe" data-tags="dur-short emocii">
+      <td>Сессия психосоматики<div class="small muted">Разбираемся, что тело пытается сказать</div></td>
       <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
+      <td>60&nbsp;мин</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=lico&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="Массаж лица и шейно-воротниковой зоны Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Массаж лица и ШВЗ<div class="small muted">Массаж лица и шейно-воротниковой зоны</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=lico&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="Массаж лица и шейно-воротниковой зоны Москва" data-loc="moskva" data-tags="dur-short">
-      <td>Массаж лица и ШВЗ<div class="small muted">Массаж лица и шейно-воротниковой зоны</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>45 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=lico&loc=moskva&dur=45">Записаться</a></td>
-    </tr><tr data-title="Массаж лица и шейно-воротниковой зоны Москва" data-loc="moskva" data-tags="dur-short">
-      <td>Массаж лица и ШВЗ<div class="small muted">Массаж лица и шейно-воротниковой зоны</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=lico&loc=moskva&dur=60">Записаться</a></td>
-    </tr><tr data-title="Массаж лица и шейно-воротниковой зоны Онлайн" data-loc="online" data-tags="dur-short online-ok">
-      <td>Массаж лица и ШВЗ<div class="small muted">Массаж лица и шейно-воротниковой зоны</div></td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=psy&fam=psySession&loc=lesnoe">Записаться</a></td>
+    </tr><tr data-title="Сессия психосоматики Онлайн" data-loc="online" data-tags="dur-short online-ok emocii">
+      <td>Сессия психосоматики<div class="small muted">Разбираемся, что тело пытается сказать</div></td>
       <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>30 мин</td>
+      <td>60&nbsp;мин</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=lico&loc=online&dur=30">Записаться</a></td>
-    </tr><tr data-title="Остеопрактика (оздоровительная) Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Остеопрактика<div class="small muted">Остеопрактика (оздоровительная)</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
-      <td class="price">5 500 ₽</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=osteopraktika&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="Остеопрактика (оздоровительная) Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Остеопрактика<div class="small muted">Остеопрактика (оздоровительная)</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=osteopraktika&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="Остеопрактика (оздоровительная) Москва" data-loc="moskva" data-tags="dur-short">
-      <td>Остеопрактика<div class="small muted">Остеопрактика (оздоровительная)</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=osteopraktika&loc=moskva&dur=60">Записаться</a></td>
-    </tr><tr data-title="Остеопрактика (оздоровительная) Москва" data-loc="moskva" data-tags="dur-long">
-      <td>Остеопрактика<div class="small muted">Остеопрактика (оздоровительная)</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=osteopraktika&loc=moskva&dur=90">Записаться</a></td>
-    </tr><tr data-title="Остеопрактика (оздоровительная) Онлайн" data-loc="online" data-tags="dur-short online-ok">
-      <td>Остеопрактика<div class="small muted">Остеопрактика (оздоровительная)</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>45 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=osteopraktika&loc=online&dur=45">Записаться</a></td>
-    </tr><tr data-title="Эстетическая остеопрактика Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Эстетич. остеопрактика<div class="small muted">Эстетическая остеопрактика</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=osteopraktika-esteticheskaya&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="Эстетическая остеопрактика Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Эстетич. остеопрактика<div class="small muted">Эстетическая остеопрактика</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=osteopraktika-esteticheskaya&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="Эстетическая остеопрактика Москва" data-loc="moskva" data-tags="dur-short">
-      <td>Эстетич. остеопрактика<div class="small muted">Эстетическая остеопрактика</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=osteopraktika-esteticheskaya&loc=moskva&dur=60">Записаться</a></td>
-    </tr><tr data-title="Эстетическая остеопрактика Онлайн" data-loc="online" data-tags="dur-short online-ok">
-      <td>Эстетич. остеопрактика<div class="small muted">Эстетическая остеопрактика</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>45 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=osteopraktika-esteticheskaya&loc=online&dur=45">Записаться</a></td>
-    </tr><tr data-title="Эмоциональная коррекция Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Эмоц. коррекция<div class="small muted">Эмоциональная коррекция</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=emocionalnaya-korrekciya&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="Эмоциональная коррекция Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Эмоц. коррекция<div class="small muted">Эмоциональная коррекция</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=emocionalnaya-korrekciya&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="Эмоциональная коррекция Москва" data-loc="moskva" data-tags="dur-short">
-      <td>Эмоц. коррекция<div class="small muted">Эмоциональная коррекция</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=emocionalnaya-korrekciya&loc=moskva&dur=60">Записаться</a></td>
-    </tr><tr data-title="Эмоциональная коррекция Онлайн" data-loc="online" data-tags="dur-short online-ok">
-      <td>Эмоц. коррекция<div class="small muted">Эмоциональная коррекция</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=emocionalnaya-korrekciya&loc=online&dur=60">Записаться</a></td>
-    </tr><tr data-title="Эмоциональная коррекция Онлайн" data-loc="online" data-tags="dur-long online-ok">
-      <td>Эмоц. коррекция<div class="small muted">Эмоциональная коррекция</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=emocionalnaya-korrekciya&loc=online&dur=90">Записаться</a></td>
-    </tr><tr data-title="Сессия психосоматики Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Психосоматика<div class="small muted">Сессия психосоматики</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=psihosomatika&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="Сессия психосоматики Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Психосоматика<div class="small muted">Сессия психосоматики</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=psihosomatika&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="Сессия психосоматики Онлайн" data-loc="online" data-tags="dur-short online-ok">
-      <td>Психосоматика<div class="small muted">Сессия психосоматики</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>45 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=psihosomatika&loc=online&dur=45">Записаться</a></td>
-    </tr><tr data-title="Сессия психосоматики Онлайн" data-loc="online" data-tags="dur-short online-ok">
-      <td>Психосоматика<div class="small muted">Сессия психосоматики</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=psihosomatika&loc=online&dur=60">Записаться</a></td>
-    </tr><tr data-title="Сессия психосоматики Онлайн" data-loc="online" data-tags="dur-long online-ok">
-      <td>Психосоматика<div class="small muted">Сессия психосоматики</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=psihosomatika&loc=online&dur=90">Записаться</a></td>
-    </tr><tr data-title="Консультация с метафорическими картами Онлайн" data-loc="online" data-tags="dur-short online-ok">
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=psy&fam=psySession&loc=online">Записаться</a></td>
+    </tr><tr data-title="Консультация с метафорическими картами Онлайн" data-loc="online" data-tags="online-ok emocii">
       <td>Метафор. карты<div class="small muted">Консультация с метафорическими картами</div></td>
       <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>45 мин</td>
+      <td>длительность уточняется [?]</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=metaforicheskie-karty&loc=online&dur=45">Записаться</a></td>
-    </tr><tr data-title="Консультация с метафорическими картами Онлайн" data-loc="online" data-tags="dur-short online-ok">
-      <td>Метафор. карты<div class="small muted">Консультация с метафорическими картами</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=metaforicheskie-karty&loc=online&dur=60">Записаться</a></td>
-    </tr><tr data-title="Консультация с метафорическими картами Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=psy&fam=psyCards&loc=online">Записаться</a></td>
+    </tr><tr data-title="Консультация с метафорическими картами Пригород Лесное" data-loc="lesnoe" data-tags="emocii">
       <td>Метафор. карты<div class="small muted">Консультация с метафорическими картами</div></td>
       <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
+      <td>длительность уточняется [?]</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=metaforicheskie-karty&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="Консультация с метафорическими картами Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Метафор. карты<div class="small muted">Консультация с метафорическими картами</div></td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=psy&fam=psyCards&loc=lesnoe">Записаться</a></td>
+    </tr><tr data-title="БЭМ биоэнергорегуляционный массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-long napryazhenie">
+      <td>БЭМ<div class="small muted">Биоэнергорегуляционный массаж — нужно оборудование, только Лесное</div></td>
       <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
+      <td>90&nbsp;мин</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=metaforicheskie-karty&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="БЭМ — биоэнергорегуляционный массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>БЭМ<div class="small muted">БЭМ — биоэнергорегуляционный массаж</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=bem&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="БЭМ — биоэнергорегуляционный массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>БЭМ<div class="small muted">БЭМ — биоэнергорегуляционный массаж</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=bem&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="БЭМ — биоэнергорегуляционный массаж Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>БЭМ<div class="small muted">БЭМ — биоэнергорегуляционный массаж</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>120 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=bem&loc=lesnoe&dur=120">Записаться</a></td>
-    </tr><tr data-title="Биодинамика (бережная практика) Онлайн" data-loc="online" data-tags="dur-short online-ok">
-      <td>Биодинамика<div class="small muted">Биодинамика (бережная практика)</div></td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=special&fam=bem&loc=lesnoe">Записаться</a></td>
+    </tr><tr data-title="Биодинамика Онлайн" data-loc="online" data-tags="online-ok otdyh">
+      <td>Биодинамика<div class="small muted">Очень мягкая практика; онлайн — по договорённости</div></td>
       <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>45 мин</td>
+      <td>длительность уточняется [?]</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=biodinamika&loc=online&dur=45">Записаться</a></td>
-    </tr><tr data-title="Биодинамика (бережная практика) Онлайн" data-loc="online" data-tags="dur-short online-ok">
-      <td>Биодинамика<div class="small muted">Биодинамика (бережная практика)</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>60 мин</td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=special&fam=bio&loc=online">Записаться</a></td>
+    </tr><tr data-title="Маски для лица" data-loc="any" data-tags="lico">
+      <td>Маски для лица<div class="small muted">Дополнительная процедура</div></td>
+      <td class="muted">место уточняется [?]</td>
+      <td>длительность уточняется [?]</td>
       <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=biodinamika&loc=online&dur=60">Записаться</a></td>
-    </tr><tr data-title="Биодинамика (бережная практика) Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Биодинамика<div class="small muted">Биодинамика (бережная практика)</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=biodinamika&loc=lesnoe&dur=60">Записаться</a></td>
-    </tr><tr data-title="Биодинамика (бережная практика) Пригород Лесное" data-loc="lesnoe" data-tags="dur-long">
-      <td>Биодинамика<div class="small muted">Биодинамика (бережная практика)</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=biodinamika&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="Биодинамика (бережная практика) Москва" data-loc="moskva" data-tags="dur-short">
-      <td>Биодинамика<div class="small muted">Биодинамика (бережная практика)</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=biodinamika&loc=moskva&dur=60">Записаться</a></td>
-    </tr><tr data-title="Маски для лица (доп. процедура) Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Маски для лица<div class="small muted">Маски для лица (доп. процедура)</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>15 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=maski-lica&loc=lesnoe&dur=15">Записаться</a></td>
-    </tr><tr data-title="Маски для лица (доп. процедура) Пригород Лесное" data-loc="lesnoe" data-tags="dur-short">
-      <td>Маски для лица<div class="small muted">Маски для лица (доп. процедура)</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>20 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=maski-lica&loc=lesnoe&dur=20">Записаться</a></td>
-    </tr><tr data-title="Маски для лица (доп. процедура) Москва" data-loc="moskva" data-tags="dur-short">
-      <td>Маски для лица<div class="small muted">Маски для лица (доп. процедура)</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>20 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=maski-lica&loc=moskva&dur=20">Записаться</a></td>
-    </tr><tr data-title="Первичный приём Пригород Лесное" data-loc="lesnoe" data-tags="dur-long vpervye">
-      <td>Первичный приём<div class="small muted">Первичный приём</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>75 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=pervichnyj-priem&loc=lesnoe&dur=75">Записаться</a></td>
-    </tr><tr data-title="Первичный приём Пригород Лесное" data-loc="lesnoe" data-tags="dur-long vpervye">
-      <td>Первичный приём<div class="small muted">Первичный приём</div></td>
-      <td><span class="loc-tag loc-tag--lesnoe">ПЛ</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=pervichnyj-priem&loc=lesnoe&dur=90">Записаться</a></td>
-    </tr><tr data-title="Первичный приём Москва" data-loc="moskva" data-tags="dur-long vpervye">
-      <td>Первичный приём<div class="small muted">Первичный приём</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>75 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=pervichnyj-priem&loc=moskva&dur=75">Записаться</a></td>
-    </tr><tr data-title="Первичный приём Москва" data-loc="moskva" data-tags="dur-long vpervye">
-      <td>Первичный приём<div class="small muted">Первичный приём</div></td>
-      <td><span class="loc-tag loc-tag--moskva">Москва</span></td>
-      <td>90 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=pervichnyj-priem&loc=moskva&dur=90">Записаться</a></td>
-    </tr><tr data-title="Первичный приём Онлайн" data-loc="online" data-tags="dur-short online-ok vpervye">
-      <td>Первичный приём<div class="small muted">Первичный приём</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>45 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=pervichnyj-priem&loc=online&dur=45">Записаться</a></td>
-    </tr><tr data-title="Первичный приём Онлайн" data-loc="online" data-tags="dur-short online-ok vpervye">
-      <td>Первичный приём<div class="small muted">Первичный приём</div></td>
-      <td><span class="loc-tag loc-tag--online">Онлайн</span></td>
-      <td>60 мин</td>
-      <td class="price unknown">цена уточняется [?]</td>
-      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?family=pervichnyj-priem&loc=online&dur=60">Записаться</a></td>
+      <td><a class="btn btn-secondary service-row__btn" href="booking/index.html?svc=face&fam=faceMasks&loc=lesnoe">Записаться</a></td>
     </tr>
         <tr id="price-empty" hidden><td colspan="5" class="muted">Ничего не найдено. Попробуйте другой запрос или снимите фильтры — или напишите Ирине, если ищете что-то особое.</td></tr>
       </tbody>

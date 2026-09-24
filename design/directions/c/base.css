@@ -327,6 +327,7 @@ body .muted { color: var(--text-muted); }
 .review-quote { font-style: italic; font-size: 1.05rem; }
 .review-quote footer { margin-top: 10px; font-style: normal; color: var(--sheet-muted); font-size: .88rem; }
 .empty-state { text-align: center; padding: 32px 16px; color: var(--text-muted); }
+.sheet.empty-state, .sheet .empty-state { color: var(--sheet-muted); }
 
 /* ---------- статус-строка ---------- */
 .status-ribbon {

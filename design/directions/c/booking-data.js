@@ -19,9 +19,9 @@
     {
       id: 'massage', title: 'Массаж тела', hint: 'Классический, лимфодренажный, стоун — техника не меняет цену.',
       families: [
-        { id: 'massage60', title: 'Массаж 60 минут', dur: 60, prices: { lesnoe: null, moskva: null },
+        { id: 'massage60', title: 'Массаж', dur: 60, prices: { lesnoe: null, moskva: null },
           techs: ['Классический', 'Лимфодренажный'] },
-        { id: 'massage90', title: 'Массаж 90 минут', dur: 90, prices: { lesnoe: 5500, moskva: null },
+        { id: 'massage90', title: 'Массаж', dur: 90, prices: { lesnoe: 5500, moskva: null },
           techs: ['Классический', 'Лимфодренажный', 'Стоун-массаж'] },
       ],
     },
@@ -30,8 +30,11 @@
       families: [{ id: 'osteo60', title: 'Остеопрактика', dur: 60, prices: { lesnoe: 5500 } }],
     },
     {
-      id: 'face', title: 'Лицо', hint: 'Массаж лица и шейно-воротниковой зоны.',
-      families: [{ id: 'face45', title: 'Массаж лица и ШВЗ', dur: 45, prices: { lesnoe: 4000, moskva: null } }],
+      id: 'face', title: 'Лицо', hint: 'Массаж лица и шейно-воротниковой зоны, маски.',
+      families: [
+        { id: 'face45', title: 'Массаж лица и ШВЗ', dur: 45, prices: { lesnoe: 4000 } },
+        { id: 'faceMasks', title: 'Маски для лица', dur: null, durKnown: false, prices: { lesnoe: null } },
+      ],
     },
     {
       id: 'psy', title: 'Психосоматика', hint: 'Разбираемся, что тело пытается сказать.',
@@ -44,7 +47,7 @@
       id: 'special', title: 'Особые', hint: 'БЭМ, биодинамика — по согласованию.',
       families: [
         { id: 'bem', title: 'БЭМ — биоэнергорегуляционный массаж', dur: 90, prices: { lesnoe: null }, note: 'Нужно оборудование — только Лесное' },
-        { id: 'bio', title: 'Биодинамика', dur: 60, durKnown: false, prices: { online: null, lesnoe: null }, note: 'Очень мягкая практика, подходит и малышам' },
+        { id: 'bio', title: 'Биодинамика', dur: null, durKnown: false, prices: { online: null }, note: 'Онлайн — по договорённости, отзывалась только со слов гостей [?]' },
       ],
     },
   ];
@@ -60,7 +63,7 @@
   function $(s, r) { return (r || document).querySelector(s); }
   function $all(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-  function rub(n) { return n == null ? '<span class="q">цена [?]</span>' : n.toLocaleString('ru-RU') + ' ₽'; }
+  function rub(n) { return n == null ? '<span class="q">цена [?]</span>' : n.toLocaleString('ru-RU').replace(/\s/g, ' ') + ' ₽'; }
   function pad2(n) { return String(n).padStart(2, '0'); }
   function iso(d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
   function hash(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0); }

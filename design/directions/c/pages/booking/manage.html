@@ -24,6 +24,7 @@
     <a class="icon-btn" href="../index.html" aria-label="Закрыть"><svg width="22" height="22"><use href="#i-close"></use></svg></a>
   </header>
   <main class="bk-body" id="body" aria-live="polite" tabindex="-1"></main>
+  <p class="bk-legal">Услуги не являются медицинскими. При заболеваниях и противопоказаниях проконсультируйтесь с врачом.</p>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <script src="../../booking-data.js"></script>
@@ -35,7 +36,7 @@
   var token = new URLSearchParams(location.search).get('token') || K.shortCode('demo');
   var now = new Date();
   var booking = {
-    guestName: 'Анна', date: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 5, 11, 0), // демо: через 5 дней
+    guestName: 'Анна', date: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 5, 11, 0), // демо: через 5&nbsp;дней
     dirId: 'massage', famId: 'massage90', tech: 'Лимфодренажный', loc: 'lesnoe', prepay: K.PREPAY, status: 'CONFIRMED',
   };
   var view = 'summary';
@@ -89,7 +90,7 @@
       d.setDate(d.getDate() + 1);
     }
     body.innerHTML = '<button class="link-btn" data-v="summary" style="margin-bottom:12px">← Назад к записи</button>' +
-      '<p class="small muted">' + (hoursLeft() < 48 ? 'До визита меньше 48 часов: перенос возможен один раз, если есть окно в ближайшие 14 дней.' : 'Выберите новое время — цена и предоплата не изменятся.') + '</p>' +
+      '<p class="small muted">' + (hoursLeft() < 48 ? 'До визита меньше 48&nbsp;часов: перенос возможен один раз, если есть окно в ближайшие 14&nbsp;дней.' : 'Выберите новое время — цена и предоплата не изменятся.') + '</p>' +
       '<div class="chips" style="flex-direction:column;align-items:stretch;gap:8px">' + opts.map(function (o) {
         return '<button class="chip" style="justify-content:space-between;display:flex" data-pick="' + K.iso(o.date) + '|' + o.time + '">' + K.fmtDay.format(o.date) + ' · ' + o.time + '</button>';
       }).join('') + '</div>';

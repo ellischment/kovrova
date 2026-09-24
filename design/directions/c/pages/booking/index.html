@@ -38,6 +38,7 @@
   <div class="progress" aria-hidden="true"><i id="progressBar" style="width:14%"></i></div>
   <main class="bk-body" id="body" aria-live="polite" tabindex="-1"></main>
   <div class="bk-foot" id="foot"></div>
+  <p class="bk-legal">Услуги не являются медицинскими. При заболеваниях и противопоказаниях проконсультируйтесь с врачом.</p>
 </div>
 <div class="toast" id="toast" role="status"></div>
 
@@ -149,6 +150,7 @@
   var STEP_NUM = { loc: 1, direction: 2, family: 2, when: 3, contacts: 4 };
 
   function kicker(step) { var n = STEP_NUM[step]; return n ? '<p class="step-kicker">Шаг ' + n + ' из 4</p>' : ''; }
+  var MED_DISCLAIMER = '<p class="small muted" style="margin-top:14px">Услуги не являются медицинскими. При заболеваниях и противопоказаниях проконсультируйтесь с врачом.</p>';
 
   function render() {
     titleEl.textContent = TITLES[S.step] || 'Запись';
@@ -195,7 +197,7 @@
           '<span><span class="t">' + K.esc(d.title) + '</span><span class="s">' + K.esc(d.hint) + '</span></span>' +
           (priceHint ? '<span class="pr">' + priceHint + '</span>' : '') + '</button>';
       }).join('');
-      return kicker('direction') + top + list;
+      return kicker('direction') + top + list + MED_DISCLAIMER;
     },
     quiz: function () {
       var Q = [
@@ -212,7 +214,7 @@
         return '<button class="opt" data-set-fam="' + f.id + '" aria-pressed="' + (S.famId === f.id) + '">' +
           '<span><span class="t">' + K.esc(f.title) + '</span><span class="s">' + (f.durKnown === false ? 'Длительность [?]' : f.dur + ' мин') +
           (f.note ? ' · ' + K.esc(f.note) : '') + '</span></span><span class="pr">' + K.rub(f.prices[S.loc]) + '</span></button>';
-      }).join('') + '<p class="small muted" style="text-align:center;margin-top:10px">Не знаете, что выбрать? <button class="link-btn" data-set-repeat-first="1">Начните с первичного приёма</button></p>';
+      }).join('') + '<p class="small muted" style="text-align:center;margin-top:10px">Не знаете, что выбрать? <button class="link-btn" data-set-repeat-first="1">Начните с первичного приёма</button></p>' + MED_DISCLAIMER;
     },
     when: function () {
       var f = famObj();
@@ -225,9 +227,11 @@
       }).join('') + '</div>';
       if (f && f.techs) {
         html += '<p class="small" style="font-weight:600;margin:6px 0 8px">Техника <span class="muted" style="font-weight:400">— можно выбрать позже, до ' + K.TECH_DEADLINE + '</span></p>' +
-          '<div class="chips chips-scroll" style="margin-bottom:16px">' + f.techs.map(function (t) {
-            return '<button class="chip" data-set-tech="' + K.esc(t) + '" aria-pressed="' + (S.tech === t) + '">' + K.esc(t) + '</button>';
-          }).join('') + '<button class="chip" data-set-tech="" aria-pressed="' + (!S.tech) + '">Выберу позже</button></div>';
+          '<div class="chips chips-scroll" style="margin-bottom:16px">' +
+            '<button class="chip" data-set-tech="" aria-pressed="' + (!S.tech) + '">Выберу позже</button>' +
+            f.techs.map(function (t) {
+              return '<button class="chip" data-set-tech="' + K.esc(t) + '" aria-pressed="' + (S.tech === t) + '">' + K.esc(t) + '</button>';
+            }).join('') + '</div>';
       }
       if (!S.date) { html += emptyState(); return html; }
       var dObj = new Date(S.date + 'T00:00');
@@ -254,8 +258,8 @@
     },
     pay: function () {
       var f = famObj();
-      return '<div class="success"><p class="muted small">Демо оплаты через СБП. В продукте здесь откроется страница банка.</p>' +
-        K.qrSvg(S.date + S.time) +
+      return '<div class="success"><p class="muted small">Демо оплаты через СБП. В продукте на телефоне откроется банковское приложение; на большом экране — можно отсканировать QR.</p>' +
+        '<div class="pay-qr">' + K.qrSvg(S.date + S.time) + '</div>' +
         '<p><b>' + K.PREPAY.toLocaleString('ru-RU') + ' ₽</b> · предоплата за ' + K.esc((f.title || '').toLowerCase()) + '</p>' +
         '<p class="small muted">Окно держится за вами ' + K.HOLD_MIN + ' минут, пока идёт оплата.</p></div>';
     },
@@ -274,7 +278,6 @@
         (S.channel === 'sms' ? 'Подтверждение и напоминания придут по SMS.' : 'Подключите ' + (S.channel === 'max' ? 'MAX' : 'Telegram') + ' кнопкой ниже — пока не подключили, пришлём SMS.') + '</p>' +
         '<div class="list-actions">' +
         '<button class="btn btn-secondary btn-block" data-ics="1">Добавить в календарь</button>' +
-        (S.channel !== 'sms' ? '<button class="btn btn-secondary btn-block" data-toast="В продукте: откроется ' + (S.channel === 'max' ? 'MAX' : 'Telegram') + '-бот по одноразовой ссылке">Подключить напоминания в ' + (S.channel === 'max' ? 'MAX' : 'Telegram') + '</button>' : '') +
         (S.loc !== 'online' ? '<a class="btn btn-ghost btn-block" href="https://yandex.ru/maps/?text=' + encodeURIComponent(l.sub) + '" target="_blank" rel="noopener">Как добраться</a>' : '') +
         '<a class="btn btn-ghost btn-block" href="manage.html?token=' + token + '">Управлять записью</a>' +
         '</div></div>';
@@ -366,7 +369,7 @@
       (withComment ? '<div class="field"><label for="f-comment">Пожелания к сеансу <span class="muted" style="font-weight:400">(необязательно)</span></label>' +
         '<textarea id="f-comment" data-bind="comment" placeholder="Например: люблю, когда посильнее">' + K.esc(S.comment) + '</textarea>' +
         '<p class="hint">Пожалуйста, не пишите здесь о здоровье — обсудим лично, при встрече.</p><div id="medWarn"></div></div>' : '') +
-      '<label class="check"><input type="checkbox" data-bind="consent" ' + (S.consent ? 'checked' : '') + '><span>Соглашаюсь на <a href="#legal" data-legal="soglasie">обработку персональных данных</a></span></label>' +
+      '<label class="check"><input type="checkbox" data-bind="consent" ' + (S.consent ? 'checked' : '') + '><span>Соглашаюсь на <a href="../legal-soglasie.html" target="_blank" rel="noopener">обработку персональных данных</a></span></label>' +
       (errs.consent ? '<p class="err">Без согласия не сможем оформить запись — это требование 152-ФЗ</p>' : '') +
       '<label class="check"><input type="checkbox" data-bind="marketing" ' + (S.marketing ? 'checked' : '') + '><span class="muted">Хочу получать новости и приглашения на события (необязательно)</span></label>';
   }
@@ -374,11 +377,14 @@
   var FOOTS = {
     when: function () { return '<button class="btn btn-primary btn-block" data-next="1" ' + (S.time ? '' : 'disabled') + '>' + (S.time ? 'Дальше · ' + S.time : 'Выберите время') + '</button>'; },
     contacts: function () { return '<button class="btn btn-primary btn-block" data-submit="1">Перейти к оплате · ' + K.PREPAY.toLocaleString('ru-RU') + ' ₽</button>' +
-      '<p class="rule">Бесплатная отмена не позднее чем за 48 ч <span class="q">[?]</span>. <a href="#legal" data-legal="pravila">Правила записи</a></p>'; },
+      '<p class="rule">Бесплатная отмена не позднее чем за 48 ч <span class="q">[?]</span>. <a href="../legal-pravila.html" target="_blank" rel="noopener">Правила записи</a></p>'; },
     race: function () { return '<p class="rule">Выберите время из списка выше — форму заполнять заново не придётся.</p>'; },
-    pay: function () { return '<button class="btn btn-primary btn-block" data-paid="1">Оплатить (демо)</button><button class="btn btn-secondary btn-block" style="margin-top:8px" data-force-error="1">Демо: смоделировать ошибку оплаты</button>'; },
+    pay: function () { return '<button class="btn btn-primary btn-block pay-mobile-cta" data-paid="1">Открыть банк (СБП)</button><button class="btn btn-primary btn-block pay-desktop-cta" data-paid="1">Оплатить (демо)</button><button class="btn btn-secondary btn-block" style="margin-top:8px" data-force-error="1">Демо: смоделировать ошибку оплаты</button>'; },
     payerror: function () { return '<button class="btn btn-primary btn-block" data-retry-pay="1">Попробовать снова</button><a class="btn btn-secondary btn-block" style="margin-top:8px" href="mailto:hello@kovrova.ru?subject=Не%20получилось%20оплатить">Написать Ирине</a>'; },
-    done: function () { return '<a class="btn btn-secondary btn-block" href="../index.html">Закрыть</a>'; },
+    done: function () {
+      return (S.channel !== 'sms' ? '<button class="btn btn-primary btn-block" data-toast="В продукте: откроется ' + (S.channel === 'max' ? 'MAX' : 'Telegram') + '-бот по одноразовой ссылке">Подключить напоминания в ' + (S.channel === 'max' ? 'MAX' : 'Telegram') + '</button>' : '') +
+        '<a class="link-btn" style="display:block;text-align:center;margin-top:10px" href="../index.html">Закрыть</a>';
+    },
   };
 
   /* ================= обработчики ================= */
@@ -392,8 +398,6 @@
   }
 
   document.addEventListener('click', function (e) {
-    var legal = e.target.closest('[data-legal]');
-    if (legal) { e.preventDefault(); K.toast('В продукте: отдельный документ /legal/' + (legal.dataset.legal === 'soglasie' ? 'soglasie' : 'pravila-zapisi') + ' (152-ФЗ)'); return; }
     var t = e.target.closest('button,a[data-toast]'); if (!t) return;
     var ds = t.dataset;
     if (ds.setLoc) { S.loc = ds.setLoc; K.track('booking_step_location', { loc: S.loc }); goStep('direction'); return; }

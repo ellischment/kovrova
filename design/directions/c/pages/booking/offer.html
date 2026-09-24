@@ -26,6 +26,7 @@
   </header>
   <main class="bk-body" id="body" aria-live="polite" tabindex="-1"></main>
   <div class="bk-foot" id="foot"></div>
+  <p class="bk-legal">Услуги не являются медицинскими. При заболеваниях и противопоказаниях проконсультируйтесь с врачом.</p>
 </div>
 <script src="../../booking-data.js"></script>
 <script>
@@ -34,7 +35,7 @@
   var K = window.KVR;
   var body = K.$('#body'), foot = K.$('#foot');
   var state = new URLSearchParams(location.search).get('state') || 'active'; // active | taken | claimed
-  var offer = { name: 'Анна', date: 'сб, 4 октября', time: '11:00', svc: 'Массаж 90 минут', loc: 'Пригород Лесное', holdUntil: '12:10' };
+  var offer = { name: 'Анна', date: 'сб, 4 октября', time: '11:00', svc: 'Массаж 90&nbsp;минут', loc: 'Пригород Лесное', holdUntil: '12:10' };
 
   function render() {
     if (state === 'taken') {
@@ -57,8 +58,8 @@
       '<button class="link-btn" style="display:block;margin:10px auto 0" data-skip="1">Мне уже не актуально — уйти из листа</button>';
   }
   document.addEventListener('click', function (e) {
-    if (e.target.closest('[data-claim]')) { K.track('waitlist_offer_accepted', offer); location.href = 'index.html?loc=lesnoe&svc=massage&fam=massage90&date=2026-10-04&time=11:00&step=contacts'; }
-    if (e.target.closest('[data-skip]')) { K.track('waitlist_offer_declined', offer); location.href = '../index.html'; }
+    if (e.target.closest('[data-claim]')) { K.track('waitlist_offer_accepted', { state: state }); location.href = 'index.html?loc=lesnoe&svc=massage&fam=massage90&date=2026-10-04&time=11:00&step=contacts'; }
+    if (e.target.closest('[data-skip]')) { K.track('waitlist_offer_declined', { state: state }); location.href = '../index.html'; }
   });
   K.track('waitlist_offer_shown', { state: state });
   render();

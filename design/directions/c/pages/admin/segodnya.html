@@ -11,20 +11,20 @@
 </head>
 <body>
 <div class="phone">
-  <header class="a-head"><div><div class="t">Сегодня</div><div class="s" id="dateSub">ср, 30 сентября · Лесное</div></div></header>
+  <header class="a-head"><div><div class="t">Сегодня</div><div class="s" id="dateSub"></div></div></header>
   <main>
     <div class="actions" style="margin-top:0">
       <button class="btn sec sm" data-toast="В продукте: выбрать интервал → если есть гости, им уйдут 3 варианта переноса">Закрыть время</button>
       <button class="btn sec sm" data-toast="В продукте: /отпуск 10.11 15.11 — слоты скрыты, гостям уйдут варианты переноса и возврат">Отпуск</button>
-      <a class="btn sec sm" href="mesyac.html">Открыть месяц</a>
+      <a class="btn sec sm" href="mesyac.html" style="margin-left:auto">Открыть месяц</a>
     </div>
     <div class="card row"><span class="time">09:00</span><div><b>Анна</b><span class="tag reg">5-й визит</span><div class="small muted">Массаж 90 · лимфодренажный</div></div></div>
     <div class="card row"><span class="time">11:00</span><div><b>Мария</b><span class="tag new">новенькая</span><div class="small muted">Первичный приём · предоплата ✓</div></div></div>
     <div class="card free">
       <div class="row"><span class="time">13:30</span><div><b>Свободно</b><div class="small muted">В листе ожидания подходят 3 гостьи. Предложение уже отправлено первой, держится до 12:10.</div></div></div>
       <div class="actions">
-        <button class="btn sm" data-toast="Отправлено следующей гостье из листа ожидания (каскад, 30 мин)">Предложить листу ожидания</button>
-        <button class="btn sec sm" data-toast="Слот закрыт, лист ожидания не беспокоим">Закрыть окно</button>
+        <button class="btn sm" data-toast="Отправлено следующей гостье из листа ожидания (каскад, 30&nbsp;мин)">Предложить листу ожидания</button>
+        <button class="btn sec sm" data-toast="Окно закрыто, лист ожидания не беспокоим">Закрыть окно</button>
       </div>
     </div>
     <div class="card row"><span class="time">16:00</span><div><b>Ольга</b><span class="tag reg">2-й визит</span><div class="small muted">Остеопрактика · поменяла технику вчера в 17:12</div></div></div>
@@ -36,6 +36,12 @@
 <script src="../../booking-data.js"></script>
 <script src="../../admin-data.js"></script>
 <script>
+(function () {
+  var K = KVR, now = new Date();
+  var loc = K.dayLocation(K.iso(now));
+  var locLabel = loc === 'moskva' ? 'Москва' : loc === 'lesnoe' ? 'Лесное' : 'закрыто';
+  document.getElementById('dateSub').textContent = K.fmtDay.format(now) + ' · ' + locLabel;
+})();
 KVRA.mountNav('segodnya');
 document.addEventListener('click', function (e) { var t = e.target.closest('[data-toast]'); if (t) KVR.toast(t.dataset.toast); });
 </script>

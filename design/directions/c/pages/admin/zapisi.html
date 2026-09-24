@@ -37,10 +37,11 @@
   ];
   function render() {
     document.getElementById('list').innerHTML = ROWS.map(function (r) {
+      var cancelled = /^Отмен/.test(r.status);
       return '<div class="card row"><div style="flex:1"><b>' + r.name + '</b>' + (r.tag ? '<span class="tag ' + r.tag + '">' + (r.tag === 'reg' ? 'постоянная' : 'новенькая') + '</span>' : '') +
         '<div class="small muted">' + r.when + ' · ' + r.svc + ' · ' + r.loc + '</div>' +
         '<div class="small" style="font-weight:600;margin-top:2px">' + r.status + '</div>' +
-        '<div class="actions"><button class="btn sec sm" data-toast="В продукте: перенос — выбор нового времени, гостье уходит уведомление">Перенести</button><button class="btn sec sm" data-toast="В продукте: отмена с расчётом возврата по правилам">Отменить</button></div>' +
+        (cancelled ? '' : '<div class="actions"><button class="btn sec sm" data-toast="В продукте: перенос — выбор нового времени, гостье уходит уведомление">Перенести</button><button class="btn sec sm" data-toast="В продукте: отмена с расчётом возврата по правилам">Отменить</button></div>') +
         '</div></div>';
     }).join('');
   }
