@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ирина Протченко: массаж, остеопрактика, психосоматика (прототип)</title>
+<title>Ирина Коврова: массаж, остеопрактика, психосоматика (прототип)</title>
 <meta name="description" content="Прототип направления: бережная работа с телом и состоянием. Пригород Лесное, Москва и онлайн. Запись онлайн без звонков.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#FAF6EF">
@@ -273,9 +273,9 @@ details p{color:var(--muted);margin:0 0 16px}
 
 <header class="header" id="top">
   <div class="container">
-    <a class="brand" href="#top" aria-label="Ирина Протченко, на главную">
+    <a class="brand" href="#top" aria-label="Ирина Коврова, на главную">
       <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><path d="M5.5 19.5C5.5 12.3 10.6 7 16.8 7 22.6 7 26.5 10.8 26.5 16.2 26.5 22.3 21.9 26 15.6 26 9.4 26 5.5 23.7 5.5 19.5Z" fill="#3D4E21"/><path d="M11.5 20.5c2.2-5 6-8.2 10.4-9.4" fill="none" stroke="#F2DCB9" stroke-width="1.7" stroke-linecap="round"/></svg>
-      <span class="brand-text"><b>Ирина Протченко</b><small>массаж · остеопрактика · психосоматика</small></span>
+      <span class="brand-text"><b>Ирина Коврова</b><small>массаж · остеопрактика · психосоматика</small></span>
     </a>
     <nav class="nav" aria-label="Основное меню">
       <a href="#uslugi">Цены</a><a href="#prostranstvo">Пространство</a><a href="#ob-irine">Об Ирине</a><a href="#voprosy">Вопросы</a><a href="#kontakty">Контакты</a>
@@ -397,11 +397,11 @@ details p{color:var(--muted);margin:0 0 16px}
 
 <section class="section alt" id="ob-irine" aria-labelledby="h-about">
   <div class="container about">
-    <div class="portrait" data-img><img src="https://f2.dikidi.net/c27/v26060/4b9r58tsvg.jpg?size=m" alt="Ирина Протченко" loading="lazy" width="480" height="600"><div class="ph">Портрет Ирины<br>(тёплый, естественный свет)</div></div>
+    <div class="portrait" data-img><img src="https://f2.dikidi.net/c27/v26060/4b9r58tsvg.jpg?size=m" alt="Ирина Коврова" loading="lazy" width="480" height="600"><div class="ph">Портрет Ирины<br>(тёплый, естественный свет)</div></div>
     <div>
       <p class="eyebrow">Об Ирине</p>
       <h2 id="h-about">Работаю с телом и сознанием — бережно</h2>
-      <p>Я Ирина Протченко, мастер массажа, остеопрактики и психосоматики. Прошла полный курс в школе остеопрактики Александра Смирнова, продолжаю учиться массажу и оздоровительным техникам. В работе использую методики научной психосоматики, метод легализации правды, эфирные масла и метафорические карты.</p>
+      <p>Я Ирина Коврова, мастер массажа, остеопрактики и психосоматики. Прошла полный курс в школе остеопрактики Александра Смирнова, продолжаю учиться массажу и оздоровительным техникам. В работе использую методики научной психосоматики, метод легализации правды, эфирные масла и метафорические карты.</p>
       <blockquote>Мы меняем жизни постепенно, продвигаясь безопасным путём. Приходите — всё будет бережно и с заботой о вас.</blockquote>
       <ul class="facts">
         <li><svg width="18" height="18" style="color:var(--moss)"><use href="#i-leaf"/></svg>8 лет практики, 5.0 по 35 оценкам</li>
@@ -488,7 +488,7 @@ details p{color:var(--muted);margin:0 0 16px}
 <footer class="footer">
   <div class="container">
     <div class="cols">
-      <div><b style="font:500 19px var(--serif);color:#fff">Ирина Протченко</b><p style="margin-top:6px">Массаж, остеопрактика, психосоматика. Пригород Лесное, Москва, онлайн.</p></div>
+      <div><b style="font:500 19px var(--serif);color:#fff">Ирина Коврова</b><p style="margin-top:6px">Массаж, остеопрактика, психосоматика. Пригород Лесное, Москва, онлайн.</p></div>
       <div><a href="#legal">Политика обработки персональных данных</a><br><a href="#legal">Согласие на обработку персональных данных</a><br><a href="#legal">Правила записи и отмены</a></div>
       <div>ИП / НПД <span class="q">[?]</span> · ИНН <span class="q">[?]</span><br>Обращения по персональным данным: email <span class="q">[?]</span></div>
     </div>
@@ -839,11 +839,11 @@ sheet.addEventListener('click', e=>{
 function downloadIcs(){
   const s=svcObj(); const [y,m,d]=S.date.split('-'); const [hh,mm]=S.time.split(':');
   const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
-  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//protchenko//prototype//RU','BEGIN:VEVENT',
-    `UID:${Date.now()}@protchenko.prototype`,`DTSTAMP:${stamp}`,`DTSTART;TZID=Europe/Moscow:${y}${m}${d}T${hh}${mm}00`,`DURATION:PT${s.dur}M`,
-    `SUMMARY:${s.title} — Ирина Протченко`,`LOCATION:${S.loc==='online'?'Онлайн':locObj().sub}`,
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//kovrova//prototype//RU','BEGIN:VEVENT',
+    `UID:${Date.now()}@kovrova.prototype`,`DTSTAMP:${stamp}`,`DTSTART;TZID=Europe/Moscow:${y}${m}${d}T${hh}${mm}00`,`DURATION:PT${s.dur}M`,
+    `SUMMARY:${s.title} — Ирина Коврова`,`LOCATION:${S.loc==='online'?'Онлайн':locObj().sub}`,
     'DESCRIPTION:Перенести или отменить — по ссылке из подтверждения.','END:VEVENT','END:VCALENDAR'].join('\r\n');
-  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'})); a.download='zapis-irina-protchenko.ics'; a.click();
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'})); a.download='zapis-irina-kovrova.ics'; a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href), 1000); track('calendar_added');
 }
 

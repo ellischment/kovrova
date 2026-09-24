@@ -11,7 +11,7 @@
 
 ## Задачи
 1. **Шаблон.** Склонируй `https://github.com/di-sukharev/vibe` (master) во временную папку. Скопируй его содержимое в корень репозитория **без перезаписи** наших `CLAUDE.md`, `README.md`, `docs/`, `prompts/`, `prototype/`, `.claude/`, `content/`. Их `CLAUDE.md` и `README.md` сохрани как `docs/vibe/CLAUDE.template.md` и `docs/vibe/README.template.md`. Их `AGENTS.md` оставь в корне: наш `CLAUDE.md` ссылается на него.
-2. **Настройка шаблона.** Выполни раздел «Agent setup instructions» из README шаблона: web без mobile; `CHECKLIST.md` заполни на русском (имя проекта «Ирина Протченко: сайт и запись», slug `protchenko`); хостинг — **Yandex Cloud** (аудитория и данные в РФ), папку и гайд DigitalOcean удали. Переименуй демо-идентификаторы (`web_app_demo` и т. п.) → `protchenko`. Remote `origin` шаблона не подключай: наш origin уже настроен.
+2. **Настройка шаблона.** Выполни раздел «Agent setup instructions» из README шаблона: web без mobile; `CHECKLIST.md` заполни на русском (имя проекта «Ирина Коврова: сайт и запись», slug `kovrova`); хостинг — **Yandex Cloud** (аудитория и данные в РФ), папку и гайд DigitalOcean удали. Переименуй демо-идентификаторы (`web_app_demo` и т. п.) → `kovrova`. Remote `origin` шаблона не подключай: наш origin уже настроен.
 3. **Зависимости.** `bun install`; подними PostgreSQL через Docker Compose, если Docker доступен (если нет — зафиксируй в STATUS и продолжай без БД). Сгенерируй локальные `.env` из примеров (**не коммить**).
 4. **Навыки.** Установи маркетинговые навыки в `.claude/skills/`:
    ```bash

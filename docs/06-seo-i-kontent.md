@@ -17,7 +17,7 @@
 | БЭМ | биоэнергорегуляция массаж; массаж перчатками | `/uslugi/massazh/bem-bioenergoregulyaciya` |
 | Подарок | сертификат на массаж подарок Видное; подарочный сертификат массаж | `/sertifikaty` |
 | Москва | массаж [район — уточнить адрес]; остеопрактика Москва | `/moskva` |
-| Бренд | Ирина Протченко; Протченко массаж | `/`, `/ob-irine` |
+| Бренд | Ирина Коврова; Ирина Протченко (прежнее имя профиля в DIKIDI и Telegram — люди ищут и так) | `/`, `/ob-irine` |
 
 > Задача для Manus или SEO-агента: собрать частотность в Вордстате (регион «Москва и область»), конкурентов в выдаче и Картах, их цены и форматы. Промпт — `prompts/manus-research.md`.
 
@@ -37,7 +37,7 @@
   "@context": "https://schema.org",
   "@type": "HealthAndBeautyBusiness",
   "@id": "https://<домен>/lesnoe#business",
-  "name": "Ирина Протченко — массаж и остеопрактика в Пригороде Лесное",
+  "name": "Ирина Коврова — массаж и остеопрактика в Пригороде Лесное",
   "url": "https://<домен>/lesnoe",
   "telephone": "+7-991-606-14-58",
   "image": "https://<домен>/img/lesnoe-cover.jpg",
@@ -46,7 +46,7 @@
   "geo": {"@type": "GeoCoordinates", "latitude": 55.552974, "longitude": 37.807862},
   "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Tuesday","Wednesday","Saturday","Sunday"], "opens": "09:00", "closes": "21:00"}],
-  "founder": {"@type": "Person", "name": "Ирина Протченко", "@id": "https://<домен>/ob-irine#person"},
+  "founder": {"@type": "Person", "name": "Ирина Коврова", "@id": "https://<домен>/ob-irine#person"},
   "makesOffer": [{"@type": "Offer", "priceCurrency": "RUB", "price": "5500",
       "itemOffered": {"@type": "Service", "name": "Массаж 90 минут"}}],
   "sameAs": ["https://t.me/<канал>", "https://yandex.ru/maps/org/<id>", "https://dikidi.net/2070240"]
