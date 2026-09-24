@@ -199,10 +199,11 @@ body .muted { color: var(--text-muted); }
 
 /* ---------- placeholder-фото ---------- */
 .photo-placeholder {
-  aspect-ratio: 4/3; border: 2px dashed var(--line);
+  aspect-ratio: 4/3; border: var(--frame) solid var(--line);
   border-radius: var(--radius-frame); display: flex; align-items: center;
   justify-content: center; text-align: center; padding: 16px;
-  color: var(--text-muted); font-size: .9rem; background: var(--bg-alt);
+  color: var(--text-muted); font-size: .85rem; background: var(--bg-alt);
+  background-image: repeating-linear-gradient(135deg, rgb(0 0 0 / .03) 0 2px, transparent 2px 12px);
 }
 .sheet .photo-placeholder { background: var(--cream-50, #FBF3E7); border-color: var(--sheet-line); color: var(--sheet-muted); }
 

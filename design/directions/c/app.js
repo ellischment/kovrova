@@ -64,6 +64,7 @@
     var rows = table.querySelectorAll("tbody tr");
     var visibleCount = 0;
     rows.forEach(function (row) {
+      if (!row.dataset.title) return;
       var text = row.dataset.title.toLowerCase();
       var rowLoc = row.dataset.loc;
       var rowTags = (row.dataset.tags || "").split(" ");

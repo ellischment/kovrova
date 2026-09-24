@@ -264,8 +264,8 @@
         '<p class="small muted">Окно держится за вами ' + K.HOLD_MIN + ' минут, пока идёт оплата.</p></div>';
     },
     payerror: function () {
-      return '<div class="banner err"><strong>Оплата не прошла</strong>Деньги не списаны. Слот пока держится за вами, попробуйте ещё раз или выберите другой способ.</div>' +
-        '<div class="success">' + K.qrSvg('err' + S.date + S.time) + '</div>';
+      return '<div class="banner err"><strong>Оплата не прошла</strong>Деньги не списаны. Окно пока держится за вами, попробуйте ещё раз или выберите другой способ.</div>' +
+        '<div class="success pay-qr">' + K.qrSvg('err' + S.date + S.time) + '</div>';
     },
     done: function () {
       var f = famObj(), d = new Date(S.date + 'T00:00'), l = locObj();
