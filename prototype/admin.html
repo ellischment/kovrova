@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Кабинет Ирины (прототип админки и бота)</title>
+<meta name="robots" content="noindex">
+<!-- ПРОТОТИП. Показывает, как Ирина управляет записью с телефона и как звучат сообщения бота. Данные демонстрационные. -->
+<style>
+@font-face{font-family:"Lora";font-style:normal;font-display:swap;font-weight:400 700;src:url(fonts/lora-cyrillic-wght-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Lora";font-style:normal;font-display:swap;font-weight:400 700;src:url(fonts/lora-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:"Manrope";font-style:normal;font-display:swap;font-weight:200 800;src:url(fonts/manrope-cyrillic-wght-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Manrope";font-style:normal;font-display:swap;font-weight:200 800;src:url(fonts/manrope-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F,U+20BD}
+:root{--ink:#1F2A1A;--muted:#5A6150;--bg:#FAF6EF;--paper:#FFFDF9;--sand:#F2DCB9;--sand-soft:#F7EBD6;--moss:#3D4E21;--moss-deep:#2A3716;--tint:#E4E9D6;--clay:#A24A2A;--line:#E6DDCC;--serif:"Lora",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
+*{box-sizing:border-box} body{margin:0;background:#E9E3D7;color:var(--ink);font:400 16px/1.5 var(--sans)}
+.phone{max-width:430px;min-height:100dvh;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;box-shadow:0 0 40px rgb(0 0 0 / .08)}
+header{padding:14px 16px 10px;border-bottom:1px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:5}
+header .t{font:500 20px/1.2 var(--serif)} header .s{font-size:13px;color:var(--muted)}
+main{flex:1;padding:14px 16px 90px}
+h2{font:500 19px/1.3 var(--serif);margin:18px 0 10px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
+.row{display:flex;gap:12px;align-items:flex-start}
+.time{font-weight:700;min-width:52px}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;margin-left:4px;vertical-align:1px}
+.tag.new{background:#F6E3D9;color:var(--clay)} .tag.reg{background:var(--tint);color:var(--moss)}
+.muted{color:var(--muted)} .small{font-size:14px}
+.free{border-style:dashed;border-color:var(--moss);background:#F4F6EE}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--moss);background:var(--moss);color:#fff;font:600 15px/1 var(--sans);cursor:pointer}
+.btn.sec{background:transparent;color:var(--moss)} .btn.sm{min-height:38px;padding:0 12px;font-size:14px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+table{width:100%;min-width:330px;border-collapse:collapse;font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+th,td{padding:10px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;background:var(--sand-soft)}
+td input{width:62px;min-height:40px;border:1.5px solid var(--line);border-radius:10px;padding:6px 8px;font:600 15px var(--sans);color:var(--clay);background:#fff}
+td input:focus{outline:none;border-color:var(--moss)}
+td.off input{opacity:.35}
+.sw{display:block;font-size:11px;color:var(--muted);margin-top:4px;cursor:pointer}
+.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;display:grid;grid-template-columns:repeat(4,1fr);background:var(--paper);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:6}
+.tabs button{border:0;background:none;padding:10px 4px 12px;font:600 13px var(--sans);color:var(--muted);cursor:pointer;min-height:56px}
+.tabs button[aria-selected=true]{color:var(--moss);box-shadow:inset 0 3px 0 var(--moss)}
+.chat{background:#DCE3D0;border-radius:18px;padding:14px 10px;display:flex;flex-direction:column;gap:8px}
+.msg{background:#fff;border-radius:14px 14px 14px 4px;padding:10px 12px;max-width:88%;font-size:15px;line-height:1.45;white-space:pre-line;box-shadow:0 1px 1px rgb(0 0 0 / .06)}
+.msg.me{align-self:flex-end;background:#EEF6DC;border-radius:14px 14px 4px 14px}
+.kb{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.kb span{background:#F1F4EA;border-radius:8px;text-align:center;padding:8px 4px;font-size:13px;font-weight:600;color:var(--moss)}
+.seg{display:flex;gap:6px;margin:4px 0 12px} .seg button{flex:1;min-height:40px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);font:600 14px var(--sans);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--moss);color:#fff;border-color:var(--moss)}
+.toast{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:12px;padding:10px 14px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9;max-width:90vw}
+.toast.show{opacity:1}
+.note{font-size:13px;color:var(--muted);margin-top:8px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="phone">
+  <header><div class="t" id="title">Сегодня</div><div class="s">Кабинет Ирины · прототип, данные демо</div></header>
+  <main>
+    <!-- СЕГОДНЯ -->
+    <section id="v-today">
+      <div class="actions" style="margin-top:0"><button class="btn sec sm" data-t="В продукте: выбрать интервал → если есть гости, им уйдут 3 варианта переноса">Закрыть время</button><button class="btn sec sm" data-t="В продукте: /отпуск 10.11 15.11 — слоты скрыты, гостям уйдут варианты переноса и возврат">Отпуск</button><button class="btn sec sm" data-t="В продукте: мастер «Открыть запись на месяц»: шаблон, исключения, время открытия">Открыть месяц</button></div>
+      <h2>ср, 30 сентября · Лесное</h2>
+      <div class="card row"><span class="time">09:00</span><div><b>Анна</b><span class="tag reg">5-й визит</span><div class="small muted">Массаж 90 · лимфодренажный</div></div></div>
+      <div class="card row"><span class="time">11:00</span><div><b>Мария</b><span class="tag new">новенькая</span><div class="small muted">Первичный приём · предоплата ✓</div></div></div>
+      <div class="card free"><div class="row"><span class="time">13:30</span><div><b>Свободно</b><div class="small muted">В листе ожидания подходят 3 гостьи. Предложение уже отправлено первой, держится до 12:10.</div></div></div>
+        <div class="actions"><button class="btn sm" data-t="Отправлено следующей гостье из листа ожидания (каскад, 30 мин)">Предложить следующей</button><button class="btn sec sm" data-t="Слот закрыт, лист ожидания не беспокоим">Закрыть окно</button></div></div>
+      <div class="card row"><span class="time">16:00</span><div><b>Ольга</b><span class="tag reg">2-й визит</span><div class="small muted">Остеопрактика · поменяла технику вчера в 17:12</div></div></div>
+      <p class="note">Отметки «пришла / не пришла» ставятся свайпом. После сеанса гостье само уйдёт тёплое «спасибо».</p>
+    </section>
+
+    <!-- ЦЕНЫ -->
+    <section id="v-prices" hidden>
+      <p class="small muted" style="margin-top:0">Одна таблица на всё. Поменяли цифру — сайт обновится примерно через минуту. Старые записи сохраняют старую цену.</p>
+      <div style="overflow-x:auto;border-radius:16px"><table>
+        <thead><tr><th>Услуга</th><th>Лесное</th><th>Москва</th><th>Онлайн</th></tr></thead>
+        <tbody id="matrix"></tbody>
+      </table></div>
+      <p class="note">Нажмите «вкл/выкл» под ценой, чтобы убрать услугу из локации. Предоплата, длительность и описание — по тапу на название (в продукте).</p>
+    </section>
+
+    <!-- ЛИСТ ОЖИДАНИЯ -->
+    <section id="v-wait" hidden>
+      <div class="card"><b>Елена</b> <span class="tag reg">постоянная</span><div class="small muted">Лесное · Массаж 90 · выходные утром · до 31 окт.</div><div class="small">1-я в очереди на «сб утро»</div><div class="actions"><button class="btn sm" data-t="Выберите окно — Елене уйдёт предложение с кнопкой «Забрать»">Предложить окно</button></div></div>
+      <div class="card"><b>Дарья</b> <span class="tag new">новенькая</span><div class="small muted">Лесное · Первичный приём · будни вечером · до 15 окт.</div><div class="small">1-я на «будни вечер»</div></div>
+      <div class="card"><b>Ксения</b><div class="small muted">Москва · Остеопрактика · любые дни · до 30 нояб.</div><div class="small">2-я на «сб Москва»</div></div>
+      <p class="note">Правила: окно на завтра и ближе предлагается всем сразу, дальше — по очереди с удержанием 30 минут. Тихие часы 22:00–08:00. Всё настраивается.</p>
+    </section>
+
+    <!-- БОТ -->
+    <section id="v-bot" hidden>
+      <div class="seg"><button aria-pressed="true" data-chat="guest">Что видит гостья</button><button aria-pressed="false" data-chat="me">Что вижу я</button></div>
+      <div class="chat" id="chat-guest">
+        <div class="msg">Анна, вы записаны 🍀
+ср, 30 сентября, 09:00 · Массаж 90 минут · Пригород Лесное
+Вид массажа можно поменять до 18:00 накануне.
+Ирина</div>
+        <div class="msg">Анна, добрый день. Напоминаю: жду вас в среду в 09:00, Пригород Лесное.
+Если планы изменились, перенести или отменить можно по кнопкам ниже. Так окно успеет достаться тому, кто его ждёт.
+<div class="kb"><span>Всё в силе</span><span>Перенести</span><span>Сменить технику</span><span>Отменить</span></div></div>
+        <div class="msg">Елена, освободилось окно, которое вы ждали:
+сб, 4 октября, 11:00 · Массаж 90 · Лесное
+Оно держится за вами 30 минут.
+<div class="kb" style="grid-template-columns:1fr"><span>Забрать окно</span></div></div>
+        <div class="msg">Анна, спасибо за доверие 🫶
+Сегодня постарайтесь дать телу отдых и пить побольше воды.</div>
+      </div>
+      <div class="chat" id="chat-me" hidden>
+        <div class="msg">🆕 сб 4 окт 11:00 · Массаж 90 (стоун) · Лесное · Елена (из листа ожидания)
+<div class="kb"><span>Открыть</span><span>Написать</span></div></div>
+        <div class="msg">Завтра, ср 30 сент, Лесное:
+09:00 Анна · Массаж 90 (лимфодренажный) · 5-й визит
+11:00 Мария · Первичный приём · новенькая
+13:30 — свободно (в листе 3, предложение отправлено)
+16:00 Ольга · Остеопрактика
+Хорошего вечера 🍀</div>
+        <div class="msg me">/закрыть 2.10 16-21</div>
+        <div class="msg">На 2.10 с 16:00 есть 1 запись (Ольга). Закрыть время и предложить ей 3 варианта переноса?
+<div class="kb"><span>Да, закрыть</span><span>Отмена</span></div></div>
+        <div class="msg">📝 Новый пост в канале: «Этому учили на всех обучениях по соцсетям…»
+<div class="kb" style="grid-template-columns:1fr 1fr 1fr"><span>На сайт</span><span>Изменить</span><span>Нет</span></div></div>
+      </div>
+      <p class="note">Все тексты — шаблоны, которые утверждает Ирина. Бот ничего не «придумывает» за неё.</p>
+    </section>
+  </main>
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-v="today">Сегодня</button>
+    <button role="tab" aria-selected="false" data-v="prices">Цены</button>
+    <button role="tab" aria-selected="false" data-v="wait">Лист</button>
+    <button role="tab" aria-selected="false" data-v="bot">Бот</button>
+  </nav>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(() => {
+const $=s=>document.querySelector(s);
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2600);};
+const TITLES={today:'Сегодня',prices:'Услуги и цены',wait:'Лист ожидания',bot:'Сообщения бота'};
+document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(!b)return;
+  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  ['today','prices','wait','bot'].forEach(v=>$('#v-'+v).hidden=v!==b.dataset.v); $('#title').textContent=TITLES[b.dataset.v]; scrollTo(0,0);});
+document.addEventListener('click',e=>{const t=e.target.closest('[data-t]'); if(t) toast(t.dataset.t);
+  const c=e.target.closest('[data-chat]'); if(c){document.querySelectorAll('[data-chat]').forEach(x=>x.setAttribute('aria-pressed',x===c)); $('#chat-guest').hidden=c.dataset.chat!=='guest'; $('#chat-me').hidden=c.dataset.chat!=='me';}
+  const sw=e.target.closest('.sw'); if(sw){const td=sw.closest('td'); td.classList.toggle('off'); sw.textContent=td.classList.contains('off')?'выкл':'вкл'; toast(td.classList.contains('off')?'Услуга скрыта в этой локации':'Услуга снова доступна');}
+});
+const ROWS=[['Первичный приём',null,null,null],['Массаж 90 мин',5500,null,false],['Остеопрактика 60',5500,null,false],['Массаж лица 45',4000,null,false],['Психосоматика 60',null,false,null],['Биодинамика 60',null,false,null]];
+$('#matrix').innerHTML=ROWS.map(([n,...p])=>`<tr><td><b style="font-weight:600">${n}</b></td>${p.map(v=>v===false?`<td class="off"><input inputmode="numeric" aria-label="${n}" placeholder="—"><span class="sw">выкл</span></td>`:`<td><input inputmode="numeric" aria-label="${n}" value="${v??''}" placeholder="[?]"><span class="sw">вкл</span></td>`).join('')}</tr>`).join('');
+$('#matrix').addEventListener('change',e=>{ if(e.target.tagName==='INPUT') toast('Сохранено · на сайте через минуту'); });
+})();
+</script>
+</body>
+</html>

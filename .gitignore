@@ -1,0 +1,15 @@
+# секреты и окружение
+.env
+.env.*
+!.env.example
+# зависимости и сборки
+node_modules/
+dist/
+.astro/
+.turbo/
+coverage/
+playwright-report/
+test-results/
+# системное
+.DS_Store
+*.log
