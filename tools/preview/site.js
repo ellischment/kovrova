@@ -47,7 +47,7 @@
      if(/^https?:/.test(h)){ a.target='_blank'; a.rel='noopener'; return; }
      if(/^(tel:|mailto:|sms:)/.test(h)) return;
      if(h==='#'||h===''){ e.preventDefault(); return; }
-     if(/^#/.test(h)) return;
+     if(/^#/.test(h)){ e.preventDefault(); var id=decodeURIComponent(h.slice(1)), el=id==='top'?d.body:d.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'}); else if(id==='top') frame.contentWindow.scrollTo(0,0); return; }
      if(/\.html([?#]|$)/.test(h)){ e.preventDefault(); open(rel(h,split(current).k)); }
    });
    d.addEventListener('submit',function(e){ setTimeout(function(){},0); },true);

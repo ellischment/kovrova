@@ -50,6 +50,16 @@ V2L={'c-home':'Главная','c-menu':'Меню','c-prices':'Услуги и �
  'zapis-gde':'Запись 1 · где','zapis-chto':'Запись 2 · что','zapis-kogda':'Запись 3 · когда','zapisK':'Запись 3 · когда','zapis-kontakty':'Запись 4 · контакты и оплата','zapisC':'Запись 4 · контакты и оплата','zapis-gotovo':'Вы записаны','zapis-netokon':'Запись: нет окон','zapis-zanyato':'Запись: время заняли','zapis-rannij':'Запись: ранний доступ','zapis-oshibka':'Запись: оплата не прошла',
  'list-forma':'Лист ожидания','list':'Лист ожидания','list-podtv':'Лист ожидания: вы в списке','list-predl':'Лист ожидания: окно для вас','list-ushlo':'Лист ожидания: окно ушло','z-obzor':'Моя запись','z':'Моя запись','z-perenos':'Перенести запись','z-otmena':'Отменить запись','z-otmeneno':'Запись отменена','msg':'Сообщения гостю',
  'adm-segodnya':'Кабинет: сегодня','adm-mesyac':'Кабинет: месяц','adm-zapisi':'Кабинет: записи','adm-ceny':'Кабинет: цены','adm-massovo':'Кабинет: цены массово','adm-list':'Кабинет: лист ожидания','adm2-eshche':'Кабинет: ещё','adm2-gost':'Кабинет: гостья','adm2-nastrojki':'Кабинет: настройки','adm2-otchety':'Кабинет: отчёты','adm2-sertifikaty':'Кабинет: сертификаты','adm2-sobytiya':'Кабинет: события','adm2-soobshcheniya':'Кабинет: шаблоны сообщений','adm2-sostoyaniya':'Кабинет: сбои и состояния'}
+# вариант 3: фото из DIKIDI недоступны в просмотре и одно из них с лицом гостьи; берём свои кадры (гостья вырезана)
+PROTO_IMG={'https://f2.dikidi.net/c27/v26968/4nn9mlllcp.jpg?size=r':('../'+B+'/img/irina-kabinet.jpg','Ирина в кабинете в Пригороде Лесное'),
+  'https://f2.dikidi.net/c27/v26968/4fv523rr96.jpg?size=r':('../'+B+'/img/okno-shtory.jpg','Кабинет: окно и тёмные шторы'),
+  'https://f2.dikidi.net/c27/v26060/5pu0p9u11m.jpg':('missing.jpg','Атмосфера кабинета'),
+  'https://f2.dikidi.net/c27/v26060/4b9r58tsvg.jpg?size=m':('../'+B+'/img/portret.jpg','Ирина Коврова')}
+def proto_photos(t):
+    for u,(n,alt) in PROTO_IMG.items():
+        pos=' style="object-position:50%% 0%%"' if 'irina-kabinet' in n else ''
+        t=re.sub(r'src="'+re.escape(u)+r'" alt="[^"]*"','src="%s" alt="%s"%s'%(n,alt,pos),t)
+    return t
 def label(k,s):
     b=re.sub(r'(-390|-1280|-cream|-night)?\.html$','',posixpath.basename(k))
     if '/c-claude-design/' in k and b in V2L: return V2L[b]
@@ -58,8 +68,9 @@ def label(k,s):
     m=re.search(r'<h1[^>]*>(.*?)</h1>',s,re.S) or re.search(r'<h2[^>]*>(.*?)</h2>',s,re.S)
     return ' '.join(H.unescape(re.sub(r'<[^>]+>',' ',m.group(1))).split())[:60] if m else posixpath.basename(k)
 def build(ver):
-    root=A if ver==1 else B
+    root={1:A,2:B,3:'prototype'}[ver]
     files=[f for f in walk(root) if not f.endswith(('.md','.dc.html')) and '/canvas/' not in f and 'LICENSE' not in f]
+    if ver==3: files+=[B+'/img/irina-kabinet.jpg',B+'/img/okno-shtory.jpg',B+'/img/portret.jpg']
     extra=set()
     for k in files:
         if k.endswith(('.html','.css','.js')):
@@ -74,6 +85,7 @@ def build(ver):
         if ext=='.html':
             t=open(k,encoding='utf-8').read(); name=posixpath.basename(k)
             if ver==2: t=route_v2(name,t)
+            if ver==3: t=proto_photos(t)
             labels[k]=label(k,t)
             t=rewrite(t,k,keys)
             t=re.sub(r'href="(#|@back)"',lambda m:'href="#"' if m.group(1)=='#' else 'href="#p:@back"',t)
@@ -102,16 +114,21 @@ def build(ver):
         groups=[('Сайт',g(r'^c-')),('Запись',g(r'^zapis-')),('Лист ожидания',g(r'^list-')),('Моя запись',g(r'^z-')+g(r'^msg')),('Кабинет Ирины',g(r'^adm')),
                 ('Варианты экранов сайта',g(r'^(mesto[MO]|otzF|podq2|podres|raspS|sobF|soon|tech|vidpsy)'))]
         name='Вариант 2 · Claude Design'
+    if ver==3:
+        entry=P('index.html').replace('/pages',''); wide={}; css=''
+        groups=[('Сайт',[root+'/index.html']),('Кабинет Ирины',[root+'/admin.html'])]
+        name='Вариант 3 · первый прототип'
+        labels[root+'/index.html']='Главная и запись'; labels[root+'/admin.html']='Кабинет Ирины'
     order=[k for _,l in groups for k in l]
-    cfg={'entry':entry,'admin':P('admin/segodnya.html') if ver==1 else P('adm-segodnya.html'),'wide':wide,'css':css,'groups':[[n,[[k,labels[k]] for k in sorted(l,key=lambda x:(x!=entry,labels[x]))]] for n,l in groups],'name':name}
+    cfg={'entry':entry,'admin':{1:P('admin/segodnya.html'),2:P('adm-segodnya.html'),3:root+'/admin.html'}[ver],'wide':wide,'css':css,'groups':[[n,[[k,labels[k]] for k in sorted(l,key=lambda x:(x!=entry,labels[x]))]] for n,l in groups],'name':name}
     data=json.dumps({'assets':assets,'pages':pages,'cfg':cfg},ensure_ascii=False).replace('</','<\\/')
     shell=open(S+'/site-shell.html',encoding='utf-8').read()
     F=A+'/fonts/'
     def ff(fam,fn,w): return "@font-face{font-family:'%s';src:url(data:font/woff2;base64,%s) format('woff2');font-weight:%s;font-display:swap}"%(fam,base64.b64encode(open(F+fn,'rb').read()).decode(),w)
     fonts=ff('Geologica','geologica-cyrillic-wght-normal.woff2','100 900')+ff('Geologica','geologica-latin-wght-normal.woff2','100 900')
     js=open(S+'/site.js',encoding='utf-8').read()
-    out=shell.replace('/*FONTS*/',fonts).replace('{{TITLE}}',{1:'Коврова, вариант 1',2:'Коврова, вариант 2'}[ver]).replace('{{NAME}}',name)\
+    out=shell.replace('/*FONTS*/',fonts).replace('{{TITLE}}',{1:'Коврова, вариант 1',2:'Коврова, вариант 2',3:'Коврова, вариант 3'}[ver]).replace('{{NAME}}',name)\
         .replace('<!--DATA-->','<script type="application/json" id="mkdata">'+data+'</script>\n<script>\n'+js+'\n</script>')
     os.makedirs(R+'/design/preview',exist_ok=True); fn=R+'/design/preview/sajt-variant-%d.html'%ver; open(fn,'w',encoding='utf-8').write(out)
     print(fn, round(len(out)/1e6,2),'MB', len(pages),'pages')
-for v in (sys.argv[1:] or ['1','2']): build(int(v))
+for v in (sys.argv[1:] or ['1','2','3']): build(int(v))

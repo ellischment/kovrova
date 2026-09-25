@@ -1,6 +1,6 @@
 # Сборка кликабельных сайтов-макетов
 
-`python3 tools/preview/site.py` → `design/preview/sajt-variant-1.html` (версия агентов, `design/directions/c`) и `sajt-variant-2.html` (версия Claude Design, `design/directions/c-claude-design`).
+`python3 tools/preview/site.py` → `design/preview/sajt-variant-1.html` (версия агентов, `design/directions/c`) `sajt-variant-2.html` (версия Claude Design, `design/directions/c-claude-design`) и `sajt-variant-3.html` (первый прототип, `prototype/`; фото из DIKIDI заменены своими кадрами, гостья вырезана).
 
 Каждый файл — один самодостаточный HTML: все страницы, стили, шрифты и фото внутри. Открывается двойным щелчком, без интернета. Страницы кликаются как на сайте; сверху узкая полоса: «Назад», «Сайт», «Кабинет», «Все экраны» (там же состояния, до которых не дойти кликами).
 
