@@ -1,0 +1,45 @@
+<title>{{TITLE}}</title>
+<style>
+/*FONTS*/
+:root{color-scheme:light;--bar:#3D4E21;--bar-ink:#F2DCB9;--bar-ink2:#D9C9A8;--sheet:#F6E7D2;--ink:#1E2113;--ink2:#4C4A3A;--line:#CDB894;--focus:#7E1F2A;
+  font-family:Geologica,system-ui,-apple-system,'Segoe UI',sans-serif}
+html,body{height:100%}
+body{margin:0;background:var(--sheet);color:var(--ink);display:flex;flex-direction:column;overflow:hidden}
+[hidden]{display:none!important}
+.bar{display:flex;align-items:center;gap:6px;padding:4px max(8px,1vw);padding-top:calc(4px + env(safe-area-inset-top,0px));background:var(--bar);color:var(--bar-ink);font-size:13px;min-height:36px;flex:none}
+.bar b{font-weight:600;white-space:nowrap}
+.bar .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--bar-ink2)}
+.bar button{min-height:32px;padding:0 12px;border-radius:6px;border:1.5px solid var(--bar-ink);background:transparent;color:var(--bar-ink);font:inherit;font-weight:500;cursor:pointer;white-space:nowrap}
+.bar button.on{background:var(--bar-ink);color:var(--ink)}
+.bar button:disabled{opacity:.4;cursor:default}
+button:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.stage{flex:1;min-height:0;position:relative}
+.stage iframe{border:0;width:100%;height:100%;display:block;background:#E4D3BA}
+.all{position:absolute;inset:0;overflow:auto;background:var(--sheet);padding:20px max(16px,4vw) 48px}
+.all h2{margin:0 0 4px;font-size:22px;font-weight:650}
+.all p{margin:0 0 20px;color:var(--ink2);font-size:14px;max-width:62ch}
+.all section{margin-bottom:22px}
+.all h3{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);font-weight:500;margin:0 0 8px}
+.all ul{list-style:none;margin:0;padding:0;columns:3 220px;column-gap:24px}
+.all li{break-inside:avoid;padding:3px 0}
+.all a{color:var(--ink);font-size:15px;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.all a[aria-current]{font-weight:650;text-decoration-color:var(--ink)}
+@media (max-width:640px){.bar .t,.bar b{display:none}.bar{gap:4px}.bar button{padding:0 9px}#allbtn{margin-left:auto}.lg{display:none}}
+@media (min-width:641px){.sm{display:none}}
+</style>
+<div class="bar">
+  <button id="back" type="button" disabled aria-label="Назад">‹<span class="lg"> Назад</span></button>
+  <b>{{NAME}}</b><span class="t" id="ttl"></span>
+  <button id="site" type="button">Сайт</button>
+  <button id="adm" type="button">Кабинет</button>
+  <button id="allbtn" type="button" aria-expanded="false"><span class="lg">Все экраны</span><span class="sm">Экраны</span></button>
+</div>
+<div class="stage">
+  <iframe id="f" title="Сайт"></iframe>
+  <div class="all" id="all" hidden>
+    <h2>Все экраны</h2>
+    <p>Сайт кликается как настоящий: меню, запись, лист ожидания, кабинет. Здесь — все экраны списком, включая состояния, до которых не дойти обычными кликами. Данные демонстрационные, ничего никуда не отправляется.</p>
+    <div id="groups"></div>
+  </div>
+</div>
+<!--DATA-->
