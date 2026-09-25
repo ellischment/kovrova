@@ -1,5 +1,5 @@
 /* Направление C · Календарь. Мох как основа, песочный текст.
-   Слои: primitive → semantic. Темы: moss (по умолчанию), night, cream.
+   Слои: primitive → semantic. Темы: cream (по умолчанию в макетах, выбор 2026-09-25), moss, night.
    Шрифты только self-host: Geologica (variable 100–900), Marck Script 400. */
 
 :root {
@@ -26,6 +26,8 @@
   --btn-bg: var(--sand-200);      --btn-text: var(--ink-900);     /* 13.7:1 */
   --accent-field: var(--bordo-500);
   --focus: var(--cream-100);
+  --pick: var(--sand-200); --pick-ink: var(--ink-900);   /* выбранный день, чип, прогресс */
+  --eyebrow: var(--olive-200);
 }
 
 [data-theme="night"] {
@@ -44,6 +46,8 @@
   --sheet-bg: var(--cream-50);
   --btn-bg: var(--moss-500); --btn-text: var(--sand-200);
   --focus: var(--bordo-500);
+  --pick: var(--moss-500); --pick-ink: var(--sand-200);  /* 8.4:1 */
+  --eyebrow: var(--bordo-500);
 }
 
 @media (prefers-color-scheme: dark) {

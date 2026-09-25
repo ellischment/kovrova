@@ -191,7 +191,7 @@ body .muted { color: var(--text-muted); }
 @media (min-width: 900px) {
   .hero { grid-template-columns: 1.1fr .9fr; align-items: center; padding-block: 64px 32px; }
 }
-.hero__eyebrow { font-family: var(--font-hand); font-size: 1.6rem; color: var(--olive-200, var(--text)); }
+.hero__eyebrow { font-family: var(--font-hand); font-size: 1.6rem; color: var(--eyebrow, var(--text)); }
 .hero__lede { font-size: 1.1rem; color: var(--text-muted); max-width: 46ch; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
 .hero__figure { border-radius: var(--radius-frame); overflow: hidden; border: var(--frame) solid var(--line); }

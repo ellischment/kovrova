@@ -30,7 +30,7 @@ button{font-family:inherit}
 .q{font-size:11px;font-weight:700;color:var(--bordo-500,#7E1F2A);background:var(--sand-200);border-radius:6px;padding:1px 6px;vertical-align:1px;white-space:nowrap}
 
 /* ---- заметка о прототипе ---- */
-.proto-note{background:var(--moss-600);color:var(--text);font-size:13px;line-height:1.4;text-align:center;padding:6px 14px}
+.proto-note{background:var(--bg-alt);color:var(--text);font-size:13px;line-height:1.4;text-align:center;padding:6px 14px}
 .proto-note b{color:var(--focus)}
 
 /* ---- страничная рамка (mobile-first, max 480 на десктопе для листа записи) ---- */
@@ -44,7 +44,7 @@ button{font-family:inherit}
 .icon-btn:hover{background:var(--bg-alt)}
 .icon-btn[hidden]{visibility:hidden}
 .progress{height:3px;background:var(--line)}
-.progress i{display:block;height:100%;background:var(--sand-200);transition:width 220ms ease}
+.progress i{display:block;height:100%;background:var(--pick);transition:width 220ms ease}
 
 /* ---- тело шага ---- */
 .bk-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:18px 16px 24px}
@@ -86,7 +86,7 @@ button{font-family:inherit}
 .chips-scroll{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent 100%);mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent 100%)}
 .chips-scroll::-webkit-scrollbar{display:none}
 .chip{min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--line);background:transparent;color:var(--text);font:600 14px/1 var(--font-sans);cursor:pointer;white-space:nowrap}
-.chip[aria-pressed=true]{background:var(--sand-200);border-color:var(--sand-200);color:var(--ink-900)}
+.chip[aria-pressed=true]{background:var(--pick);border-color:var(--pick);color:var(--pick-ink)}
 .chip:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
 
 /* ---- календарь месяца ---- */
@@ -102,8 +102,8 @@ button{font-family:inherit}
 .cal-day.free.loc-lesnoe,.cal-day.free.loc-online{border-color:var(--loc-lesnoe)}
 .cal-day.free.loc-moskva{background:var(--loc-moskva-fill);color:var(--loc-moskva-text);border-color:var(--loc-moskva-fill)}
 .cal-day.early{position:relative}
-.cal-day.early::after{content:"";position:absolute;top:3px;right:3px;width:6px;height:6px;border-radius:50%;background:var(--sand-200)}
-.cal-day[aria-pressed=true]{background:var(--sand-200);color:var(--ink-900);border-color:var(--sand-200)}
+.cal-day.early::after{content:"";position:absolute;top:3px;right:3px;width:6px;height:6px;border-radius:50%;background:var(--pick)}
+.cal-day[aria-pressed=true]{background:var(--pick);color:var(--pick-ink);border-color:var(--pick)}
 .cal-day .dnum{font-size:15px}
 .cal-day .dtag{font-size:9px;text-transform:uppercase;letter-spacing:.02em;opacity:.85}
 .cal-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--text-muted);margin:10px 0 4px}
@@ -124,7 +124,7 @@ button{font-family:inherit}
 .hint{font-size:13px;color:var(--text-muted);margin-top:6px;line-height:1.45}
 .warn{font-size:14px;background:var(--loc-moskva-fill);color:var(--loc-moskva-text);border-radius:10px;padding:10px 12px;margin-top:8px}
 .check{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45;margin:14px 0;cursor:pointer}
-.check input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--sand-200)}
+.check input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--pick)}
 
 /* ---- сводка ---- */
 .summary{background:var(--sheet-bg);color:var(--sheet-text);border:var(--frame) solid var(--sheet-line);border-radius:var(--radius-frame);padding:14px 16px;font-size:15px;margin-bottom:16px}
@@ -135,10 +135,10 @@ button{font-family:inherit}
 /* ---- пустые состояния / успех ---- */
 .empty,.success{text-align:center;padding:12px 4px}
 .empty svg,.success svg{margin:0 auto 12px}
-.ok-circle{width:64px;height:64px;border-radius:50%;background:var(--sand-200);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--ink-900)}
+.ok-circle{width:64px;height:64px;border-radius:50%;background:var(--pick);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--pick-ink)}
 .list-actions{display:grid;gap:10px;margin-top:16px;text-align:left}
 .rule{font-size:13px;color:var(--text-muted);text-align:center;margin:10px 0 0}
-.banner{border:var(--frame) solid var(--sand-200);border-radius:var(--radius-frame);padding:12px 14px;font-size:14px;margin-bottom:16px;background:var(--bg-alt)}
+.banner{border:var(--frame) solid var(--pick);border-radius:var(--radius-frame);padding:12px 14px;font-size:14px;margin-bottom:16px;background:var(--bg-alt)}
 .banner.err{border-color:var(--ink-900);background:var(--sheet-bg);color:var(--sheet-text)}
 .banner strong{display:block;margin-bottom:2px}
 

@@ -53,7 +53,7 @@ td.off input{opacity:.35}
 .sw{display:block;font-size:11px;color:var(--sheet-muted);margin-top:4px;cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
 .tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;display:grid;grid-template-columns:repeat(5,1fr);background:var(--bg);border-top:2px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:6;overflow-x:auto}
 .tabs a,.tabs button{border:0;background:none;padding:9px 2px 10px;font:600 11px var(--font-sans);color:var(--text-muted);cursor:pointer;min-height:52px;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:2px}
-.tabs a[aria-current=page],.tabs button[aria-selected=true]{color:var(--text);box-shadow:inset 0 3px 0 var(--sand-200)}
+.tabs a[aria-current=page],.tabs button[aria-selected=true]{color:var(--text);box-shadow:inset 0 3px 0 var(--pick)}
 .more-menu{position:fixed;left:8px;right:8px;bottom:64px;max-width:414px;margin:0 auto;background:var(--sheet-bg);color:var(--sheet-text);border-radius:var(--radius-frame);border:var(--frame) solid var(--sheet-line);padding:8px;z-index:7;display:grid;gap:4px}
 .more-menu a{display:block;padding:12px 10px;border-radius:8px;color:inherit;text-decoration:none;font-weight:600;font-size:14px}
 .more-menu a:hover{background:var(--bg-alt)}
@@ -84,6 +84,6 @@ td.off input{opacity:.35}
 .field label{display:block;font-weight:600;font-size:13px;margin-bottom:5px}
 .field input,.field select,.field textarea{width:100%;min-height:44px;border:2px solid var(--line);border-radius:10px;background:var(--sheet-bg);color:var(--sheet-text);padding:10px 12px;font:400 15px/1.4 var(--font-sans)}
 .chip{display:inline-flex;min-height:38px;align-items:center;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:transparent;font:600 13px var(--font-sans);color:var(--text);cursor:pointer;margin:2px}
-.chip[aria-pressed=true]{background:var(--sand-200);border-color:var(--sand-200);color:var(--ink-900)}
+.chip[aria-pressed=true]{background:var(--pick);border-color:var(--pick);color:var(--pick-ink)}
 .card .chip{color:var(--sheet-text);border-color:var(--sheet-line)}
-.card .chip[aria-pressed=true]{color:var(--ink-900);border-color:var(--sand-200)}
+.card .chip[aria-pressed=true]{color:var(--pick-ink);border-color:var(--pick)}
